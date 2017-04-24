@@ -84,7 +84,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{commath}
 \RequirePackage[inline]{enumitem}
-\RequirePackage[acronym,toc,nonumberlist,nogroupskip,nopostdot]{glossaries}
+\RequirePackage[acronym,toc,nonumberlist,nogroupskip,nopostdot,nomain]{glossaries}
 \RequirePackage{tikz-3dplot}
 \RequirePackage{xkeyval}
 \RequirePackage{tabu}
