@@ -2,3 +2,14 @@
 \label{results}
 \graphicspath{{Results/Images/}}
 
+\section{Regolith launched from the longest edge of the asteroid}
+\label{regolith_longest_edge}
+The results that we'll discuss in this section pertain to the case of regolith launched from the longest edge of the asteroid, modeled as an ellipsoid.
+
+\subsection{Dynamics without Solar perturbations}
+\label{regolith_longest_edge_without_solar}
+...to be added later...
+
+\subsection{Dynamics with Solar perturbations}
+\label{regolith_longest_edge_with_solar}
+In this case, the simulation accounted for perturbations from the irregular gravity field of the asteroid, the \gls{SRP}, and the \gls{STBE}. The asteroid revolves around the Sun in a circular orbit at a distance of 1.0 \gls{AU}. Four different initial Solar phase angles were considered for the simulation – 45.0, 135.0, 225.0 315.0 [deg]. The density of the regolith was considered to be 3.2 [g/cm3] with a spherical shape of radius 1.0 [cm]. A total of 72 such particles were launched from the surface of the asteroid, each in a different direction (defined using the launch declination and azimuth angles). The launch declination angle, measured from the zenith, was kept constant at 45.0 [deg] for all the particles. The launch azimuth, measured counterclockwise from the direction pointing to north, was varied at a resolution of 5.0 [deg] starting from 0.0 [deg] all the way up to 355.0 [deg]. Each particle was launched, in their specified direction, with different velocities ranging from 1.0 [m/s] to 16.0 [m/s] (measured with respect to the asteroid-centric rotating frame) at a resolution of 1.0 [m/s]. So basically, every combination of an initial Solar phase angle, initial launch azimuth, and initial launch velocity corresponds to a unique trajectory for a single particle. Thus, a single simulation, results in 4608 unique trajectories. In extension to this, we can also say that each particle out of the 72 particles is subjected to 64 unique initial conditions (4 different initial Solar phase angles and 16 different initial launch velocities), all of them leading to unique trajectories. The simulations were subjected to run for a maximum of 270.0 [days] and were terminated earlier if a particular trajectory resulted in escape or surface reimpact.
