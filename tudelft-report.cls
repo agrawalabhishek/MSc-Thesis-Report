@@ -72,6 +72,7 @@
 \fi
 \RequirePackage{lettrine}
 \RequirePackage{metalogo}
+\RequirePackage[table,xcdraw]{xcolor}
 %\RequirePackage[square,sort&compress]{natbib}
 \RequirePackage[thinlines]{easytable}
 \RequirePackage{booktabs}
@@ -81,7 +82,7 @@
 \RequirePackage[noindentafter]{titlesec}
 \RequirePackage{titletoc}
 \RequirePackage[nottoc]{tocbibind}
-\RequirePackage{xcolor}
+%\RequirePackage{xcolor}
 \RequirePackage{commath}
 \RequirePackage[inline]{enumitem}
 \RequirePackage[acronym,toc,nonumberlist,nogroupskip,nopostdot,nomain]{glossaries}
