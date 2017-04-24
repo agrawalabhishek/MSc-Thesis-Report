@@ -1,0 +1,63 @@
+# Files created by LaTeX on build
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.soc
+*.synctex.gz
+*.toc
+*.acn
+*.alg
+*.acr
+*.gls
+*.glo
+*.glg
+*.lof
+*.tex.bak
+
+#literature study specific
+external bibs for references/
+figure codes/
+report*
+!report_new.tex
+!report22.bib
+!report_new.pdf
+!report_new-blx.bib
+
+#Taken from shareLateX blog
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.synctex.gz
+*.sub
+*.suc
+*.syc
+*.sym
+
+#Others
+*.csv
+*.zip
+*.sublime-project
+*.sublime-workspace

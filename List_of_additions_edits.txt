@@ -1,0 +1,66 @@
+List of additions/edits to the final draft of literature study
+
+Chapter-1: Introduction
+    1. Added initial research questions.
+    2. Expanded the introduction content, made it better.
+    3. Added information regarding the types of asteroids, such as binary, contact etc.
+    4. made general corrections from both ron and jinglang.
+
+Chapter-2: Mission heritage
+    1. General corrections were all taken care of.
+    2. Figures 2.11 and 2.12 further explained (the overlaps and irregularity).
+    3. added "inferred" pros and cons to the orbit design approach for the NEAR mission.
+    4. Added a conclusion section.
+
+Chapter-3: Modeling the gravitational potential of a small irregular body
+    1. information on what binary, triple asteroids are, was added in the introduction chapter.
+    2. The section on spherical harmonics was improved, added more details and illustrations.
+
+    3. The question - why is the circumscribing ellipsoid not of for example same volume - For highly elongated bodies, it could be that the same volume ellipsoid does not enclose the surface entirely, and part of the asteroids surface could be popping out of the reference ellipsoid. The gravitational potential model satisfies the Laplace's equation (Delta^2 U = 0) for a point outside the surface of the body (from daniel scheeres' book). For an irregular body, a gravitational potential model is developed by finding a solution to the Laplace's equation. If for the same volume fit, a part of the irregular body is popping out, then in practice the acceleration due to gravity for the part which is popping out will not be correct because although it will be satisfying the Laplace's equation, the point is technically inside the surface, which is a total violation of the underlying concept. This is my understanding but I could not find any references to claim this is true so I did not add it to the literature study report.
+
+    4. Added results from an objective comparison (from a different thesis work) between the different potential models.
+    5. Added three more criteria for potential model comparison - accuracy, application and availability of input data. Removed the comparison criteria 'Generalization'.
+
+chapter-4: Orbit perturbations
+    1. General corrections made.
+    2. The reason for studying binary asteroids for the literature study, was added to the introduction of chapter-5.
+    3. Qualitative result for acceleration on a regolith particle due to SRP was calculated and compared with point-mass gravitational acceleration of asteroid Eros.
+    4. Added a proposal on visualizing the variations in the orbital (osculating) elements through a numerical method, instead of using the Lagrange planetary equations.
+    5. Edited the reason for not using the averaging effect of perturbation.
+    6. The comparison of the relative strengths of individual perturbations using the coefficients was removed, instead actual acceleration values were calculated and put in a table for comparison.
+    7. LPE added as a separate section in this chapter.
+
+Chapter-5: The Full 2-Body problem
+    1. made general corrections.
+    2. The reason 'why binary' was added in the introduction section of this chapter.
+    3. Figure 5.2 - the third body was left included since I had taken the image from a paper, and since it was referenced, I did not want to alter it in any way. But I clarified that the dynamics of the spacecraft are not included in the equations of motion (both in the figure caption and the paragraph before it).
+
+Chapter-6: The full 3 body problem
+    1. The reason 'why binary' was mentioned in the previous chapter.
+    2. The question about whether polyhedron-polyhedron model is used only for modeling the motion of the third particle - yes, and it is also used for modeling the motion of the binary asteroids around each other as explained in chapter 5. I added this in the conclusion of this chapter.
+
+Chapter-7: Numerical integration methods
+    1. Added Taylor series integration method. It's comparison with other integrators was also added.
+    2. Could not locate any literary resource for unified state theory for numerical integration. All I could find was the unified state theory for astrodynamics but that was related to representing an orbit with seven elements instead of using the cartesian or the keplerian orbital elements approach.
+    3. Made general corrections.
+    4. Added a new section on verification of a numerical integrator for our application.
+    5. modified the final paragraph on conclusions.
+
+chapter-8: Monte-Carlo Simulation
+    1. made general corrections.
+    2. the reasoning for escape velocity as the upper bound resolved.
+    3. The question on what should be chosen for F - actually we don't choose it, we derive it from the probability density function f(x), but as of now I am not sure what the function f(x) would be.
+    4. From what I could get off from google searches, ray tracing monte carlo methods are designed specifically for optical applications, such as image synthesis for movies, testing the amount of power generated in solar panels, but I couldn't relate it to how I can use that technique for multi particle simulations.
+    5. Added the part on why a grid search technique would not be practical compared to monte carlo.
+
+Chapter-9: Dynamical systems theory
+    1. made general corrections.
+
+Chapter-10: Conclusion
+    1. This is a new chapter
+
+List of Symbols
+    The corrections were made, however some symbols were left unaltered since that is how they were represented in their respective papers. I did double check all your comments against symbol definition in the papers.
+
+Added Preface as well.
+
