@@ -84,7 +84,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{commath}
 \RequirePackage[inline]{enumitem}
-\RequirePackage[acronym,toc,nonumberlist,nopostdot]{glossaries}
+\RequirePackage[acronym,toc,nonumberlist,nogroupskip,nopostdot]{glossaries}
 \RequirePackage{tikz-3dplot}
 \RequirePackage{xkeyval}
 \RequirePackage{tabu}
@@ -264,9 +264,11 @@
 \setlength\@cover@spinewidth{0.375in}
 %% Width and height of the boxes on the front and back cover.
 \newlength\@cover@frontboxwidth
-\setlength\@cover@frontboxwidth{4.375in}
+%\setlength\@cover@frontboxwidth{4.375in}
+\setlength\@cover@frontboxwidth{6.0in}
 \newlength\@cover@frontboxheight
-\setlength\@cover@frontboxheight{2.1875in}
+%\setlength\@cover@frontboxheight{2.1875in}
+\setlength\@cover@frontboxheight{2.0in}
 \newlength\@cover@fronttextwidth
 \newlength\@cover@fronttextheight
 \newlength\@cover@backboxwidth
@@ -640,9 +642,9 @@
 %        {}                                                  % <theorem head spec (can be left empty, meaning `normal')>
 %\theoremstyle{problemstyle}
 
-%Using thmtools instead. http://texdoc.net/texmf-dist/doc/latex/thmtools/thmtools.pdf 
+%Using thmtools instead. http://texdoc.net/texmf-dist/doc/latex/thmtools/thmtools.pdf
 
-%Declares theorem style, 
+%Declares theorem style,
 \declaretheoremstyle[
 spaceabove=6pt, spacebelow=6pt,
 headfont=\normalfont\bfseries,
@@ -655,20 +657,20 @@ shaded={bgcolor={cmyk}{0,0,0,0.05}}
 
 %Declates theorem
 \declaretheorem[style=mystyle]{Problem}
-	
-%To make a textbox at any place on a page. Origin is top centre of box. Page origin coordinate is bottomleft. Coordinate range: 0 to 1. 		
+
+%To make a textbox at any place on a page. Origin is top centre of box. Page origin coordinate is bottomleft. Coordinate range: 0 to 1.
 \newcommand{\placetextbox}[3]{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
   \setbox0=\hbox{#3}% Put <stuff> in a box
   \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
     \put(\LenToUnit{#1\paperwidth},\LenToUnit{#2\paperheight}){\vtop{{\null}\makebox[0pt][c]{#3}}}%
   }%
-}%		
-		
-		
+}%
+
+
 \newcommand{\tdseteulerxyz}{
 \renewcommand{\tdplotcalctransformrotmain}{%
 %perform some trig for the Euler transformation
-\tdplotsinandcos{\sinalpha}{\cosalpha}{\tdplotalpha} 
+\tdplotsinandcos{\sinalpha}{\cosalpha}{\tdplotalpha}
 \tdplotsinandcos{\sinbeta}{\cosbeta}{\tdplotbeta}
 \tdplotsinandcos{\singamma}{\cosgamma}{\tdplotgamma}
 %
@@ -702,9 +704,9 @@ shaded={bgcolor={cmyk}{0,0,0,0.05}}
 \pgfmathsetmacro{\rcbeul}{\cbsg}
 \pgfmathsetmacro{\rcceul}{\cbcg}
 }
-}		
-					
-					
+}
+
+
 %% The dedication is vertically centered on a separate page and flushed to the
 %% right.
 \newcommand\dedication[1]{%
