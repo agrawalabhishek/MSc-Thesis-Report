@@ -12,4 +12,73 @@ The results that we'll discuss in this section pertain to the case of regolith l
 
 \subsection{Dynamics with Solar perturbations}
 \label{regolith_longest_edge_with_solar}
-In this case, the simulation accounted for perturbations from the irregular gravity field of the asteroid, the \gls{SRP}, and the \gls{STBE}. The asteroid revolves around the Sun in a circular orbit at a distance of 1.0 \gls{AU}. Four different initial Solar phase angles were considered for the simulation – 45.0, 135.0, 225.0 315.0 [deg]. The density of the regolith was considered to be 3.2 [g/cm3] with a spherical shape of radius 1.0 [cm]. A total of 72 such particles were launched from the surface of the asteroid, each in a different direction (defined using the launch declination and azimuth angles). The launch declination angle, measured from the zenith, was kept constant at 45.0 [deg] for all the particles. The launch azimuth, measured counterclockwise from the direction pointing to north, was varied at a resolution of 5.0 [deg] starting from 0.0 [deg] all the way up to 355.0 [deg]. Each particle was launched, in their specified direction, with different velocities ranging from 1.0 [m/s] to 16.0 [m/s] (measured with respect to the asteroid-centric rotating frame) at a resolution of 1.0 [m/s]. So basically, every combination of an initial Solar phase angle, initial launch azimuth, and initial launch velocity corresponds to a unique trajectory for a single particle. Thus, a single simulation, results in 4608 unique trajectories. In extension to this, we can also say that each particle out of the 72 particles is subjected to 64 unique initial conditions (4 different initial Solar phase angles and 16 different initial launch velocities), all of them leading to unique trajectories. The simulations were subjected to run for a maximum of 270.0 [days] and were terminated earlier if a particular trajectory resulted in escape or surface reimpact.
+In this case, the simulation accounted for perturbations from the irregular gravity field of the asteroid, the \gls{SRP}, and the \gls{STBE}. Within this category, there are 4 distinct sets of simulations, each for a particle with different Area-to-Mass ratio. These are mentioned in \Cref{tab:area_to_mass_ratio}.
+%%%
+\begin{table}[]
+\centering
+\captionsetup{justification=centering}
+\caption{Particle Area-to-Mass ratios}
+\label{tab:area_to_mass_ratio}
+\begin{tabular}{|l|c|c|c|}
+\hline
+Code    & \multicolumn{1}{l|}{Particle radius {[}cm{]}} & \multicolumn{1}{l|}{Density {[}g/cm$^3${]}} & \multicolumn{1}{l|}{Area-to-Mass ratio {[}m$^2$/kg{]}} \\ \hline
+LoGSP-1     &   1.0     &   3.2     &   0.0234      \\ \hline
+LoGSP-2     &   1.0     &   2.6     &   0.0288      \\ \hline
+LoGSP-3     &   5.0     &   3.2     &   0.0047      \\ \hline
+LoGSP-4     &   5.0     &   2.6     &   0.0058      \\ \hline
+\end{tabular}
+\end{table}
+%%%
+
+For each of the four types of particles mentioned in \Cref{tab:area_to_mass_ratio}, the initial conditions for lofting the regolith are varied in the same manner. These initial conditions are mentioned as follows. The asteroid revolves around the Sun in an equatorial circular orbit at a distance of 1.0 \gls{AU}. Four different initial Solar phase angles were considered for the simulation – 45.0, 135.0, 225.0 315.0 [deg], to account for the four different quadrants where the Sun could be with respect to the asteroid. For each case in \Cref{tab:area_to_mass_ratio}, a total of 72 particles were launched from the surface of the asteroid, each in a different direction (defined using the launch declination and azimuth angles). The launch declination angle, measured from the zenith, was kept constant at 45.0 [deg] for all the particles. The launch azimuth, measured \gls{CCW} from the direction pointing to north, was varied at a resolution of 5.0 [deg] starting from 0.0 [deg] all the way up to 355.0 [deg]. Each particle was launched, in their specified direction, with different velocities ranging from 1.0 [m/s] to 16.0 [m/s] (measured with respect to the asteroid-centric rotating frame) at a resolution of 1.0 [m/s]. So basically, every combination of an initial Solar phase angle, initial launch azimuth, and initial launch velocity corresponds to a unique trajectory for a single particle of a given Area-to-Mass ratio; Thus amounting to a total of 4608 unique trajectories. The simulations were subjected to run for a maximum of 270.0 [days] and were terminated earlier if a particular trajectory resulted in escape or surface reimpact.
+
+\subsubsection{Case LoGSP-1}
+\label{LoGSP-1}
+The density of the regolith was considered to be 3.2 [g/cm$^{3}$] with a spherical shape of radius 1.0 [cm]. \Cref{fig:longest_edge_perturbations_final_fate_histogram} gives a distribution of particles for each of the three different final fates for the regolith i.e. capture, reimpact, and escape, for different initial launch velocities and initial Solar phase angles. Irrespective of the initial Solar phase, initial launch velocities from 1.0 to 3.0 [m/s] results in particles launched in all directions to eventually reimpact the asteroid's surface. Similarly, for initial launch velocities ranging from 14.0 to 16.0 [m/s], we see that the particles always manage to escape the gravitational attraction of the asteroid. However, there is one exception to the former statement, a single particle launched with a velocity of 14.0 [m/s] at a launch azimuth of 90.0 [deg] and at an initial Solar phase angle of 315.0 [deg], reimpacts the asteroid's surface. It is interesting to note that the launch azimuth of the particle is such that it is launched in a direction that is directly opposite to the direction of rotation of the asteroid. Launch velocities from 4.0 to 13.0 [m/s] show a mixed behavior and the final fate distribution trend does not vary drastically for different initial Solar phase angles.
+
+The number of capture cases is far less than those for escape and reimpact. For initial Solar phase of 225.0 [deg], there are no cases of regolith being captured in orbit around the asteroid. All capture cases, arranged in order of increasing launch azimuth angle, are listed in \Cref{tab:LoGSP_1_capture}. It is interesting to note that all capture cases result from when the particle is launched in a direction which is against the direction of rotation of the asteroid, bar one exception which is case index-11 in \Cref{tab:LoGSP_1_capture}.
+%%%
+\begin{table}[htb]
+\centering
+\captionsetup{justification=centering}
+\caption{Initial conditions that resulted in temporary orbital capture of regolith around the asteroid}
+\label{tab:LoGSP_1_capture}
+\begin{tabular}{|l|c|c|c|}
+\hline
+Index & \multicolumn{1}{l|}{Launch azimuth [deg]} & \multicolumn{1}{l|}{Launch velocity [m/s]} & \multicolumn{1}{l|}{Initial Solar phase angle [deg]} \\ \hline
+\rowcolor[HTML]{FE996B}
+1   & 5.0 & 5.0 & 315.0     \\ \hline
+\rowcolor[HTML]{67FD9A}
+2   & 10.0 & 9.0 & 135.0    \\ \hline
+\rowcolor[HTML]{9698ED}
+3   & 15.0 & 8.0 & 45.0     \\ \hline
+\rowcolor[HTML]{FFCC67}
+4   & 45.0 & 12.0 & 45.0    \\ \hline
+\rowcolor[HTML]{96FFFB}
+5   & 45.0 & 10.0 & 315.0   \\ \hline
+\rowcolor[HTML]{FFCC67}
+6   & 135.0 & 12.0 & 45.0   \\ \hline
+\rowcolor[HTML]{96FFFB}
+7   & 135.0 & 10.0 & 315.0  \\ \hline
+\rowcolor[HTML]{9698ED}
+8   & 165.0 & 8.0 & 45.0    \\ \hline
+\rowcolor[HTML]{67FD9A}
+9   & 170.0 & 9.0 & 135.0   \\ \hline
+\rowcolor[HTML]{FE996B}
+10  & 175.0 & 5.0 & 315.0   \\ \hline
+11  & 185.0 & 5.0 & 135.0   \\ \hline
+\end{tabular}
+\end{table}
+%%%
+The capture cases which represent symmetry in terms of the launch azimuth angle are highlighted with the same color in \Cref{tab:LoGSP_1_capture}. This symmetric behavior results from the combination of two factors. First, the Sun's motion relative to the asteroid is not in an inclined plane, and secondly, the particles are launched from the equatorial tip of the ellipsoid shaped asteroid, which is a point of symmetry on the ellipsoid.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+% another option for includegraphics - keepaspectratio
+\includegraphics[angle=90, width=\textwidth, height=\textheight]{longest_edge_perturbations/3.2Density_1cmSize/final_fate_versus_launch_velocity_histogram_all_solar_phases.png}
+\caption{Histogram showing the number of particles that reimpact, escape, or get captured around the asteroid, for different initial launch velocities.}
+\label{fig:longest_edge_perturbations_final_fate_histogram}
+\end{figure}
+\FloatBarrier
+%%%
