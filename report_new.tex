@@ -11,6 +11,7 @@
 \usepackage{cleveref}
 \usepackage{glossary-superragged}
 \usepackage{afterpage}
+\usepackage[toc,page]{appendix}
 
 \DeclareNameAlias{sortname}{last-first}
 \DeclareNameAlias{default}{last-first}
@@ -59,7 +60,7 @@ Carl Sagan
 \input{LOS_2}
 \glsaddall
 %
-\renewcommand{\glstextformat}[1]{\color{orange} #1}
+% \renewcommand{\glstextformat}[1]{\color{orange} #1}
 \printglossary[type=\acronymtype, title=List of Acronyms, style=superragged]
 \afterpage{\null\thispagestyle{empty}\addtocounter{page}{-1}\newpage}
 %
@@ -77,4 +78,23 @@ Carl Sagan
 %\bibliography{report22}
 %\bibliography{report22.bib}{}
 \printbibliography[heading=bibintoc]
+
+\begin{appendices}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+  \chapter{Extra Figures}
+  This appendix contains figures which are used to support the explanation of certain results, arguments and conclusions in the main part of the Thesis report.
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    % another option for includegraphics - keepaspectratio
+    \includegraphics[angle=90, width=\textwidth, height=\textheight]{Results/Images/longest_edge_perturbations/3.2Density_1cmSize/maxAltitude_reimpactCase.png}
+    \caption{Maximum radial distance (from the centre of the asteroid) attained by the regolith in orbit for different launch velocities and launch azimuths. The particles were launched from the longest edge of the ellipsoid (asteroid). Plots are for particle code LoGSP-1 and only for the re-impact scenario.}
+    \label{fig:LoGSP_1_maxAltitude_reimpactscenario}
+    \end{figure}
+    \FloatBarrier
+    %%%
+
+\end{appendices}
+
 \end{document}
