@@ -120,4 +120,45 @@ Now the primary purpose of the plots in \Cref{fig:LoGSP_1_range_comparison} (com
 \end{figure}
 \FloatBarrier
 %%%
-We shall now look at the cases where the lofted regolith gets (temporarily) captured in orbit by the asteroid. The initial conditions for all capture cases, for the current particle size and density, were mentioned earlier in \Cref{tab:LoGSP_1_capture}.
+We shall now look at the cases where the lofted regolith gets (temporarily) captured in orbit by the asteroid. The initial conditions for all capture cases, for the current particle size and density, were mentioned earlier in \Cref{tab:LoGSP_1_capture}. \Cref{fig:LoGSP_1_capture_orbital_range} depicts the progression in orbital range of the temporarily captured regolith. The straight lines in the plot are used to mark the different altitude regimes. These are the \gls{LAO}, \gls{MAO}, \gls{HAO}, \gls{UHAO}, and \gls{EHAO}. These altitude regime definitions are not from well defined standards, but instead were arbitrarily chosen as integer multiples of the longest semi-major axis, $\alpha$, of the tri-axial ellipsoid shaped asteroid. The definition for these altitude regimes is given in \Cref{tab:altitude_regimes}.
+%%%
+\begin{table}[htb]
+\centering
+\captionsetup{justification=centering}
+\caption{Altitude regimes and their definitions}
+\label{tab:altitude_regimes}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Altitude regime}        & \textbf{Definition}                    \\ \hline
+\gls{LAO}                       & Asteroid surface to $2 \times \alpha$  \\ \hline
+\gls{MAO}                       & $2 \times \alpha$ to $3 \times \alpha$ \\ \hline
+\gls{HAO}                       & $3 \times \alpha$ to $5 \times \alpha$ \\ \hline
+\gls{UHAO}                      & $5 \times \alpha$ to $7 \times \alpha$ \\ \hline
+\gls{EHAO}                      & Above $7 \times \alpha$                \\ \hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+%%%
+The symmetry as explained for initial conditions mentioned in \Cref{tab:LoGSP_1_capture} can also be seen in \Cref{fig:LoGSP_1_capture_orbital_range}, for example, regolith launched with velocity of 8.0 [m/s] and launch azimuth of 15.0 [deg] (shown by the purple curve in the top plot in \Cref{fig:LoGSP_1_capture_orbital_range}) shows the same behavior as that of regolith launched with the same velocity and 165.0 [deg] launch azimuth (shown by the green curve in the bottom plot in \Cref{fig:LoGSP_1_capture_orbital_range}). Another thing we see from the plot is that, apart from case number 11 in \Cref{tab:LoGSP_1_capture}, the captured regolith stay in the higher altitude regions for most part and only briefly do they fall within the \gls{MAO} and \gls{LAO} region.
+%%%
+\begin{figure}[p]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[scale=0.5]{longest_edge_perturbations/3.2Density_1cmSize/altitude_versus_time_all_cases_part_1.png}
+\includegraphics[scale=0.5]{longest_edge_perturbations/3.2Density_1cmSize/altitude_versus_time_all_cases_part_2.png}
+\caption{Orbital range progression with time for temporary capture scenarios. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_orbital_range}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+% another option for includegraphics - keepaspectratio
+\includegraphics[width=\textwidth, height=\textheight]{longest_edge_perturbations/3.2Density_1cmSize/3dTrajectory_10ms_45Azimuth_315solarPhase.png}
+\caption{3D trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture}. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_case_5_3d_trajectory}
+\end{figure}
+\FloatBarrier
+%%%
