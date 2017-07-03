@@ -178,8 +178,138 @@ Of all the cases shown in \Cref{fig:LoGSP_1_capture_orbital_range} or \Cref{tab:
 %%%
 Note that in the trajectory animation in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_animation} (and any other animation included henceforth) the particle is made to skip several data points in between along the trajectory when it is far away from the asteroid, just to reduce the length of the animation. So because of this, the particle appears to be moving faster when it is away from the asteroid but this is not true. For the exact velocity of the particle, the reader should look at the velocity magnitude indicator within the animation itself.
 
-The animation shows that the particle reverses its direction of motion twice in its entire course. To visualize how this is happening in 3D, look at \Cref{fig:LoGSP_1_capture_case_5_3d_traj_inertialFrame_differnetViews}. The reason for this can be understood by looking at the direction of the perturbing vectors in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_perturbationVectors}. The plot shows the direction of the perturbing acceleration vector in the XY plane. Both \gls{SRP} and \gls{STBE} are shown separately as well as the net effect of the two. The vectors (in all three plots in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_perturbationVectors}) are shown along those parts of the trajectory where the magnitude of \gls{SRP} acceleration is of the same order of magnitude as that of the gravitational acceleration. However, the magnitude of the \gls{STBE} acceleration is always 1.0 order of magnitude smaller than the gravitational acceleration for those very same points along the trajectory. The \gls{SRP} is definitely more dominant of the two Solar perturbations as we can see that the direction of the net perturbation is the same as that of \gls{SRP}. In the plots, the trajectory loops numbered 1 and 2, is where the particle's direction of motion reversed. And this happens because of the \gls{SRP}, as the direction of the perturbation is such that it pulls the particle away from its nominal motion and forces it to change its direction. This is an interesting effect and happens only because the \gls{SRP} offers an acceleration to the particle which is equally significant as the gravitational acceleration when the particle is far away from the asteroid. This is not an isolated incident and we'll show another example where this happens.
+The animation shows that the particle reverses its direction of motion twice in its entire course. To visualize how this is happening in 3D, look at \Cref{fig:LoGSP_1_capture_case_5_3d_traj_inertialFrame_differnetViews}. The reason for this can be understood by looking at the direction of the perturbing acceleration, the gravitational acceleration vectors, and the combined effect of all accelerations acting on the particle. The direction of \gls{SRP} and \gls{STBE} are shown in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_srp_stbe_perturbationVectors} and that of the net effect of the two is shown in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_totalPerturbationVectors}. In the trajectory simulator, the gravity model (triaxial ellipsoid model) computes the acceleration in the rotating frame. We calculated the direction of the gravitational acceleration in inertial frame in post-simulation analysis assuming a point-mass model by considering the fact that when the regolith is far-away from the asteroid, its gravity field would appear as that of a point-mass gravity source. The gravitational acceleration vectors are shown in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_gravityVector}. The net acceleration acting on the particle is then shown in \Cref{fig:LoGSP_1_capture_case_5_2d_totalAccelerationVector_inertialFrame}. All acceleration vectors are shown along those parts of the trajectory where the magnitude of \gls{SRP} acceleration is of the same order of magnitude as that of the gravitational acceleration. However, the magnitude of the \gls{STBE} acceleration is always 1.0 order of magnitude smaller than the gravitational acceleration for those very same points along the trajectory, but is still significant. We do not show the vectors for the entire trajectory for two reasons; first, when close to the asteroid the direction of these vectors would reduce the clarity of the plot and,  second, we want to discuss the effect of the perturbations when the particle is far away from the asteroid because then they are as significant as the gravitational force.
 
+In \Cref{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}, the trajectory loops numbered 1 and 2 (XY plane), is where the particle's direction of motion gets reversed. If we look at \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_srpVectors}, we see that the direction of the \gls{SRP} vector is consistent with how the particle changes its direction of motion. This, however, does not mean that the \gls{SRP} is the sole actor responsible for how the particle's motion eventually turns out to be (and we will see this in detail shortly). The direction of \gls{STBE}, as shown in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_stbeVectors}, however, does not directly tell us on how the particle's motion would change as it progresses through its trajectory. \gls{STBE} is always an order of magnitude smaller than \gls{SRP} for the points shown in the two plots and its direction is not consistent with how the particle changes its direction of motion but its contribution to the capture scenario is significant (we will see the effect of removing \gls{STBE} shortly). The direction of the net perturbing acceleration, shown in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_totalPerturbationVectors}, shows us exactly how and where the motion of the particle is directed. Especially when we look at trajectory loops 1 and 2 in \Cref{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}, we can see that the net perturbing vector is acting in the direction that is consistent with how the particle changes its orbital motion. Now looking at these plots that we just discussed, a question that arises is that - why did the particle remain in a temporary capture orbit, and for example not escape especially when the net perturbing acceleration was acting opposite to the direction of asteroid such as in trajectory loop number 3 in \Cref{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}? The answer to this is found by looking at the direction of gravitational attraction in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_gravityVector} and the total acceleration (i.e. the net effect of gravity and perturbations) acting on the particle in \Cref{fig:LoGSP_1_capture_case_5_2d_totalAccelerationVector_inertialFrame}. Although the gravitational acceleration has the same order of magnitude as that of the Solar perturbations when the particle is far away from the asteroid, we see that the net effect of the two is towards the asteroid and hence prevents the particle from escaping.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\linewidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/2d_trajectory_inertialFrame_edit.pdf}
+\caption{2D inertial frame trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture}. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\subfloat[]
+{
+    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/srp_inertialFrame.pdf}
+    \label{fig:LoGSP_1_capture_case_5_2d_trajectory_srpVectors}
+}
+
+\subfloat[]
+{
+    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/stbe_inertialFrame.pdf}
+    \label{fig:LoGSP_1_capture_case_5_2d_trajectory_stbeVectors}
+}
+\caption{2D trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture} with direction of \gls{SRP} and \gls{STBE} perturbation vectors. Note that the vectors are shown only for those parts of the trajectory where the \gls{SRP} magnitude is of the same order as that of the asteroid's gravitational acceleration. For those very same points along the trajectory, the magnitude of the \gls{STBE} is always 1.0 order of magnitude smaller than the gravitational acceleration. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_case_5_2d_trajectory_srp_stbe_perturbationVectors}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\subfloat[]{
+    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/totalPerturbation_inertialFrame.pdf}
+    \label{fig:LoGSP_1_capture_case_5_2d_trajectory_totalPerturbationVectors}
+}
+
+\subfloat[]
+{
+    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/gravity_inertialFrame.pdf}
+    \label{fig:LoGSP_1_capture_case_5_2d_trajectory_gravityVector}
+}
+\caption{2D trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture} with direction of the sum total of \gls{SRP} and \gls{STBE} perturbation vectors, and the direction of the gravitational acceleration vector for the same data points. Note that the vectors are shown only for those parts of the trajectory where the \gls{SRP} magnitude is of the same order as that of the asteroid's gravitational acceleration. For those very same points along the trajectory, the magnitude of the \gls{STBE} is always 1.0 order of magnitude smaller than the gravitational acceleration. Particle code LoGSP-1.}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/totalAcceleration.pdf}
+\caption{2D trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture} with direction of the net acceleration vector. Note that the vectors are shown only for those parts of the trajectory where the \gls{SRP} magnitude is of the same order as that of the asteroid's gravitational acceleration. For those very same points along the trajectory, the magnitude of the \gls{STBE} is always 1.0 order of magnitude smaller than the gravitational acceleration. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_case_5_2d_totalAccelerationVector_inertialFrame}
+\end{figure}
+\FloatBarrier
+%%%
+Both \gls{SRP} and \gls{STBE} together are necessary in getting the capture trajectory shown in \Cref{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}. If either one of them is removed from the simulation, for the same launch conditions and initial Solar phase angle, then the results are completely different and we do not get a capture orbit. Note that the definition of capture orbit in this context implies that the particle stays in an orbit around the asteroid for the complete duration of 270.0 [days], i.e., the maximum time for which the simulation is run.
+
+When only \gls{STBE} is removed, then we get a trajectory where the particle eventually escapes the asteroid. This is shown in \Cref{fig:LoGSP_1_capture_case_5_2d_inertialTrajectory_noSTBE}. The trajectory is completely different from the one in \Cref{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}, even though the only difference between the two simulations is the omittion of \gls{STBE} perturbation. \Cref{fig:LoGSP_1_capture_case_5_2d_SRP_and_gravity_vector_noSTBE_inertialFrame} shows the direction of perturbing acceleration due to \gls{SRP} and the gravitational acceleration for those points along the trajectory where both have the same order of magnitude. The direction for the net acceleration acting on the particle is shown in \Cref{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSTBE_inertialFrame}. The trajectory of the particle starts out the same way in both \Cref{fig:LoGSP_1_capture_case_5_2d_inertialTrajectory_noSTBE} and \Cref{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame} however due to the lack of \gls{STBE} perturbation, the trajectories soon start to differ from each other. Upon comparing \Cref{fig:LoGSP_1_capture_case_5_2d_totalAccelerationVector_inertialFrame} and \Cref{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSTBE_inertialFrame} we can infer that the trajectories differ because the with the lack of \gls{STBE} the direction of the net acceleration vector differs for the two trajectories which eventually directs how the particle motion would progress. The particle trajectory in \Cref{fig:LoGSP_1_capture_case_5_2d_inertialTrajectory_noSTBE} eventually leads to an escape scenario. Now if we look at \Cref{fig:LoGSP_1_capture_case_5_2d_SRP_and_gravity_vector_noSTBE_inertialFrame}, towards the end of the trajectory, the direction of the gravitational vector gradually changes and starts to point along the instantaneous tangent to the trajectory, all the while with the \gls{SRP} vector point away from the asteroid. The net effect of this situation can be seen in \Cref{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSTBE_inertialFrame}; we see that the net acceleration vector starts pointing away from the asteroid towards the end segment of the trajectory and thus this is when the particle escapes.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\linewidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSTBE_2d_trajectory_inertialFrame.pdf}
+\caption{2D trajectory of particle for same initial conditions as that of capture case 5 in \Cref{tab:LoGSP_1_capture} except that only \gls{SRP} was included in this simulation. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_case_5_2d_inertialTrajectory_noSTBE}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\subfloat[]{
+    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSTBE_srp&gravity_vectors_inertialFrame.pdf}
+    \label{fig:LoGSP_1_capture_case_5_2d_SRP_and_gravity_vector_noSTBE_inertialFrame}
+}
+
+\subfloat[]{
+    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSTBE_total_acceleration_inertialFrame.pdf}
+    \label{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSTBE_inertialFrame}
+}
+\caption{Inertial frame XY plane trajectory for same launch conditions as that of capture case 5 in \Cref{tab:LoGSP_1_capture}: \protect\subref{fig:LoGSP_1_capture_case_5_2d_SRP_and_gravity_vector_noSTBE_inertialFrame} showing direction of \gls{SRP} acceleration and gravitational acceleration \& \protect\subref{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSTBE_inertialFrame} showing direction of the net acceleration acting on the particle. Vectors are shown only for those parts of trajectory where acceleration due to \gls{SRP} and gravity have the same order of magnitude. Note that \gls{STBE} perturbation was not part of the simulation here. Particle code LoGSP-1.}
+\end{figure}
+\FloatBarrier
+%%%
+When we keep \gls{STBE} but remove \gls{SRP} from our simulations, then the trajectory again leads to an escape situation, only this time its much faster. The 2D inertial frame trajectory is shown in \Cref{fig:LoGSP_1_capture_case_5_2d_inertialTrajectory_noSRP}. The trajectory shows similarity only for a brief moment immediately after launch (notice the small loop after 'start') with the capture case in \Cref{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame} but soon after the particle is on a trajectory that never comes back around the asteroid. The reason for this is clear and simple if one looks at the direction of acceleration due to gravity and \gls{STBE} in \Cref{fig:LoGSP_1_capture_case_5_2d_STBE_and_gravity_vector_noSRP_inertialFrame} and their net effect in \Cref{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSRP_inertialFrame}. Initially, from the point when we show these vectors, we know that the magnitude of \gls{STBE} acceleration is 1.0 order of magnitude smaller than the gravitational acceleration (see \Cref{fig:LoGSP_1_capture_case_5_2d_acceleration_magnitudes_noSRP}) and even then the direction of the net acceleration vector is such that the trajectory can not loop around the asteroid. The \gls{STBE} magnitude increases soon enough to the same order as that of gravitational acceleration and the net acceleration vector direction never points towards the asteroid which eventually causes the particle to escape.
+
+From this analysis, we can say that effect of removing \gls{SRP} from simulations had a much drastic effect than removing just the \gls{STBE}. Both cases lead to an escape situation and the combined effect of both the perturbations leads to a capture orbit, for the same launch conditions and initial Solar phase angle. The behavior of the trajectory, in all cases, can be easily understood by looking at the direction of the net acceleration vector, especially when the particle is far away from the asteroid because it tells us exactly, how by adding perturbations, the motion of the particle is affected and not just in terms of its final fate but even in terms of changing its orbital direction.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\linewidth, height=0.50\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_acceleration_magnitudes.pdf}
+\caption{Magnitudes of acceleration due to gravity, \gls{STBE} and the net effect of the two for the corresponding vectors as shown in \Cref{fig:LoGSP_1_capture_case_5_2d_noSRP_accelerationVectorPlot_inertialFrame}. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_case_5_2d_acceleration_magnitudes_noSRP}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\linewidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_2d_trajectory_inertialFrame.pdf}
+\caption{2D trajectory of particle for same initial conditions as that of capture case 5 in \Cref{tab:LoGSP_1_capture} except that only \gls{STBE} was included in this simulation. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_case_5_2d_inertialTrajectory_noSRP}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\subfloat[]{
+    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_stbe&gravity_vectors_inertialFrame.pdf}
+    \label{fig:LoGSP_1_capture_case_5_2d_STBE_and_gravity_vector_noSRP_inertialFrame}
+}
+
+\subfloat[]{
+    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_total_acceleration_inertialFrame.pdf}
+    \label{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSRP_inertialFrame}
+}
+\caption{Inertial frame XY plane trajectory for same launch conditions as that of capture case 5 in \Cref{tab:LoGSP_1_capture}: \protect\subref{fig:LoGSP_1_capture_case_5_2d_STBE_and_gravity_vector_noSRP_inertialFrame} showing direction of \gls{STBE} acceleration and gravitational acceleration \& \protect\subref{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSRP_inertialFrame} showing direction of the net acceleration acting on the particle. Vectors are shown only for those parts of trajectory where acceleration due to \gls{STBE} is equal to gravitational acceleration or smaller than it by 1.0 order of magnitude. Note that \gls{SRP} perturbation was not part of the simulation here. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_case_5_2d_noSRP_accelerationVectorPlot_inertialFrame}
+\end{figure}
+\FloatBarrier
+%%%
 \Cref{fig:LoGSP_1_capture_case_8_3d_traj_inertialFrame_differnetViews} shows the 3D trajectory for completely different launch conditions (see capture case 8 in \Cref{tab:LoGSP_1_capture}). The 3D trajectory as viewed from the asteroid centric body fixed frame is shown in \Cref{fig:LoGSP_1_capture_case_8_3d_trajectory}. The 2D trajectory projections for the same, in inertial and body fixed frames, are shown in \Cref{fig:LoGSP_1_capture_case_8_2d_traj_inertialFrame} and \Cref{fig:LoGSP_1_capture_case_8_2d_traj_bodyFrame} respectively. Just like in the previous case, we see from the animation (see \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_animation}) and the 3D trajectory for current launch conditions that the particle direction of motion is reversed twice in its course. If we look at \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_perturbationVectors}, we see it again that the change in direction is happening because of the perturbations and more significantly by the \gls{SRP}. The perturbation vectors in \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_perturbationVectors} are plotted for points along the trajectory where the magnitude of acceleration due to \gls{SRP} is of the same order of magnitude as the gravitational acceleration. Again, the magnitude of \gls{STBE} is 1.0 order of magnitude smaller than the gravitational acceleration for the same data points along the trajectory. Along loops numbered 1 and 2 in \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_perturbationVectors} the \gls{SRP} direction is such that it forces the particle to change its direction of motion from its nominal course.
 %%%
 \begin{figure}[htb]
@@ -193,27 +323,6 @@ The animation shows that the particle reverses its direction of motion twice in 
 \FloatBarrier
 %%%
 In both the capture cases that we discussed so far, we can see that out of \gls{SRP} and \gls{STBE}, the former has a more deciding effect on the motion of the particle when it is far away from the asteroid. The way the particles change their direction of motion is consistent with the direction in which the \gls{SRP} perturbation is acting. So now we know how \gls{SRP} is affecting a particle's motion while it is in a capture orbit around an asteroid. But now, we shall take a look at how these Solar perturbations are also responsible for creating a capture orbit in the first place.
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-% another option for includegraphics - keepaspectratio
-\includegraphics[width=\textwidth, height=\textheight]{longest_edge_perturbations/3.2Density_1cmSize/2dTrajectory_10ms_45Azimuth_315solarPhase_inertialFrame.png}
-\caption{2D inertial frame trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture}. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}
-\end{figure}
-\FloatBarrier
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-% another option for includegraphics - keepaspectratio
-\includegraphics[width=\textwidth, height=\textheight]{longest_edge_perturbations/3.2Density_1cmSize/TotalPerturbingVector_xyPlane_completeTraj_10ms_45DegAzim_315SolarPhase_edit.png}
-\caption{2D trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture} with direction of \gls{SRP} and \gls{STBE} perturbation vectors along with the sum total of the two. Note that the vectors are shown only for those parts of the trajectory where the \gls{SRP} magnitude is of the same order as that of the asteroid's gravitational acceleration. For those very same points along the trajectory, the magnitude of the \gls{STBE} is always 1.0 order of magnitude smaller than the gravitational acceleration. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_capture_case_5_2d_trajectory_perturbationVectors}
-\end{figure}
-\FloatBarrier
-%%%
 %%%
 \begin{figure}[htb]
 \centering
@@ -282,42 +391,44 @@ Let us begin with capture case number 8 in \Cref{tab:LoGSP_1_capture}. \Cref{fig
 \FloatBarrier
 %%%
 From the animation we can see that even as the particle has just been lofted from the surface of the asteroid, there are very subtle and minute differences, in the range to the particle and its velocity, between the perturbed and unperturbed trajectory. Ofcourse as the state vector differences are so small initially, the perturbed and unperturbed trajectory overlap with each other and can be seen so in \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_comparative_inertialFrame}. Later, as the trajectory progresses, we see that these differences increase to a significant quotient because the effect of \gls{SRP} adds up after a certain amount of time. A snippet from the trajectory animation in \Cref{fig:LoGSP_1_capture_case_8_2d_comparative_animation_snippet} clearly shows the said differences. This snippet was taken around the moment when the perturbed and unperturbed trajectory start to separate from each other.
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-% another option for includegraphics - keepaspectratio
-\includegraphics[width=\textwidth]{longest_edge_perturbations/3.2Density_1cmSize/animation_snippet_8ms_165Azimuth_45SolarPhase_comparative_xyTraj.pdf}
-\caption{Animation snippet of the inertial frame 2D trajectory (XY plane) of capture regolith for case number 8 in \Cref{tab:LoGSP_1_capture}. The trajectory on the left is for the case when Solar perturbations were omitted from the simulation and the trajectory on the right includes them. Note the differences in the range to the particle and its velocity for the same time stamp and rotational state of the asteroid. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_capture_case_8_2d_comparative_animation_snippet}
-\end{figure}
-\FloatBarrier
-%%%
+
 In \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_comparative_inertialFrame} we can see that the departure in the perturbed trajectory from the unperturbed one is consistent with the direction in which the perturbing acceleration from \gls{SRP} is acting. This can also be seen a bit more clearly when we look at the trajectory plot in the asteroid centric rotating frame or the body frame as shown in \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_comparative_bodyFrame}. The plot on the left shows the trajectory for 1.4 [days] (i.e. until escape for the unperturbed trajectory) as viewed from the rotating frame, and the plot on the right zooms into a small part of this trajectory to show how \gls{SRP} is responsible for changing the course of the particle. It is easily seen how the \gls{SRP} vector pulls the trajectory away from the unperturbed one, thereby avoiding an escape scenario.
 
-We see a similar effect when we look at capture case number 5 from \Cref{tab:LoGSP_1_capture}. The inertial frame trajectory, both perturbed and unperturbed, for it are shown in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_comparative_inertialFrame}. With Solar perturbations removed from the simulation, the initial conditions for this particle result in it getting launched on a highly elliptical orbit and eventually crashing onto the surface of the asteroid. The particle, however, avoids this fate when Solar perturbations are included in the simulation. Just like before, we only show the \gls{SRP} vector because it is more significant than \gls{STBE} when the particle is near the asteroid (\gls{STBE} is 5.0 orders magnitude smaller than gravitational acceleration compared to \gls{SRP} which is only 3.0 orders of magnitude smaller when the particle is near the asteroid). Ofcourse, we see that the particle eventually moves far away from the asteroid but again we have discussed previously that the direction of \gls{SRP} perturbing acceleration is enough to decide how the trajectory of the particle would behave. In \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_comparative_inertialFrame}, it can be clearly seen that the direction of the perturbing acceleration due to \gls{SRP} is consistent with how the trajectory departs from its unperturbed counterpart.
+We see a similar effect when we look at capture case number 5 from \Cref{tab:LoGSP_1_capture}. The inertial frame trajectory, both perturbed and unperturbed, for it are shown in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_comparative_inertialFrame}. With Solar perturbations removed from the simulation, the initial conditions for this particle result in it getting launched on a highly elliptical orbit and eventually crashing onto the surface of the asteroid. The particle, however, avoids this fate when Solar perturbations are included in the simulation. Just like before, we only show the \gls{SRP} vector because it is more significant than \gls{STBE} when the particle is near the asteroid (\gls{STBE} is 5.0 orders magnitude smaller than gravitational acceleration compared to \gls{SRP} which is only 3.0 orders of magnitude smaller when the particle is near the asteroid). Ofcourse, we see that the particle eventually moves far away from the asteroid but again we have discussed previously that the direction of \gls{SRP} perturbing acceleration is enough to decide how the trajectory of the particle would behave. In \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_comparative_inertialFrame}, it can be clearly seen that the direction of the perturbing acceleration due to \gls{SRP} is consistent with how the trajectory departs from its unperturbed counterpart. To illustrate how the Solar phase angle at the time of launch is important in deciding the final fate of the regolith, we should look at \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_comparative_srpEscape}. The particle launch conditions are same as that for the perturbed simulation in \Cref{fig:LoGSP_1_capture_case_5_2d_trajectory_comparative_inertialFrame} except that the initial Solar phase angle is 45.0 [deg] instead of 315.0 [deg]. The former results in an escape situation as the particle is just whisked away by the impeding \gls{SRP}.
 
-Ofcourse \gls{SRP} is not directly responsible here, but rather indirectly, to get a capture orbit. The inclusion of \gls{SRP} causes the regolith/particle trajectory to depart slowly from its unperturbed counterpart resulting in a different or rather favorable phasing (in this context we mean the location of the particle with respect to a given rotational state of the asteroid) which leads to the particle getting trapped around the asteroid.
+Ofcourse \gls{SRP} is not directly responsible here, but rather indirectly, to get a capture orbit. The inclusion of \gls{SRP} causes the regolith/particle trajectory to depart slowly from its unperturbed counterpart resulting in a different or rather favorable phasing (in this context we mean the location of the particle with respect to a given rotational state of the asteroid) which leads to the particle getting trapped around the asteroid. An example for this is shown in \Cref{fig:LoGSP_1_capture_case_8_2d_comparative_animation_phasingExample}. The snippet only shows an instance of the particle motion but it is seen more clearly in the animation in \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_comparative_animation} that from a given epoch, the particle in the unperturbed simulation is experiencing acceleration while in the perturbed simulation it is being decelerated. When the particle is on the final leg of the trajectory as shown in the snippet in \Cref{fig:LoGSP_1_capture_case_8_2d_comparative_animation_phasingExample}, both particles are experiencing deceleration but the particle in the unperturbed simulation experienced deceleration for a relatively shorter period of time (again this was observed through the animation) than its perturbed counterpart. This leads to a situation where the former has a higher velocity in the final leg of the trajectory and eventually escapes compared to the latter which has a relatively lower velocity and stays in a capture orbit.
 %%%
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
 % another option for includegraphics - keepaspectratio
-\includegraphics[scale=0.70]{longest_edge_perturbations/3.2Density_1cmSize/singlePlot_comparative_PerturbationVector_10ms_45Azimuth_315SolarPhase_inertialFrame.png}
+\includegraphics[scale=0.60]{longest_edge_perturbations/3.2Density_1cmSize/singlePlot_comparative_PerturbationVector_10ms_45Azimuth_315SolarPhase_inertialFrame.png}
 \caption{Inertial frame 2D trajectory (XY plane) of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture} with direction of \gls{SRP} perturbation vector compared with the trajectory of a particle launched with the same initial conditions but in absence of Solar perturbations. Particle code LoGSP-1.}
 \label{fig:LoGSP_1_capture_case_5_2d_trajectory_comparative_inertialFrame}
 \end{figure}
 \FloatBarrier
 %%%
-An example for this is shown in \Cref{fig:LoGSP_1_capture_case_8_2d_comparative_animation_phasingExample}.
 %%%
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
 % another option for includegraphics - keepaspectratio
-\includegraphics[angle=90, keepaspectratio]{longest_edge_perturbations/3.2Density_1cmSize/phasingExample_8ms_165Azimuth_45SolarPhase_comparative_animation_snippet.pdf}
-\caption{Animation snippet for an inertial frame 2D trajectory (XY plane) of capture regolith for capture case number 8 in \Cref{tab:LoGSP_1_capture}. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_capture_case_8_2d_comparative_animation_phasingExample}
+\includegraphics[scale=0.60]{longest_edge_perturbations/3.2Density_1cmSize/srpEscape_comparative_10ms_45Azimuth_45SolarPhase_inertialFrame.png}
+\caption{Inertial frame 2D trajectory (XY plane) of capture regolith for same launch velocity and launch azimuth as that of capture case number 5 in \Cref{tab:LoGSP_1_capture} but a different Solar phase angle of 45.0 [deg]. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_case_5_2d_trajectory_comparative_srpEscape}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\subfloat[]{\includegraphics[angle=90, keepaspectratio]{longest_edge_perturbations/3.2Density_1cmSize/animation_snippet_8ms_165Azimuth_45SolarPhase_comparative_xyTraj.pdf}
+\label{fig:LoGSP_1_capture_case_8_2d_comparative_animation_snippet}}
+\vline\vline
+\subfloat[]{\includegraphics[angle=90, keepaspectratio]{longest_edge_perturbations/3.2Density_1cmSize/phasingExample_8ms_165Azimuth_45SolarPhase_comparative_animation_snippet.pdf}
+\label{fig:LoGSP_1_capture_case_8_2d_comparative_animation_phasingExample}}
+\caption{Animation snippets of the inertial frame 2D trajectory (XY plane) of capture regolith for case number 8 in \Cref{tab:LoGSP_1_capture}. The trajectory on the left is for the case when Solar perturbations were omitted from the simulation and the trajectory on the right includes them. Note the differences in the range to the particle and its velocity for the same time stamp and rotational state of the asteroid. Particle code LoGSP-1.}
 \end{figure}
 \FloatBarrier
 %%%
