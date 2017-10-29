@@ -494,11 +494,11 @@
 
 %% A part title starts with a huge (96pt) bold black number, flushed to the
 %% right, followed by the part name on the next line in the title color.
-\titleformat{\part}[display]
-    {\flushright\titlestyle}
-    {\fontsize{96pt}{96pt}\selectfont\bfseries\thepart}
-    {0pt}
-    {\Huge\color{title}}
+%\titleformat{\part}[display]
+%    {\vfil\centering\titlestyle}
+%    {\fontsize{96pt}{96pt}\selectfont\bfseries\thepart}
+%    {0pt}
+%    {\Huge\color{title}}
 %% Separate the title from the text by two empty lines.
 \titlespacing{\part}{0pt}{0pt}{2\baselineskip}
 %% In the table of contents, the part name is preceded by an empty line, printed
