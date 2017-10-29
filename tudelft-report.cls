@@ -49,6 +49,8 @@
 %\RequirePackage{graphicx}
 %\RequirePackage{realboxes}
 
+%\def\@largetitlesize{96pt}
+
 %Checks for xetex
 \ifxetex
     \RequirePackage[xetex]{geometry}
