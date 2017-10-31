@@ -64,7 +64,9 @@ Carl Sagan
 \glsaddall
 %
 % \renewcommand{\glstextformat}[1]{\color{orange} #1}
-\printglossary[type=\acronymtype, title=List of Acronyms, style=superragged]
+% \printglossary[type=\acronymtype, title=List of Acronyms, style=superragged]
+% \printglossary[type=\acronymtype, title=List of Acronyms, style=superborder]
+\printglossary[type=\acronymtype, title=List of Acronyms]
 \afterpage{\null\thispagestyle{empty}\addtocounter{page}{-1}\newpage}
 %
 
@@ -77,6 +79,7 @@ Carl Sagan
 \part{Motivation}
 \input{Mission_Heritage/heritage}
 \input{Research_Questions/researchQuestions}
+\part{Numerical Simulation Results}
 \input{Results/results}
 
 % \bibliographystyle{apalike}
