@@ -13,6 +13,9 @@
 \ExecuteOptions{english}
 \ProcessOptions\relax
 
+\newif\if@roman
+\@romantrue
+
 \LoadClass[11pt,openright]{book}
 
 \RequirePackage{etex}
@@ -112,7 +115,7 @@
         BoldFont = *-Bold,
         ItalicFont = *-Italic,
         BoldItalicFont = *-BoldItalic
-    ]{BookmanOldStyle}
+    ]{Georgia}
     \newfontfamily\tudsffamily[
         Path = fonts/,
         Extension = .ttf,
@@ -121,7 +124,7 @@
         ItalicFeatures = FakeSlant,
         BoldItalicFont = *-Bold,
         BoldItalicFeatures = FakeSlant
-    ]{Tahoma}
+    ]{Arial}
 \else
     %% If the document is not compiled with XeLaTeX, we need to use the native
     %% fonts.
@@ -156,7 +159,7 @@
         BoldFont = *-Bold,
         ItalicFont = *-Italic,
         BoldItalicFont = *-BoldItalic
-    ]{BookmanOldStyle}
+    ]{Georgia}
     \setsansfont[
         Path = fonts/,
         Extension = .ttf,
@@ -165,7 +168,7 @@
         ItalicFeatures = FakeSlant,
         BoldItalicFont = *-Bold,
         BoldItalicFeatures = FakeSlant
-    ]{Tahoma}
+    ]{TUDelft-UltraLight}
     \setmonofont[
         Path = fonts/,
         Extension = .ttf,
