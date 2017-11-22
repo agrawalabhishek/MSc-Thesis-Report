@@ -6,7 +6,7 @@ In the past, there have been multiple spacecraft missions to the small bodies in
 
 \section{Past Missions}
 \label{sec:past_missions}
-In all the history of space exploration there have been only three spacecraft missions that have rendezvoused with asteroids. In chronological order these are: \gls{NASA}'s \gls{NEAR}-Shoemaker mission to asteroid Eros, \gls{JAXA}'s Hayabusa mission to asteroid Itokawa, and \gls{NASA}'s Dawn mission to asteroids Vesta and Ceres.
+In all the history of space exploration there have been only three spacecraft missions that have rendezvoused with asteroids. In chronological order these are: \gls{NASA}'s \gls{NEAR}-Shoemaker mission to asteroid Eros, \gls{JAXA}'s Hayabusa mission to asteroid Itokawa, and \gls{NASA}'s Dawn mission to asteroids Vesta and Ceres \parencite{scheeresBook}. Out of these, only \gls{NEAR} and Hayabusa had direct contact with the small bodies and acquired high-resolution imagery of surface regolith.
 
 \subsection{NEAR-Shoemaker}
 \label{subsec:near_heritage}
@@ -22,9 +22,36 @@ The \gls{NEAR}-Shoemaker (henceforth \gls{NEAR}) mission was launched in 1996 an
 \FloatBarrier
 %%%
 
+\subsection{Hayabusa}
+\label{subsec:hayabusa_heritage}
+The Hayabusa spacecraft was launched by \gls{JAXA} in 2003 and it arrived at asteroid Itokawa in 2005. After arrival, it performed close-proximity operations around the asteroid for approximately 3 months during which several measurements were taken to estimate the shape, mass, topography and elemental composition of the asteroid. During this period, the spacecraft also collected samples from the surface of the asteroid that were eventually returned back to Earth in 2010. The measurements at Itokawa estimated its mass to be $3.51 \times 10^{10}$ [kg] and its bulk density to be $1.9 \pm 0.13$ [g/$cm^3$] \parencite{fujiwara2006ItokawaHayabusa}.
+%
+\newline\newline
+%
+Two distinct types of terrains can be recognized on Itokawa, one which is rough and rich in boulders and the other which is smooth and mostly flat. This distinction can easily be seen in \Cref{fig:itokawa_regolith}. The smooth regolith regions, that account for approximately 20\% of Itokawa's surface, composed of fragmented debris with grain sizes ranging from sub-centimetre to centimetre scales. One of the smooth regolith regions, called Muses Sea and from where the sample was also acquired, even consisted of a few metre-sized boulders that were hypothesized to have landed in the region as secondary ejecta \parencite{miyamotoItokawaRegolith}. The rougher terrain on Itokawa, which has a very sharp boundary with the smoother regolith filled regions (as evident in \Cref{fig:itokawa_regolith}), consists of boulders that range upto tens of metres in size \parencite{fujiwara2006ItokawaHayabusa}.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\linewidth, height=0.5\textheight, keepaspectratio=true]{itokawa_regolith.pdf}
+\caption{Image of Itokawa taken from a 7 [km] altitude depicting the nature of regolith on its surface. Muses Sea and Sagamihara are the two distinct smooth regolith regions on the asteroid \parencite{fujiwara2006ItokawaHayabusa}.}
+\label{fig:itokawa_regolith}
+\end{figure}
+\FloatBarrier
+%%%
+Hayabusa employed an \textit{impact sampling mechanism} that would work across various types of terrains, from hard bedrock to fine regolith. The spacecraft consisted of a long cylindrical sampling horn with a conical tip. When the tip of the horn touched the surface of the asteroid, the deformation in the horn's fabric was detected by a laser range finder and within 0.3 [s] of this event, a 5.0 [g] projectile was fired towards the surface with a velocity of 300 [m/s] and the resultant ejecta was collected by the sampler \parencite{yano2004sampling}. \cite{yanoHayabusaTouchdown} presents data from the sampling experiments that were performed on ground in $1g$ and micro-gravity environments. The experiments revealed that, for the projectile hitting at normal impact angles in micro-gravity, the impact ejecta mass of particles greater than 1.0 [cm] ranged from 2 - 11 [g] whereas for particles less than 1.0 [mm] the ejecta mass ranged from 100 - 10000 [g]. The impact target consisted of various analog materials from glass beads to lunar regolith simulant and an experiment like is a nice indicator of how artificial impact events can displace significant amount of fragmented debris on an asteroid.
+
 \section{Future Missions}
 \label{sec:future_missions}
+We will now discuss two missions, Hayabusa-2 by \gls{JAXA} and \gls{OSIRIS-REx} by \gls{NASA}. Both are currently en route to their respective target asteroids and after orbit insertion, they shall perform operations to collect surface samples.
 
+\subsection{Hayabusa-2}
+\label{subsec:hayabusa2_heritage}
+Hayabusa-2 is the second asteroid sample return mission by \gls{JAXA}, which to a significant extent, shares the successful technical legacy of Hayabusa. The target asteroid of the former is \textit{1999 JU3} which is suspected to contain organic matter and hydrated minerals. A successful sample return from this asteroid may thus help us in understanding the origin of life and/or water on Earth. The spacecraft will enter into an orbit around its target by mid-2018, after which it will perform close-proximity operations for 1.5 years. The mission will entail 3 touchdowns for sample acquisition and a cratering event to observe the subsurface of the asteroid. The sampling mechanism is based on that of Hayabusa and each sampling attempt has the potential to acquire samples in the order of 100 [mg]. The samples are sealed-off and transported back to Earth in a re-entry capsule. The cratering operation is performed by a \gls{SCI}. The \gls{SCI} is deployed by the spacecraft at an altitude of 500 [m] and after a preset time, a detonation accelerates it to about 2 [km/s] prior to impact. It is estimated that this will result in a crater of about 2 [m] wide. Prior to the detonation of \gls{SCI}, the spacecraft will move to a safe location on the opposite side of the asteroid from the impact point to avoid damage from impact ejecta and/or debris from the detonation. Apart from these, the spacecraft will perform other in-situ operations to characterize the asteroid and will also deploy a lander and three miniature rovers for technology demonstration \parencite{TsudaHayabusa2SystemDesign}.
+
+\subsection{OSIRIS-REx}
+\label{subsec:osiris_heritage}
+\gls{OSIRIS-REx} is part of \gls{NASA}'s New Frontiers program and will travel to \gls{NEA} 1999 $RQ_{36}$, also known as Bennu. The mission, amongst other scientific objectives, will return a regolith sample back to Earth that may provide insight into the initial states of planetary formation as well as answer questions on the origins of life. Since Bennu is a \gls{NEA}, the sample collection and subsequent analysis will provide us information on asteroids that could potentially impact Earth. The spacecraft was launched in 2016 and is expected to reach its target by the end of 2018 \parencite{berry2013osiris}. The asteroid has a semi-major axis of 1.126 [AU] which makes it an easily accessible asteroid as far as distance is concerned. But more than that, Bennu falls under the category of asteroids that are rich in volatiles and could potentially be related to objects that brought the seeds of life to Earth. Initial observations of Bennu through ground based telescopes, the Spitzer Telescope, the Arecibo Observatory and other assets revealed an abundance of regolith on the surface with grain sizes ranging from 4 - 8 [mm]. \gls{OSIRIS-REx} will acquire the regolith sample using a \gls{TAG} mechanism which uses pressurized Nitrogen gas to force the loosely held regolith into a collection chamber. The sampling will occur in 2020 and it will be retrieved on Earth in 2023 \parencite{osirisMissionOverview}.
 
 \section{State of the art / Literature Review}
 \label{sec:literature_review}
