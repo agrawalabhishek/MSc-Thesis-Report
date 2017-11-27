@@ -8,8 +8,11 @@
     \textbf{Symbol} & \textbf{Units} & \textbf{Description}                             \\
     \hline
     $r$              & m                & Distance                                      \\
-    $\vv{\bm{r}}$    & m                & Position Vector                               \\
+    $\vv{\bm{r}}$    & m                & Position vector                               \\
+    $t$              & s                & Time                                          \\
     $U$              & $m^2/s^2$        & Gravitational potential                       \\
+    $v$              & $m/s$            & Velocity                                      \\
+    $\vv{\bm{v}}$    & $m/s$            & Velocity vector                               \\
     $x$              & m                & Cartesian coordinate \emph{x}                 \\
     $y$              & m                & Cartesian coordinate \emph{y}                 \\
     $z$              & m                & Cartesian coordinate \emph{z}                 \\
@@ -19,12 +22,18 @@
 
 \subsection*{Greek}
 \begin{longtable}[l]{p{100pt} p{70pt} p{150pt}}
-    \textbf{Symbol} & \textbf{Units} & \textbf{Description}                             \\
+    \textbf{Symbol} & \textbf{Units} & \textbf{Description}                                 \\
     \hline
-    $\omega$        & rad/s           & Asteroid rotation rate                          \\
-    $\theta$        & deg             & Rotating angle between the Asteroid-centric
-                                        inertial and body-fixed frame                   \\
-    $\vartheta$     & deg             & Longitude of Sun with respect to the asteroid   \\
+    $\omega$            & rad/s           & Asteroid rotation rate or angular
+                                            velocity                                        \\
+    $\vv{\bm{\omega}}$  & rad/s           & Angular velocity vector                         \\
+    $\phi_{B}^{I}$      & -               & Rotating frame (ARF) to Inertial frame (AIF)
+                                            transformation matrix                           \\
+    $\phi_{I}^{B}$      & -               & Inertial frame (AIF) to Rotating frame (ARF)
+                                            transformation matrix                           \\
+    $\theta$            & deg             & Rotating angle between the Asteroid-centric
+                                            inertial and Rotating frame                     \\
+    $\vartheta$         & deg             & Longitude of Sun with respect to the asteroid   \\
 \end{longtable}
 %%%
 \vspace{1cm}
@@ -33,8 +42,13 @@
 \begin{longtable}[l]{p{100pt} p{230pt}}
     \textbf{Symbol} & \textbf{Description}                                              \\
     \hline
-    B        & Body-fixed rotating frame                                                \\
-    I        & Inertial frame                                                           \\
-    P        & Particle or Regolith                                                     \\
-    S        & Sun                                                                      \\
+    B                                 & Asteroid-centric Rotating frame (ARF)           \\
+    I                                 & Asteroid-centric Inertial frame (AIF)           \\
+    P                                 & Particle or Regolith                            \\
+    S                                 & Sun                                             \\
+    x                                 & Vector component along x-axis                   \\
+    y                                 & Vector component along y-axis                   \\
+    z                                 & Vector component along z-axis                   \\
+    $\ast_{I}^{B}$                    & AIF \textit{'quantity'} expressed
+                                        in ARF components                               \\
 \end{longtable}
