@@ -275,8 +275,50 @@ where $u_1$ is the maximum real root possible and at that value, \Cref{eqn:confo
 %
 The potential defined by \Cref{eqn:ellipsoid_potential_short_form} appears to have a complicated computational process due to its integral form. However, the integral can be split into multiple parts such that each can be solved with the help of standard functions called \textit{Carlson's Elliptic Integrals} \parencite{carlsonEllipticIntegral}. Software routines for these integrals exist in several computing languages which, for our case, helps in computing the \gls{CDE} gravitational potential. The integral defined in \Cref{eqn:ellipsoid_potential_short_form,eqn:ellipsoid_potential_phi,eqn:ellipsoid_potential_delta} is restated in its complete form as follows:
 %%%
-
+\begin{align}
+    U(\bvector{r}) &= -\frac{3\mu}{4} \int_{\lambda(\bvector{r})}^{\infty} \left(\frac{x^2}{\alpha^2 + u} + \frac{y^2}{\beta^2 + u} + \frac{z^2}{\gamma^2 + u} - 1\right) \frac{du}{\sqrt{(\alpha^2 + u)(\beta^2 + u)(\gamma^2 + u)}}
+    \label{eqn:ellipsoid_potential_long_form}
+\end{align}
 %%%
+\Cref{eqn:ellipsoid_potential_long_form} can be split into 4 parts which are stated as follows:
+%%%
+\begin{align}
+    U_1 &= -\frac{\mu}{2} \cdotp \frac{3}{2} \int_{\lambda}^{\infty} \frac{x^2}{(\alpha^2 + u)^{3/2}(\beta^2 + u)^{1/2}(\gamma^2 + u)^{1/2}} du
+    \label{eqn:ellipsoid_potential_split_1}\\
+    U_2 &= -\frac{\mu}{2} \cdotp \frac{3}{2} \int_{\lambda}^{\infty} \frac{y^2}{(\alpha^2 + u)^{1/2}(\beta^2 + u)^{3/2}(\gamma^2 + u)^{1/2}} du
+    \label{eqn:ellipsoid_potential_split_2}\\
+    U_3 &= -\frac{\mu}{2} \cdotp \frac{3}{2} \int_{\lambda}^{\infty} \frac{z^2}{(\alpha^2 + u)^{1/2}(\beta^2 + u)^{1/2}(\gamma^2 + u)^{3/2}} du
+    \label{eqn:ellipsoid_potential_split_3}\\
+    U_4 &= +\frac{\mu}{2} \cdotp \frac{3}{2} \int_{\lambda}^{\infty} \frac{du}{(\alpha^2 + u)^{1/2}(\beta^2 + u)^{1/2}(\gamma^2 + u)^{1/2}}
+    \label{eqn:ellipsoid_potential_split_4}
+\end{align}
+%%%
+where $\lambda{(\bvector{r})}$ is simply written as $\lambda$ for brevity. Thus, the \gls{CDE} potential is given as $U = U_1 + U_2 + U_3 + U_4$. We make the following substitution for \Cref{eqn:ellipsoid_potential_split_1,eqn:ellipsoid_potential_split_2,eqn:ellipsoid_potential_split_3,eqn:ellipsoid_potential_split_4}:
+%%%
+\begin{align}
+    u &= v + \lambda \\
+    du &= dv \\
+    u &= \lambda \text{; } v = 0 \\
+    u &= \infty \text{; } v = \infty
+\end{align}
+%%%
+With these substitutions, \Cref{eqn:ellipsoid_potential_split_1}, for example, can now be re-written as follows:
+%%%
+\begin{align}
+    U_1 &= -\frac{\mu x^2}{2} \left[\frac{3}{2} \int_{0}^{\infty} \frac{dv}{((\alpha^2 + \lambda) + v)^{3/2}((\beta^2 + \lambda) + v)^{1/2}((\gamma^2 + \lambda) + v)^{1/2}}\right]
+    \label{eqn:ellipsoid_potential_split_1_mod} \\
+    &= -\frac{\mu x^2}{2} R_D(\beta^2 + \lambda, \gamma^2 + \lambda, \alpha^2 + \lambda)
+    \label{eqn:ellipsoid_potential_split_1_carlson}
+\end{align}
+%%%
+In \Cref{eqn:ellipsoid_potential_split_1_mod}, the expression within the square braces conforms to the standard elliptic integral function $R_D$ as defined by \cite{carlsonEllipticIntegral} and is given as follows:
+%%%
+\begin{align}
+    R_D(x, y, z) &= \frac{3}{2} \int_0^{\infty} \frac{dt}{(t+x)^{1/2}(t+y)^{1/2}(t+z)^{3/2}}
+    \label{eqn:carlson_RD}
+\end{align}
+%%%
+
 
 \section{Solar Perturbations}
 \label{sec:solar_perturbations}
