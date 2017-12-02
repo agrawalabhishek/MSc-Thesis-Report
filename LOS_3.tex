@@ -5,17 +5,31 @@
 
 \subsection*{Roman}
 \begin{longtable}[l]{p{100pt} p{70pt} p{150pt}}
-    \textbf{Symbol} & \textbf{Units} & \textbf{Description}                             \\
+    \textbf{Symbol} & \textbf{Units} & \textbf{Description}                                 \\
     \hline
-    $r$              & m                & Distance                                      \\
-    $\vv{\bm{r}}$    & m                & Position vector                               \\
-    $t$              & s                & Time                                          \\
-    $U$              & $m^2/s^2$        & Gravitational potential                       \\
-    $v$              & $m/s$            & Velocity                                      \\
-    $\vv{\bm{v}}$    & $m/s$            & Velocity vector                               \\
-    $x$              & m                & Cartesian coordinate \emph{x}                 \\
-    $y$              & m                & Cartesian coordinate \emph{y}                 \\
-    $z$              & m                & Cartesian coordinate \emph{z}                 \\
+    $a, b, c$        & m                & Semi-axes of reference ellipsoid
+                                          (ellipsoidal harmonics gravity potential model)   \\
+    $\mathcal{B}$    & -                & Collection of all discrete mass distributions     \\
+    $C$              & -                & Spherical harmonics expansion coefficient         \\
+    $E$              & -                & Lam\'e function of first kind                     \\
+    $F$              & -                & Lam\'e function of second kind                    \\
+    $P$              & -                & Associated Legendre functions                     \\
+    $r$              & m                & Distance                                          \\
+    $\vv{\bm{r}}$    & m                & Position vector                                   \\
+    $s$              & m                & Conic equation parameter                          \\
+    $S$              & -                & Spherical harmonics expansion coefficient         \\
+    $t$              & s                & Time                                              \\
+    $u$              & m                & Parameter in equation for family of confocal
+                                          quadrics to an ellipsoid (CDE potential model)    \\
+    $u_1, u_2, u_3$  & m                & Real valued and unequal roots to the equation for
+                                          family of confocal quadrics to an ellipsoid (CDE potential model)                                  \\
+    $U$              & $m^2/s^2$        & Gravitational potential                           \\
+    $v$              & $m/s$            & Velocity                                          \\
+    $\vv{\bm{v}}$    & $m/s$            & Velocity vector                                   \\
+    $V$              & $m^3$            & Volume                                            \\
+    $x$              & m                & Cartesian coordinate \emph{x}                     \\
+    $y$              & m                & Cartesian coordinate \emph{y}                     \\
+    $z$              & m                & Cartesian coordinate \emph{z}                     \\
 \end{longtable}
 %%%
 \vspace{1cm}
@@ -24,6 +38,20 @@
 \begin{longtable}[l]{p{100pt} p{70pt} p{150pt}}
     \textbf{Symbol} & \textbf{Units} & \textbf{Description}                                 \\
     \hline
+    $\alpha$            & -               & Ellipsoidal harmonics expansion coefficient     \\
+    $\alpha, \beta, \gamma$ & m           & Semi-major axes of an ellipsoid
+                                            (CDE potential model)                           \\
+    $\delta$            & deg             & Latitude (spherical harmonics
+                                            gravitational potential model)                  \\
+    $\Delta$            & -               & Function in CDE potential model                 \\
+    $\lambda$           & deg             & Longitude (spherical harmonics
+                                            gravitational potential model)                  \\
+    $\lambda_1, \lambda_2, \lambda_3$ & m & Ellipsoidal coordinates                         \\
+    $\lambda_1^{ref}$   & m               & Largest semi-major axis of reference ellipsoid
+                                            (ellipsoidal harmonics gravity potential model) \\
+    $\lambda(\bvector{r})$ or $\lambda$ & m & Real valued parameter; defines a confocal
+                                              ellipsoid in the CDE potential model          \\
+    $\mu$               & $m^3/s^2$       & Gravitational parameter                         \\
     $\omega$            & rad/s           & Asteroid rotation rate or angular
                                             velocity                                        \\
     $\vv{\bm{\omega}}$  & rad/s           & Angular velocity vector                         \\
@@ -31,6 +59,9 @@
                                             transformation matrix                           \\
     $\phi_{I}^{B}$      & -               & Inertial frame (AIF) to Rotating frame (ARF)
                                             transformation matrix                           \\
+    $\phi$              & -               & Function in CDE potential model                 \\
+    $\rho$              & m               & Distance to a discrete mass distribution        \\
+    $\bvector{\rho}$    & m               & Distance vector to a discrete mass distribution \\
     $\theta$            & deg             & Rotating angle between the Asteroid-centric
                                             inertial and Rotating frame                     \\
     $\vartheta$         & deg             & Longitude of Sun with respect to the asteroid   \\
@@ -44,6 +75,10 @@
     \hline
     B                                 & Asteroid-centric Rotating frame (ARF)           \\
     I                                 & Asteroid-centric Inertial frame (AIF)           \\
+    l                                 & Degree of spherical harmonics expansion         \\
+    m                                 & Order of spherical harmonics expansion          \\
+    n                                 & Degree of ellipsoidal harmonics expansion       \\
+    p                                 & Order of ellipsoidal harmonics expansion        \\
     P                                 & Particle or Regolith                            \\
     S                                 & Sun                                             \\
     x                                 & Vector component along x-axis                   \\
@@ -51,4 +86,6 @@
     z                                 & Vector component along z-axis                   \\
     $\ast_{I}^{B}$                    & AIF \textit{'quantity'} expressed
                                         in ARF components                               \\
+    $\ast_{B}^{I}$                    & ARF \textit{'quantity'} expressed
+                                        in AIF components                               \\
 \end{longtable}

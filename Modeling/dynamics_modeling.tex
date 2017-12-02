@@ -137,14 +137,146 @@ The transfer matrix to transform a state vector from \gls{AIF} to \gls{ARF} is j
         -\sin\theta & \cos\theta & 0 \\
         0 & 0 & 1
     \end{bmatrix}
-    \label{eqn:arf_to_aif_transformation matrix}
+    \label{eqn:aif_to_arf_transformation matrix}
 \end{align}
 %%%
+Then the state vector transformation from \gls{AIF} to \gls{ARF} takes place as follows:
+%%%
+\begin{align}
+    \bvector{r}_B &= \phi_I^B \bvector{r}_I
+    \label{eqn:aif_to_arf_position} \\
+    \bvector{v}_B^I &= \bvector{v}_I - \bvector{\omega} \times \bvector{r}_I
+    \label{eqn:aif_to_arf_transport_theorem} \\
+    \bvector{v}_B &= \phi_I^B \bvector{v}_B^I
+    \label{eqn:aif_to_arf_velocity}
+\end{align}
+%%%
+where $\bvector{v}_B^I$ is the \gls{ARF} velocity in \gls{AIF} components, and $\bvector{r}_I$ is the position vector in the \gls{AIF}.
 
-
-\section{Gravity Modeling}
+\section{Gravitational Potential}
 \label{sec:gravity}
-...elliptic integral method and how the accelerations are calculated and the third order equation solving for lambda...
+% ...elliptic integral method and how the accelerations are calculated and the third order equation solving for lambda...
+The key feature that differentiates small bodies, or asteroids for our particular case, from planets is their highly irregular shapes and thus non-spherical mass distributions \parencite{scheeresBook}. This is why the dynamics close to an asteroid are deemed as interesting and hence it is very important that the gravitational potential is modeled properly.
+
+\subsection{Spherical \& Ellipsoidal Harmonics}
+\label{subsec:spherical_ellipsoidal_harmonics}
+One of the most common methods for modeling gravity potential of any celestial body is the \textit{spherical harmonics} model. In that, a sphere whose radius is equal to the maximum dimension of the irregular body, circumscribes it and this sphere is called the \textit{Brillouin sphere} (see \Cref{fig:brillouin_sphere}). The spherical harmonics model then induces deformities on the Brillouin sphere, thereby producing a non-spherical gravity field. The spherical harmonics gravity potential is stated as follows \parencite{scheeresBook}:
+%%%
+\begin{align}
+    U(r, \delta, \lambda) = \frac{\mu}{r} \sum_{l=0}^{\infty} \sum_{m=0}^{l} \left(\frac{r_0}{r}\right)^l P_{lm} (\sin\delta) [C_{lm}\cos m\lambda + S_{lm}\sin m\lambda]
+    \label{eqn:spherical_harmonics_general}
+\end{align}
+%%%
+where $U$ is the gravitational potential calculated at a distance $r$ from the centre of the Brillouin sphere at latitude $\delta$ and longitude $\lambda$, $\mu$ is the gravitational parameter of the irregular body or asteroid, $r_0$ is the radius of the Brillouin sphere, $P_{lm}$ are the associated Legendre functions, $C_{lm}$ and $S_{lm}$ are the spherical harmonic coefficients which account for shape and density variations \parencite{romain2001ellipsoidal}, and $l$ and $m$ are the degree and order, respectively, of the spherical harmonic expansion. The definitions and calculations for the associated Legendre functions and the harmonics coefficients has been explained in detail by \cite{scheeresBook} and is not repeated here for brevity. The majority of gravity field perturbations can be accounted for by just considering the second degree and order in the spherical harmonics expansion. The potential is then expressed as follows \parencite{scheeresBook}:
+%%%
+\begin{align}
+    U = \frac{\mu}{r} \left[ 1 + \left(\frac{r_0}{r}\right)^2 \left\{C_{20} \left(1-\frac{3}{2}\cos^2\delta\right) + 3C_{22}\cos^2\delta \cos(2\lambda) \right\} \right]
+    \label{eqn:spherical_harmonics_second_degree}
+\end{align}
+%%%
+where the spherical harmonic coefficients can be obtained from the principle moments of inertia as defined in \cite{scheeresBook}.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.25\textheight, keepaspectratio=true]{Brillouin_sphere.pdf}
+\caption{Brillouin sphere or the circumscribing sphere around an irregular body \parencite{romain2001ellipsoidal}.}
+\label{fig:brillouin_sphere}
+\end{figure}
+\FloatBarrier
+%%%
+Now consider a general statement for the gravity field of any arbitrary mass distribution $\mathcal{B}$ \parencite{scheeresBook}:
+%%%
+\begin{align}
+    U = \frac{\mu}{V} \int_{\mathcal{B}} \frac{dV}{|\bvector{r} - \bvector{\rho}|}
+    \label{eqn:general_gravity_field}
+\end{align}
+%%%
+where $V$ is the volume, $\bvector{r}$ is the position vector to the point where the potential is being calculated, $\bvector{\rho}$ is the position vector to the discrete mass distribution within $\mathcal{B}$. If the potential is being calculated for a point that lies outside the maximum radius of the mass distribution being considered, then the integrand in \Cref{eqn:general_gravity_field} can be expanded into the following Laplace series form \parencite{scheeresBook}:
+%%%
+\begin{align}
+    \frac{1}{|\bvector{r} - \bvector{\rho}|} = \frac{1}{r} \sum_{i=0}^{\infty} \left(\frac{\rho}{r}\right)^i P_{i0} \left(\frac{\bvector{r} \cdot \bvector{\rho}}{r\rho}\right)
+    \label{eqn:general_grav_term_laplace_series}
+\end{align}
+%%%
+where $P_{i0}$ are the Legendre polynomials. Thus using \Cref{eqn:general_grav_term_laplace_series}, the integral in \Cref{eqn:general_gravity_field} can be restated as follows \parencite{scheeresBook}:
+%%%
+\begin{align}
+    \frac{1}{V} \int_{\mathcal{B}} \left(\frac{\rho}{r}\right)^i P_{i0} \left(\frac{\bvector{r} \cdot \bvector{\rho}}{r\rho}\right) dV
+    \label{eqn:general_gravity_field_modified_integral}
+\end{align}
+%%%
+There is a one-to-one correspondence between the integral in \Cref{eqn:general_gravity_field_modified_integral} and the $i$th degree and order spherical harmonics gravity field. Thus by looking at the Laplace series in \Cref{eqn:general_grav_term_laplace_series} and the integral in \Cref{eqn:general_gravity_field_modified_integral}, we can infer on the convergence or divergence of the spherical harmonics gravity field. Since the maximum radius of the mass distribution in case of the spherical harmonics model would be that of the circumscribing or Brillouin sphere, then for a point on this sphere, i.e. $r = |\bvector{\rho}|$, the Laplace series is not defined and for a point inside the sphere, i.e. $r < |\bvector{\rho}|$, the Laplace series diverges. This is the limitation for using the spherical harmonics model for an irregular body when one wants to compute orbital motion in close-proximity to the body. If the computation points are within the Brillouin sphere then the spherical harmonics series might diverge to a value that does not represent the true gravitational potential value and hence lead to errors in orbit computations. We can see from \Cref{fig:brillouin_sphere} that the volume of divergence for irregularly shaped asteroids can be quite significant. Thus, this model is definitely not suitable for our research since we are dealing with close-proximity orbits and above all, particle re-impact scenarios.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.25\textheight, keepaspectratio=true]{Brillouin_ellipsoid.pdf}
+\caption{Brillouin ellipsoid or the circumscribing ellipsoid around an irregular body \parencite{romain2001ellipsoidal}.}
+\label{fig:brillouin_ellipsoid}
+\end{figure}
+\FloatBarrier
+%%%
+The above problem can be mitigated, to a certain extent, by using the \textit{ellipsoidal harmonics} expansion for representing the gravity potential of an irregular body. An extremely detail account on this model is given by \cite{dechambre2002transformation}. In the ellipsoidal harmonics model, instead of a sphere, a triaxial ellipsoid is used to circumscribe the irregular body and proves to be a better fit as shown in \Cref{fig:brillouin_ellipsoid}. The ellipsoidal harmonics potential is then given as follows \parencite{dechambre2002transformation}:
+%%%
+\begin{align}
+    U(\lambda_1, \lambda_2, \lambda_3) &= \mu \sum_{n=0}^{\infty} \sum_{p=1}^{2n+1} \alpha_{np} \frac{E_n^p(\lambda_1)}{E_n^p(\lambda_1^{ref})} \times E_n^p(\lambda_2) E_n^p(\lambda_3) \text{; $\lambda_1 \leq \lambda_1^{ref}$}
+    \label{eqn:ellipsoidal_harmonics_inside} \\
+    U(\lambda_1, \lambda_2, \lambda_3) &= \mu \sum_{n=0}^{\infty} \sum_{p=1}^{2n+1} \alpha_{np} \frac{F_n^p(\lambda_1)}{F_n^p(\lambda_1^{ref})} \times E_n^p(\lambda_2) E_n^p(\lambda_3) \text{; $\lambda_1 \geq \lambda_1^{ref}$}
+    \label{eqn:ellipsoidal_harmonics_outside}
+\end{align}
+%%%
+where $(\lambda_1, \lambda_2, \lambda_3)$ are the ellipsoidal coordinates, which are basically three real roots (solutions) in terms of $s$ for the following conic equation \parencite{garmier2002modeling}:
+%%%
+\begin{align}
+    \frac{x^2}{s^2 + a^2} + \frac{y^2}{s^2 + b^2} + \frac{z^2}{s^2 + c^2} = 1
+    \label{eqn:conic_ellipsoidal}
+\end{align}
+%%%
+where $(x, y, z)$ are the Cartesian coordinates and $(a, b, c)$ are the semi-major axes of the reference ellipsoid circumscribing the irregular body (note that $a=\lambda_1^{ref}$). In \Cref{eqn:ellipsoidal_harmonics_inside,eqn:ellipsoidal_harmonics_outside}, $(\lambda_1, \lambda_2, \lambda_3)$ are analogous to the radius $r$, latitude $\delta$ and longitude $\lambda$, respectively, of \Cref{eqn:spherical_harmonics_general}; $\alpha_{np}$ is the ellipsoidal harmonics expansion coefficient similar to the spherical harmonics coefficient $C_{lm}$ and $S_{lm}$; $F_n^p()$ are the Lam\'e function of second kind of degree $n$ and order $p$ and is analogous to the attenuation term $(r_0 / r)^l$ of the spherical harmonics expansion in \Cref{eqn:spherical_harmonics_general}; $E_{n}^p()$ is the Lam\'e function of the first kind of degree $n$ and order $p$; and finally, the product term $E_{n}^p(\lambda_2)E_{n}^p(\lambda_3)$ is analogous to the product term $P_{lm} (\sin\delta) [C_{lm}\cos m\lambda + S_{lm}\sin m\lambda]$ which in both cases models the surface harmonic \parencite{garmier2002modeling}. A detailed description on definition and calculation of the ellipsoidal harmonic coefficients and the Lam\'e functions of the first and the second kind can be found in \cite{dechambre2002transformation} and is not repeated here for brevity.
+%
+\newline\newline
+%
+Even in the case of ellipsoidal harmonics expansion model, the gravity potential calculated for a point inside the circumscribing ellipsoid can diverge from the true potential. But the advantage of this model over the spherical harmonics expansion is that the circumscribing reference ellipsoid reduces the volume of divergence around the irregular body, relative to a sphere, making close-proximity evaluations possible. However, relative to spherical harmonics expansion, the computation of the basis functions for ellipsoidal harmonics, i.e. the Lam\'e functions of the first and the second kind, is extremely complex. On top of that, with increasing degree of the harmonics model, the order of magnitude of the Lam\'e functions increases, which then runs the risk of arithmetic overflow, thereby impeding accurate calculations of the harmonic expansion for degrees above 10 to 15 \parencite{reimond2016spheroidal}. However, in their research, \cite{reimond2016spheroidal} have devised a new method to calculate the basis functions using logarithmic expressions which allows accurate harmonic expansions for degrees of upto 500 but the computational complexity also increases tremendously as stated by them. Ultimately, since we wish to express the motion of particles close to the surface of the asteroid, which also involves surface interactions, the approach of ellipsoidal harmonics expansion also fails.
+
+\subsection{Constant Density Ellipsoid}
+\label{subsec:constant_density_ellipsoid}
+The gravity potential modeling methods discussed so far involved the use of surface harmonics on the circumscribing object (sphere or ellipsoid) to simulate a non-homogeneous gravity field for an irregular body. The major drawback with the harmonics approach was its divergence from the true potential value within the circumscribing volume. This problem can be mitigated all together by assuming a specific shape and density distribution for the irregular body in question. In this realm, there are the \gls{CDE} and constant density polyhedron gravity potential models. Unlike the harmonics expansion approach, these potential models are valid upto and on the surface of the shape that has been assumed for the irregular body in question \parencite{scheeresBook}. Hence, these models are perfect to study close-proximity motion of particles or spacecraft around an asteroid.
+
+Consider a \gls{CDE} with semi-major axes $(\alpha, \beta, \gamma)$ such that $\gamma \leq \beta \leq \alpha$. The shape of the triaxial ellipsoid is completely defined by the equation $(x/\alpha)^2 + (y/\beta)^2 + (z/\gamma)^2 \leq 1$. The density of the ellipsoid is assumed to be constant. Then the gravitational potential for a point external to such a body, i.e. \gls{CDE}, is defined by the following equation \parencite{scheeresBook}:
+%%%
+\begin{align}
+    U(\bvector{r}) &= -\frac{3\mu}{4} \int_{\lambda(\bvector{r})}^{\infty} \phi(\bvector{r}, u) \frac{du}{\Delta(u)}
+    \label{eqn:ellipsoid_potential_short_form} \\
+    \phi(\bvector{r}, u) &= \frac{x^2}{\alpha^2 + u} + \frac{y^2}{\beta^2 + u} + \frac{z^2}{\gamma^2 + u} - 1
+    \label{eqn:ellipsoid_potential_phi} \\
+    \Delta(u) &= \sqrt{(\alpha^2 + u)(\beta^2 + u)(\gamma^2 + u)}
+    \label{eqn:ellipsoid_potential_delta}
+\end{align}
+%%%
+where $\bvector{r}$ is the position vector to the point, external to the \gls{CDE}, and is defined in the \gls{ARF}; $\lambda(\bvector{r})$ is a parameter defined by the equation $\phi(\bvector{r}, \lambda) = 0$, which is a cubic polynomial and the value $\lambda$ is the maximum real root of this polynomial \parencite{scheeresBook}. Now for the given ellipsoid, the equation for the family of confocal quadratic surfaces is given as follows \parencite{ellipsoid_potential_model}:
+%%%
+\begin{align}
+    \frac{x^2}{\alpha^2 + u} + \frac{y^2}{\beta^2 + u} + \frac{z^2}{\gamma^2 + u} &= 1
+    \label{eqn:confocal_quadrics}
+\end{align}
+%%%
+where $u$ is a real-valued parameter whose value defines the type of the confocal quadratic surface. \Cref{eqn:confocal_quadrics} is a cubic polynomial in $u$ and can be solved to obtain three unequal real roots - $u_1, u_2, u_3$, such that the following relation holds true \parencite{ellipsoid_potential_model}:
+%%%
+\begin{align}
+    -\alpha^2 < u_3 < -\beta^2 < u_2 < -\gamma^2 < u_1 < +\infty
+    \label{eqn:confocal_quadrics_all_real_roots}
+\end{align}
+%%%
+where $u_1$ is the maximum real root possible and at that value, \Cref{eqn:confocal_quadrics} defines another ellipsoid which is confocal to the original one defined by the semi-major axes $\rightarrow$ $\alpha, \beta, \gamma$ \parencite{ellipsoid_potential_model}. Thus, the value of $\lambda$ in \Cref{eqn:ellipsoid_potential_short_form} conforms to a confocal ellipsoid for a given point external to the original ellipsoid (which in turn is modeling the asteroid).
+% The standard definition of gravitational potential at a point is defined as the work required to move that point from infinity to the location of the point in question and in \Cref{eqn:ellipsoid_potential_short_form}, this is being done by moving through a family of confocal ellipsoids.
+%
+\newline\newline
+%
+The potential defined by \Cref{eqn:ellipsoid_potential_short_form} appears to have a complicated computational process due to its integral form. However, the integral can be split into multiple parts such that each can be solved with the help of standard functions called \textit{Carlson's Elliptic Integrals} \parencite{carlsonEllipticIntegral}. Software routines for these integrals exist in several computing languages which, for our case, helps in computing the \gls{CDE} gravitational potential. The integral defined in \Cref{eqn:ellipsoid_potential_short_form,eqn:ellipsoid_potential_phi,eqn:ellipsoid_potential_delta} is restated in its complete form as follows:
+%%%
+
+%%%
 
 \section{Solar Perturbations}
 \label{sec:solar_perturbations}
