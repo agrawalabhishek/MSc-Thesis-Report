@@ -12,10 +12,26 @@
     $\mathcal{B}$    & -                & Collection of all discrete mass distributions     \\
     $C$              & -                & Spherical harmonics expansion coefficient         \\
     $E$              & -                & Lam\'e function of first kind                     \\
+    $\bm{E}$         & -                & Edge Dyad in the polyhedron potential model       \\
     $F$              & -                & Lam\'e function of second kind                    \\
+    $\bm{F}$         & -                & Facet dyad in the polyhedron potential model      \\
+    $\mathcal{G}$    & $m^3 g^{-1} s^{-2}$ & Universal Gravitational constant               \\
+    $L_e$            & -                & Per-edge factor in polyhedron model               \\
+    $\buvec{n}$      & -                & Unit normal vector                                \\
+    $\buvec{n}_e^f$  & -                & Unit normal vector to edge \textit{e}
+                                          of facet \textit{f} of a polyhedron               \\
     $P$              & -                & Associated Legendre functions                     \\
+    \textbf{P}       & -                & Field point in polyhedron potential model         \\
     $r$              & m                & Distance                                          \\
     $\vv{\bm{r}}$    & m                & Position vector                                   \\
+    $\bvector{r}_i^f$ & m               & Vector from field point to vertices of a facet
+                                          in polyhedron model                               \\
+    $\bvector{r}_i^e$ & m               & Vector from field point to vertices of an edge
+                                          in polyhedron model                               \\
+    $\bvector{r}_e$, $\bvector{r}_f$ & m & Vector from any point on edge \textit{e}
+                                           or \textit{f}, respectively, to the field point
+                                           in polyhedron model                              \\
+    $R_D, R_F$       & -                & Carlson elliptic integral functions               \\
     $s$              & m                & Conic equation parameter                          \\
     $S$              & -                & Spherical harmonics expansion coefficient         \\
     $t$              & s                & Time                                              \\
@@ -24,6 +40,11 @@
     $u_1, u_2, u_3$  & m                & Real valued and unequal roots to the equation for
                                           family of confocal quadrics to an ellipsoid (CDE potential model)                                  \\
     $U$              & $m^2/s^2$        & Gravitational potential                           \\
+    $U_1, U_2, U_3, U_4$ & $m^2/s^2$    & CDE gravitational potential split in 4 parts      \\
+    $U_\ast$         & $m/s^2$          & Gravitational acceleration component
+                                          where $(\ast=x,y,z)$                              \\
+    $v$              & m                & Substitution parameter to get standard Carlson
+                                          elliptic integral                                 \\
     $v$              & $m/s$            & Velocity                                          \\
     $\vv{\bm{v}}$    & $m/s$            & Velocity vector                                   \\
     $V$              & $m^3$            & Volume                                            \\
@@ -54,6 +75,7 @@
     $\mu$               & $m^3/s^2$       & Gravitational parameter                         \\
     $\omega$            & rad/s           & Asteroid rotation rate or angular
                                             velocity                                        \\
+    $\omega_f$          & -               & Per-facet factor in the polyhedron model        \\
     $\vv{\bm{\omega}}$  & rad/s           & Angular velocity vector                         \\
     $\phi_{B}^{I}$      & -               & Rotating frame (ARF) to Inertial frame (AIF)
                                             transformation matrix                           \\
@@ -62,6 +84,7 @@
     $\phi$              & -               & Function in CDE potential model                 \\
     $\rho$              & m               & Distance to a discrete mass distribution        \\
     $\bvector{\rho}$    & m               & Distance vector to a discrete mass distribution \\
+    $\sigma$            & $kg/m^3$        & Density in polyhedron model                     \\
     $\theta$            & deg             & Rotating angle between the Asteroid-centric
                                             inertial and Rotating frame                     \\
     $\vartheta$         & deg             & Longitude of Sun with respect to the asteroid   \\
@@ -74,6 +97,8 @@
     \textbf{Symbol} & \textbf{Description}                                              \\
     \hline
     B                                 & Asteroid-centric Rotating frame (ARF)           \\
+    e                                 & Edge of a facet in a polyhedron shape model     \\
+    f,f'                              & Facet or face of a polyhedron shape model       \\
     I                                 & Asteroid-centric Inertial frame (AIF)           \\
     l                                 & Degree of spherical harmonics expansion         \\
     m                                 & Order of spherical harmonics expansion          \\

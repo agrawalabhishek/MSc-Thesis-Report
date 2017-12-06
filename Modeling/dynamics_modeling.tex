@@ -10,7 +10,7 @@ The simulator designed as part of this research (see \Cref{chap:naos}) involves 
 % Every research involves some degree of approximation of the natural world, on Earth or otherwise, to understand or explain any phenomenon. Through this thesis work, we hope to understand the orbital behavior of regolith around an asteroid and we have to do it with a relatively simplified model because recreating an exact replica of an asteroid's dynamical environment is out of the scope of this thesis. Although we are making simplifications, but it does not mean that the scientific returns from it would be any less. The particle trajectories might not be exact when we conduct the simulation based experiments in real world but the underlying science explaining the orbital behavior would remain unchanged (this would become more clear in \Cref{chap:results}). Thus, the simplifying assumptions we make for modeling the asteroid-regolith system are mentioned as follows:
 %%%
 \begin{enumerate}
-\item The asteroid body is modeled as a smooth triaxial ellipsoid to account for its non-uniform gravity. The reasons for choosing this model over others will be explained later in \Cref{sec:gravity}.
+\item The asteroid body is modeled as a smooth triaxial ellipsoid to account for its non-uniform gravity. The triaxial model is chosen over the spherical and ellipsoidal harmonics approach because we want to study motion of regolith close to the surface of the asteroid; in particular the re-impact scenarios. This can't be done with the harmonics model as the gravitational potential diverges, within the circumscribing volume, from the true potential of an irregular body (see \Cref{sec:gravity}). We chose not to use a polyhedron model either, even though it can account for surface irregularities of an irregular body much better than the triaxial ellipsoid. This is because we want to decouple the fundamental phenomenon, associated with the motion of the regolith, from any effects of a truly irregular shape such as in the case of a polyhedron model.
 
 \item Craters, surface depressions, mountains or any other terrain deformity on the asteroid is not considered in the simulation. The body is considered to have a uniform density. This is to simplify calculations of the gravitational acceleration.
 
@@ -239,11 +239,58 @@ where $(x, y, z)$ are the Cartesian coordinates and $(a, b, c)$ are the semi-maj
 %
 Even in the case of ellipsoidal harmonics expansion model, the gravity potential calculated for a point inside the circumscribing ellipsoid can diverge from the true potential. But the advantage of this model over the spherical harmonics expansion is that the circumscribing reference ellipsoid reduces the volume of divergence around the irregular body, relative to a sphere, making close-proximity evaluations possible. However, relative to spherical harmonics expansion, the computation of the basis functions for ellipsoidal harmonics, i.e. the Lam\'e functions of the first and the second kind, is extremely complex. On top of that, with increasing degree of the harmonics model, the order of magnitude of the Lam\'e functions increases, which then runs the risk of arithmetic overflow, thereby impeding accurate calculations of the harmonic expansion for degrees above 10 to 15 \parencite{reimond2016spheroidal}. However, in their research, \cite{reimond2016spheroidal} have devised a new method to calculate the basis functions using logarithmic expressions which allows accurate harmonic expansions for degrees of upto 500 but the computational complexity also increases tremendously as stated by them. Ultimately, since we wish to express the motion of particles close to the surface of the asteroid, which also involves surface interactions, the approach of ellipsoidal harmonics expansion also fails.
 
+\subsection{Constant Density Polyhedron}
+\label{subsec:polyhedron}
+The gravity potential modeling methods discussed so far involved the use of surface harmonics on the circumscribing object (sphere or ellipsoid) to simulate a non-homogeneous gravity field for an irregular body. The major drawback with the harmonics approach was its divergence from the true potential value within the circumscribing volume. This problem can be mitigated all together by assuming a specific shape and density distribution for the irregular body in question. In this realm, there are the \gls{CDE} and constant density polyhedron gravity potential models. Unlike the harmonics expansion approach, these potential models are valid upto and on the surface of the shape that has been assumed for the irregular body in question \parencite{scheeresBook}. Hence, these models are perfect to study close-proximity motion of particles or spacecraft around an asteroid.
+%
+\newline\newline
+%
+The irregular shape of an asteroid can be best represented by a polyhedron shape model (henceforth polyhedron) as shown in \Cref{fig:polyhedron_example}. Surface irregularities in the form of craters, large boulders, mountains etc. can be easily modeled with this method. A polyhedron is basically a 3D body that consists of several \textit{vertices} which form triangular faces or \textit{facets} that are connected to each other through the \textit{edges} of each face. A triangular facet thus comprises of three vertices, three edges and a surface normal as shown in \Cref{fig:single_facet} \parencite{scheeresBook}. A detailed derivation for the polyhedron gravitational potential model is given in \cite{scheeres_polyhedra} and concisely presented in \cite{scheeresBook} as well. Hence, we will only present a summary of this method in this section.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.3\textheight, keepaspectratio=true]{polyhedra_example.pdf}
+\caption{Polyhedron shape model estimated for asteroid \textit{Kleopatra} and shown in $\pm x, \pm y, \pm z$ axis directions. Constant density has been assumed in this modeling process. Surface deformities are easily modeled by this method \parencite{polyhedra_example}.}
+\label{fig:polyhedron_example}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.2\textheight, keepaspectratio=true]{single_facet.pdf}
+\caption{Single facet of a polyhedron model depicting three vertices, three edges and a surface normal, associated with each facet in general \parencite{scheeresBook}.}
+\label{fig:single_facet}
+\end{figure}
+\FloatBarrier
+%%%
+Each face or facet \textit{'f'} of the polyhedron is associated with three vertex vectors given as $\bvector{r}_i^f$, where $i=1,2,3$, and a unit normal vector $\buvec{n}_f$. The vector $\bv{r}_i^f$ goes from each vertex of a facet to the field point \textbf{P} where the potential has to be calculated. Each edge \textit{'e'} is associated to two vertex vectors $\bvector{r}_i^e$, for $i=1,2$, and this edge connects two adjacent faces \textit{f} and \textit{f'}. Again, the vector $\bv{r}_i^e$ goes from the edge vertices to the field point \textbf{P}. The edge normal, corresponding to facet \textit{f}, is denoted as $\buvec{n}_e^f$ such that it is perpendicular to the edge and the facet normal $\buvec{n}_f$ and is pointing away from the centre of the facet. For the same edge shared by facet \textit{f'}, the edge normal $\buvec{n}_e^{f'}$ points in a different direction than $\buvec{n}_e^f$ and may not be parallel to it. With these definitions, the general formula for the polyhedron gravitational potential is given as follows \parencite{scheeresBook}:
+%%%
+\begin{align}
+    U(\bvector{r}) &= \frac{\mathcal{G}\sigma}{2} \left[ \sum_{e\in edges} \bvector{r}_e \cdotp \bm{E}_e \cdotp \bvector{r}_e L_e - \sum_{f\in faces} \bvector{r}_f \cdotp \bm{F}_f \cdotp \bvector{r}_f \omega_f \right]
+    \label{eqn:polyhedron_potential} \\
+    \bm{E}_e &= \buvec{n}_f \buvec{n}_e^f + \buvec{n}_{f'} \buvec{n}_e^{f'}
+    \label{eqn:polyhedron_E_term} \\
+    \bm{F}_f &= \buvec{n}_f \buvec{n}_f
+    \label{eqn:polyhedron_F_term} \\
+    L_e &= ln\left(\frac{r_1^e + r_2^e + e_e}{r_1^e + r_2^e - e_e} \right)
+    \label{eqn:polyhedron_L_term} \\
+    e_e &= |\bvector{r}_1^e - \bvector{r}_2^e|
+    \label{eqn:polyhedron_e_term} \\
+    \omega_f &= 2 \tan^{-1} \left(\frac{\bv{r}_1^f \cdotp (\bv{r}_2^f \times \bv{r}_3^f)}{r_1^f r_2^f r_3^f + r_1^f(\bv{r}_2^f \cdotp \bv{r}_3^f) + r_2^f(\bv{r}_3^f \cdotp \bv{r}_1^f) + r_3^f(\bv{r}_1^f \cdotp \bv{r}_2^f)} \right)
+\end{align}
+%%%
+where \bvt{r} is the position vector to the field point \textbf{P} from the origin of an asteroid-fixed reference frame; $\mathcal{G}$ is the universal gravitational constant and $\sigma$ is the density of the body being modeled; $\bvector{r}_e$ is the vector from any point along the edge \textit{'e'} to \bvt{r} or the field point \textbf{P} and in the same way $\bvector{r}_f$ denotes a vector from any point on the facet \textit{f} to \bvt{r} \parencite{scheeresBook}; the term $\omega_f$ represents the solid angle subtended by a facet when viewed from the field point \textbf{P}, or alternately, it is the angle subtended by the facet of the polyhedron on to a unit sphere centered at the field point \textbf{P}; $L_e$ is analogous to the potential of a 1D straight \textit{'wire'} and is computed for all facet edges in a polyhedron \parencite{scheeres_polyhedra}; $\bm{E}_e$ is the edge dyad and is expressed as the sum of two outer-products, forming a 3x3 matrix; and finally $\bm{F}_f$ is the facet dyad which is simply the outer-product of the facet normal vector with itself \parencite{scheeres_polyhedra}.
+%
+\newline\newline
+%
+The constant density polyhedron gravitational potential model provides a realistic shape for an irregular body by accounting for topographical irregularities, however, the polyhedron model is computationally expensive \parencite{scheeresBook}. This thesis work does not make use of this model, but instead, employs a triaxial ellipsoid to model the gravitational potential (explained in the following section). This is because we wanted to understand the fundamental phenomenon associated with the motion and final fate of regolith in presence of gravity and Solar perturbations. This fundamental phenomenon would be difficult to decouple from other effects of a true irregular body, such as in the case of a polyhedron model and hence it was not used in this thesis. A triaxial ellipsoid itself is a very good approximation of real small body shapes \parencite{broschart2005control} and hence we don't loose out on the validity of explanations for the fundamental features of regolith motion by excluding the polyhedron model.
+
 \subsection{Constant Density Ellipsoid}
 \label{subsec:constant_density_ellipsoid}
-The gravity potential modeling methods discussed so far involved the use of surface harmonics on the circumscribing object (sphere or ellipsoid) to simulate a non-homogeneous gravity field for an irregular body. The major drawback with the harmonics approach was its divergence from the true potential value within the circumscribing volume. This problem can be mitigated all together by assuming a specific shape and density distribution for the irregular body in question. In this realm, there are the \gls{CDE} and constant density polyhedron gravity potential models. Unlike the harmonics expansion approach, these potential models are valid upto and on the surface of the shape that has been assumed for the irregular body in question \parencite{scheeresBook}. Hence, these models are perfect to study close-proximity motion of particles or spacecraft around an asteroid.
-
-Consider a \gls{CDE} with semi-major axes $(\alpha, \beta, \gamma)$ such that $\gamma \leq \beta \leq \alpha$. The shape of the triaxial ellipsoid is completely defined by the equation $(x/\alpha)^2 + (y/\beta)^2 + (z/\gamma)^2 \leq 1$. The density of the ellipsoid is assumed to be constant. Then the gravitational potential for a point external to such a body, i.e. \gls{CDE}, is defined by the following equation \parencite{scheeresBook}:
+Consider a \gls{CDE} with semi-major axes $(\alpha, \beta, \gamma)$ such that $\gamma \leq \beta \leq \alpha$. The shape of the triaxial ellipsoid is completely defined by the equation $(x/\alpha)^2 + (y/\beta)^2 + (z/\gamma)^2 \leq 1$. The density of the ellipsoid is assumed to be constant. An example for a \gls{CDE} model is shown in \Cref{fig:cde}.  Then the gravitational potential for a point external to such a body, i.e. \gls{CDE}, is defined by the following equation \parencite{scheeresBook}:
 %%%
 \begin{align}
     U(\bvector{r}) &= -\frac{3\mu}{4} \int_{\lambda(\bvector{r})}^{\infty} \phi(\bvector{r}, u) \frac{du}{\Delta(u)}
@@ -254,7 +301,28 @@ Consider a \gls{CDE} with semi-major axes $(\alpha, \beta, \gamma)$ such that $\
     \label{eqn:ellipsoid_potential_delta}
 \end{align}
 %%%
-where $\bvector{r}$ is the position vector to the point, external to the \gls{CDE}, and is defined in the \gls{ARF}; $\lambda(\bvector{r})$ is a parameter defined by the equation $\phi(\bvector{r}, \lambda) = 0$, which is a cubic polynomial and the value $\lambda$ is the maximum real root of this polynomial \parencite{scheeresBook}. Now for the given ellipsoid, the equation for the family of confocal quadratic surfaces is given as follows \parencite{ellipsoid_potential_model}:
+where $\bvector{r}$ is the position vector to the point, external to the \gls{CDE}, and is defined in the \gls{ARF}; $\lambda(\bvector{r})$ is a parameter defined by the equation $\phi(\bvector{r}, \lambda) = 0$, which is a cubic polynomial as shown in \Cref{eqn:cubicPolynomial}, and the value $\lambda$ is the maximum real root of this polynomial \parencite{scheeresBook}.
+%%%
+\begin{align}
+    \lambda^3 &+ \nonumber \\
+    \lambda^2 (\alpha^2 + \beta^2 + \gamma^2 - (x^2 + y^2 + z^2)) &+ \nonumber \\
+    \lambda (\alpha^2 \beta^2 + \alpha^2 \gamma^2 + \beta^2 \gamma^2 - x^2(\beta^2 + \gamma^2) - y^2(\alpha^2 + \gamma^2) - z^2(\alpha^2 + \beta^2)) &+ \nonumber \\
+    (\alpha^2 \beta^2 \gamma^2 - x^2 \gamma^2 \beta^2 - y^2 \alpha^2 \gamma^2 - z^2 \alpha^2 \beta^2) &= 0
+    \label{eqn:cubicPolynomial}
+\end{align}
+%%%
+For a given point $(x, y, z)$ in space around the \gls{CDE}, the only unknown in \Cref{eqn:cubicPolynomial} is $\lambda$ which is solved for using the standard Cardano's formula (see \cite{cubic_formula}).
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{cde.pdf}
+\caption{Triaxial ellipsoid model with semi-major axes $\alpha=20$ km, $\beta=7$ km, $\gamma=7$ km.}
+\label{fig:cde}
+\end{figure}
+\FloatBarrier
+%%%
+Now for the given ellipsoid, the equation for the family of confocal quadratic surfaces is given as follows \parencite{ellipsoid_potential_model}:
 %%%
 \begin{align}
     \frac{x^2}{\alpha^2 + u} + \frac{y^2}{\beta^2 + u} + \frac{z^2}{\gamma^2 + u} &= 1
@@ -296,10 +364,14 @@ The potential defined by \Cref{eqn:ellipsoid_potential_short_form} appears to ha
 where $\lambda{(\bvector{r})}$ is simply written as $\lambda$ for brevity. Thus, the \gls{CDE} potential is given as $U = U_1 + U_2 + U_3 + U_4$. We make the following substitution for \Cref{eqn:ellipsoid_potential_split_1,eqn:ellipsoid_potential_split_2,eqn:ellipsoid_potential_split_3,eqn:ellipsoid_potential_split_4}:
 %%%
 \begin{align}
-    u &= v + \lambda \\
-    du &= dv \\
-    u &= \lambda \text{; } v = 0 \\
+    u &= v + \lambda
+    \label{eqn:ellipsoidal_potential_substitution_1} \\
+    du &= dv
+    \label{eqn:ellipsoidal_potential_substitution_2} \\
+    u &= \lambda \text{; } v = 0
+    \label{eqn:ellipsoidal_potential_substitution_3} \\
     u &= \infty \text{; } v = \infty
+    \label{eqn:ellipsoidal_potential_substitution_4}
 \end{align}
 %%%
 With these substitutions, \Cref{eqn:ellipsoid_potential_split_1}, for example, can now be re-written as follows:
@@ -318,7 +390,63 @@ In \Cref{eqn:ellipsoid_potential_split_1_mod}, the expression within the square 
     \label{eqn:carlson_RD}
 \end{align}
 %%%
-
+Similarly, \Cref{eqn:ellipsoid_potential_split_2,eqn:ellipsoid_potential_split_3} can be re-written using the standard elliptic integral function $R_D$ as follows:
+%%%
+\begin{align}
+    U_2 &= -\frac{\mu y^2}{2} R_D(\alpha^2 + \lambda, \gamma^2 + \lambda, \beta^2 + \lambda)
+    \label{eqn:ellipsoid_potential_split_2_carlson} \\
+    U_3 &= -\frac{\mu z^2}{2} R_D(\alpha^2 + \lambda, \beta^2 + \lambda, \gamma^2 + \lambda)
+    \label{eqn:ellipsoid_potential_split_3_carlson}
+\end{align}
+%%%
+For \Cref{eqn:ellipsoid_potential_split_4}, we use another standard elliptic integral function as defined by \cite{carlsonEllipticIntegral}:
+%%%
+\begin{align}
+    R_F(x, y, z) &= \frac{1}{2} \int_0^\infty \frac{dt}{(t+x)^{1/2}(t+y)^{1/2}(t+z)^{1/2}}
+    \label{eqn:carlson_RF}
+\end{align}
+%%%
+using which, \Cref{eqn:ellipsoid_potential_split_4} is re-written as follows:
+%%%
+\begin{align}
+    U_4 &= \frac{3\mu}{2} R_F(\alpha^2 + \lambda, \beta^2 + \lambda, \gamma^2 + \lambda)
+    \label{eqn:ellipsoid_potential_split_4_carlson}
+\end{align}
+%%%
+Thus, to calculate the \gls{CDE} gravitational potential $U$ at any given point $(x,y,z)$ external to the ellipsoid, we first calculate the corresponding value of $\lambda$ from \Cref{eqn:cubicPolynomial} and then substitute this value into \Cref{eqn:ellipsoid_potential_split_1_carlson,eqn:ellipsoid_potential_split_2_carlson,eqn:ellipsoid_potential_split_3_carlson,eqn:ellipsoid_potential_split_4_carlson}, the sum of which is the final potential value.
+%
+\newline\newline
+%
+The gravitational acceleration components are obtained by taking a partial derivatives of the potential equation given in \Cref{eqn:ellipsoid_potential_long_form} \parencite{scheeresBook}:
+%%%
+\begin{align}
+    U_x &= -\frac{3\mu x}{2} \int_{\lambda(\bvector{r})}^{\infty} \frac{du}{(\alpha^2 + u) \Delta u}
+    \label{eqn:grav_acc_x} \\
+    U_y &= -\frac{3\mu y}{2} \int_{\lambda(\bvector{r})}^{\infty} \frac{du}{(\beta^2 + u) \Delta u}
+    \label{eqn:grav_acc_y} \\
+    U_z &= -\frac{3\mu z}{2} \int_{\lambda(\bvector{r})}^{\infty} \frac{du}{(\gamma^2 + u) \Delta u}
+    \label{eqn:grav_acc_z}
+\end{align}
+%%%
+where $(U_x, U_y, U_z)$ are the gravitational acceleration terms and all other terms have the same definition as explained before for the \gls{CDE} potential term. Just like with the gravitational potential, the acceleration terms can be reduced to standard Carlson's elliptic integrals by using the same substitution parameters as defined in \Cref{eqn:ellipsoidal_potential_substitution_1,eqn:ellipsoidal_potential_substitution_2,eqn:ellipsoidal_potential_substitution_3,eqn:ellipsoidal_potential_substitution_4}. After substitution, for example, the x-component of the acceleration term is written as follows:
+%%%
+\begin{align}
+    U_x &= -\frac{-3\mu x}{2} \int_{0}^{\infty} \frac{dv}{(\alpha^2 + v + \lambda)\sqrt{(\alpha^2 + v + \lambda)(\beta^2 + v + \lambda)(\gamma^2 + v + \lambda)}} \\
+    &= -\mu x \left[\frac{3}{2} \int_0^\infty \frac{dv}{((\alpha^2 + \lambda) + v)^{3/2} ((\beta^2 + \lambda) + v)^{1/2} ((\gamma^2 + \lambda) + v)^{1/2}} \right] \\
+    &= -\mu x \cdotp R_D((\beta^2 + \lambda), (\gamma^2 + \lambda), (\alpha^2 + \lambda))
+    \label{eqn:grav_acc_x_carlson}
+\end{align}
+%%%
+Similarly, the other components of the gravitational acceleration (defined in the \gls{ARF}) can be written as follows:
+%%%
+\begin{align}
+    U_y &= -\mu y \cdotp R_D((\alpha^2 + \lambda), (\gamma^2 + \lambda), (\beta^2 + \lambda))
+    \label{eqn:grav_acc_y_carlson} \\
+    U_z &= -\mu z \cdotp R_D((\alpha^2 + \lambda), (\beta^2 + \lambda), (\gamma^2 + \lambda))
+    \label{eqn:grav_acc_z_carlson}
+\end{align}
+%%%
+For any point $(x,y,z)$ outside of the \gls{CDE}, we calculate the value for $\lambda$ first by solving \Cref{eqn:cubicPolynomial} and then substitute it into \Cref{eqn:grav_acc_x_carlson,eqn:grav_acc_y_carlson,eqn:grav_acc_z_carlson} to get the acceleration components in the \gls{ARF}.
 
 \section{Solar Perturbations}
 \label{sec:solar_perturbations}
