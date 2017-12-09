@@ -30,7 +30,8 @@ The simulator designed as part of this research (see \Cref{chap:naos}) involves 
 
 \item The shadow region of the asteroid is not modeled which means that the solar perturbations are always acting on the regolith grain and this simplification was made since asteroids are extremely small compared to planets, and thus the orbiting particles wouldn't spend long periods of time in the shadow.
 
-\item Perturbations are considered only from the Sun. \gls{SRP} is important because regolith grains will have higher Area-To-Mass ratios, relative to a spacecraft, and so the radiation pressure would be significantly large for them. We model the third body attraction from the Sun (\gls{STBE}) as well but not from any of the giant planets such as Jupiter or Saturn, because the magnitude of perturbation from the \gls{STBE} itself is atleast 5 orders of magnitude smaller than the gravitational acceleration when the regolith is in close proximity to the asteroid (see \Cref{chap:results}).
+\item Perturbations are considered only from the Sun. \gls{SRP} is important because regolith grains will have higher Area-To-Mass ratios, relative to a spacecraft, and so the radiation pressure would be significantly large for them. We model the third body attraction from the Sun (\gls{STBE}) as well but not from any of the planets because we are assuming that the small body does not pass close to any planet, thus rendering the perturbations from them insignificant.
+% The magnitude of perturbation from the \gls{STBE} itself is atleast 5 orders of magnitude smaller than the gravitational acceleration (for a sample asteroid assumed to be in a circular orbit at 1 AU from the Sun) when the regolith is in close proximity to the asteroid (see \Cref{chap:results}).
 
 \item The apparent motion of the Sun around the asteroid is considered circular and in the equatorial plane of the asteroid and this was based on the orbital element measurements of all observed asteroids. Majority of these asteroids have small orbital eccentricities \parencite{malhotra2016_eccentricityDistribution}, quite a few of which have a nearly circular orbit. \cite{jedicke1998_orbitalElements} presents debiased measurements for the inclination of the \gls{MBO} and shows that a large number of asteroids have near-zero inclinations.
 \end{enumerate}
@@ -450,16 +451,71 @@ For any point $(x,y,z)$ outside of the \gls{CDE}, we calculate the value for $\l
 
 \section{Solar Perturbations}
 \label{sec:solar_perturbations}
+The dominant force acting on an orbiting particle in the vicinity of an asteroid is from its gravity field. However, perturbations, both gravitational and non-gravitational, can be significant especially when the particle is further away from the asteroid \parencite{scheeresBook}. The two most significant sources of perturbations are from the Sun and we will be discussing them briefly in this section.
+
+\subsection{Solar Third-Body Effect (STBE)}
+\label{subsec:stbe}
+We consider a simple two-body problem, wherein the asteroid has a circular, Heliocentric orbit in the Ecliptic plane. This is a reasonable approximation, as mentioned earlier in \Cref{sec:assumptions}, since several asteroids have been observed to have circular orbits around the Sun with near-zero inclinations. \hlt{The gravitational effect of the Sun on the motion of regolith (henceforth \gls{STBE}) around the asteroid is not modeled through a three-body problem because the order of magnitude of the perturbing acceleration is extremely small relative to the gravitational acceleration of the asteroid (atleast 5 orders of magnitude smaller in the vicinity of a sample asteroid at 1 AU from the Sun) and hence it is sufficient to model it as an external perturbing acceleration.}
+%
+\newline\newline
+%
+The absolute gravitational acceleration, due to the Sun, experienced by a particle (of mass negligible compared to that of the Sun) in orbital motion around the asteroid is given as \parencite{scheeresBook}:
+%%%
+\begin{align}
+    \bv{a}_{abs, p} &= -\frac{\mu_S}{|\bv{r} - \bv{d}|^3} (\bv{r} - \bv{d})
+    \label{eqn:stbe_particle_abs_acc}
+\end{align}
+%%%
+where $\mu_S$ is the gravitational parameter of the Sun; \bvt{r} and \bvt{d} are the position vectors of the orbiting particle and the Sun, respectively, from the asteroid's centre of mass, defined in the \gls{AIF}. In \Cref{eqn:stbe_particle_abs_acc}, the Sun is viewed to be orbiting the asteroid, instead of the other way around. This is just a change in perspective and is done to keep all distance vector definitions originating from the centre of mass of the asteroid \parencite{scheeresBook}. The orientation of the position vectors is shown in \Cref{fig:stbe_bodyFrame}.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.35\textheight, keepaspectratio=true]{stbe_bodyframe_edit_2.pdf}
+\caption{A schematic representing the orientation of position vectors of the Sun and the orbiting particle/regolith around the asteroid, in the \gls{AIF}. Diagram is not to scale and the rotation state of asteroid is such that the \gls{ARF} and \gls{AIF} are coinciding.}
+\label{fig:stbe_bodyFrame}
+\end{figure}
+\FloatBarrier
+%%%
+Now the absolute gravitational acceleration, due to the Sun, experienced by the asteroid is given as follows \parencite{scheeresBook}:
+%%%
+\begin{align}
+    \bv{a}_{abs, a} &= +\frac{\mu_S}{|\bv{d}|^3} (\bv{d})
+    \label{eqn:stbe_asteroid_abs_acc}
+\end{align}
+%%%
+where the definition of all variables is the same as that for \Cref{eqn:stbe_particle_abs_acc}. Thus, the perturbing acceleration acting on the particle due to the \gls{STBE} is the difference between the absolute accelerations experienced by the particle (\Cref{eqn:stbe_particle_abs_acc}) and the asteroid (\Cref{eqn:stbe_asteroid_abs_acc}) \parencite{scheeresBook}:
+%%%
+\begin{align}
+    \bv{a}_{STBE} &= -\mu_S \left[ \frac{(\bv{r} - \bv{d})}{|\bv{r} - \bv{d}|^3} + \frac{\bv{d}}{|\bv{d}|^3} \right]
+    \label{eqn:stbe_acc}
+\end{align}
+%%%
+In \Cref{eqn:stbe_acc}, we can directly substitute the position vectors as defined in \gls{ARF} such that the acceleration term obtained is also in the \gls{ARF}. This is possible because the position magnitude terms would remain the same in either of the reference frames. Also, the rotation matrix $\phi_I^B$ multiplied either outside the square bracket or inside, in \Cref{eqn:stbe_acc}, with the two numerator terms would ultimately give the same result.
+%%%
+\begin{align}
+    \ddot{\bv{d}} &= -\frac{\mu_S}{|\bv{d}|^3} (\bv{d})
+    \label{eqn:sun_around_asteroid}
+\end{align}
+%%%
+\hlt{The apparent position of the Sun, relative to the asteroid, can be obtained in two ways. We could either numerically integrate the second order differential equation for the standard two-body problem as stated in \Cref{eqn:sun_around_asteroid} or solve, what is historically known as, the \textit{Kepler's problem}. We use the latter since the apparent position of the Sun can be obtained for any time value directly by using the Kepler's problem algorithm as stated by \cite{chobotovBook}. Although the Kepler's problem algorithm is not completely analytical and uses a numerical iteration method to solve for the true anomaly, it is relatively easier to use within the simulator than employing a numerical integrator to propagate the position from an initial condition for every time value. The algorithm for solving the Kepler's problem is not stated here for brevity; A detailed explanation for it is given by \cite{chobotovBook}.}
+
+\subsection{Solar Radiation Pressure (SRP)}
+\label{subsec:srp}
+
 
 \section{Perturbed Two-Body Problem}
 \label{sec:2BP}
+
 
 \section{Particle Initial Conditions}
 \label{sec:init_conditions}
 ...launch velocity, location and direction calculation...
 
+
 \section{Non-conservative Escape Speed}
 \label{sec:escape_speed_derivation}
+
 
 \section{Conclusion}
 \label{sec:dynamics_conclusion}
