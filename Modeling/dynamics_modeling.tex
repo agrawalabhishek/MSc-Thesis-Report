@@ -618,7 +618,7 @@ where $(x,y,z)$ is the coordinate of any point \emph{on} the surface. An alterna
     \end{bmatrix}
 \end{align}
 %%%
-where \bvt{r} is a general position vector expressed in the \gls{ARF}. Continuing with \Cref{eqn:launch_loc_ellipsoid_eqn_vectorForm}:
+where \bvt{r} is a general position vector expressed in the \gls{ARF} and ($\alpha, \beta, \gamma$) are the semi-major axes of the triaxial ellipsoid model of the asteroid. Continuing with \Cref{eqn:launch_loc_ellipsoid_eqn_vectorForm}:
 %%%
 \begin{align}
     \bv{r}.\bv{r} &= \frac{1}{E} \\
@@ -650,7 +650,89 @@ where $r$ is obtained from \Cref{eqn:launch_loc_r_square_expanded}. Thus, just b
 
 \subsection{Launch Velocity}
 \label{subsec:launch_velocity}
-Once we know the position of the particle, we need to provide an initial velocity to launch it into an orbit around the asteroid.
+Once we know the position of the particle, we need to provide an initial velocity to launch it into an orbit around the asteroid. But this has to do much more than just providing a velocity magnitude. The velocity magnitude is accompanied by a launch direction which is defined by two angles, namely, \emph{Launch Azimuth} ($\eta$) and \emph{Launch Declination} ($\chi$).
+%
+\newline\newline
+%
+These angles can be understood as follows. Suppose you are standing on the surface of an asteroid and you throw a ball. Now the ball will be associated with a velocity vector and if we take the projection of this vector onto the local surface, then the angle between this projection and the local direction to the North pole of the asteroid is defined as the launch azimuth. The angle that the velocity vector itself makes with the local normal is then defined as the launch declination. By keeping a constant angle of declination and varying the launch azimuth from \SI{0}{\degree} to \SI{360}{\degree}, we can create a cone of particles, thus replicating how impact ejecta would launch out. An example of this is given in \Cref{fig:longest_edge_velocity_vector_cone}.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\subfloat[]{
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_ARF_velocity_vectors_cone.pdf}
+    \label{fig:longestEdge_velocity_vector_cone_1}
+}
+
+\subfloat[]{
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{velocity_vector_ARF_lateral_view.pdf}
+    \label{fig:longestEdge_velocity_vector_cone_2}
+}
+\caption{Various velocity vectors depicted at the longest edge of the ellipsoid shaped asteroid i.e. for a launch location longitude and latitude of \SI{0}{\degree}. \protect\Cref{fig:longestEdge_velocity_vector_cone_1} depicts the front view of multiple velocity vectors spaced at \SI{45}{\degree} azimuth from each other and at a constant declination of \SI{45}{\degree}. All vectors are expressed in the rotating frame or the \gls{ARF}. \protect\Cref{fig:longestEdge_velocity_vector_cone_2} depicts the lateral view of the same velocity vectors.}
+\label{fig:longest_edge_velocity_vector_cone}
+\end{figure}
+\FloatBarrier
+%%%
+We will now discuss how the velocity vectors are formed in practice. Consider the equation for a triaxial ellipsoid given in \Cref{eqn:launch_loc_ellipsoid_eqn_cartesian}. Now for any given point $(x,y,z)$ on the surface of the ellipsoid, the normal vector ($\bv{n}$) (and subsequently the unit normal vector ($\buvec{n}$)) to it is found by taking the gradient of \Cref{eqn:launch_loc_ellipsoid_eqn_cartesian}:
+%%%
+\begin{align}
+    \bv{n} &= \frac{2x}{\alpha^2}\buvec{i} + \frac{2y}{\beta^2}\buvec{j} + \frac{2z}{\gamma^2}\buvec{k}
+    \label{eqn:surface_normal_vector} \\
+    \buvec{n} &= \frac{\bv{n}}{|\bv{n}|}
+    \label{eqn:unit_normal}
+\end{align}
+%%%
+where both \bvt{n} and $\buvec{n}$ are expressed in the \gls{ARF}, whose basis vectors are denoted here as ($\buv{i},\buv{j},\buv{k}$). Note that since the body in question is not a sphere, the normal vector at the launch location and the radial unit vector $\buv{R}$ (from the centre of the ellipsoid to the launch location) may not always coincide. Now that we know the unit normal vector to the launch location, we need to find the local North direction. This is done by performing the following calculations successively:
+%%%
+\begin{align}
+    \buv{R} &= \frac{\bv{r}_s}{|\bv{r}_s|} \\
+    \buv{T} &= \frac{\buv{R} \times \buv{k}}{|\buv{R} \times \buv{k}|} \\
+    \buv{x} &= \frac{\buv{T} \times \buv{n}}{|\buv{T} \times \buv{n}|} \\
+    \label{eqn:surface_frame_xBasis}
+\end{align}
+%%%
+where $\bv{r}_s$ is the position vector to the launch location from the centre of the asteroid; $\buv{T}$ is the tangential unit vector (tangential to the local surface at the local point); $\buv{x}$ is the unit vector that is pointing towards the local North. This formulation works for any point on the surface of the asteroid to give the local North's direction except for the two poles and as such an alternative definition for them has to be used which will be defined later. Note that all the unit vectors discussed so far are expressed in the \gls{ARF}.
+%
+\newline\newline
+%
+$\buv{x}$ is also viewed as the x-axis basis vector for a frame of reference fixed and centered at the launch location. This frame of reference is termed as the \gls{SF}. Note that the \gls{SF} is not used to define the orbital motion of the regolith and hence it is not one of the standard reference frames. This is why it wasn't mentioned in \Cref{sec:reference_frames} and is only defined here since it's use is only for obtaining the velocity vector. The z-axis of \gls{SF} is defined in the direction of the unit normal vector at the launch location and the y-axis is obtained by following the right-hand rule to form the orthogonal frame. The \gls{SF} is shown in \Cref{fig:surface_frame}.
+%
+\newline\newline
+%
+Note that the basis vectors of the \gls{SF} are expressed in the \gls{ARF} and thus their components are defined as follows:
+%%%
+\begin{align}
+    \buv{x} &= x_1\buv{i} + x_2\buv{j} + x_3\buv{k}
+    \label{eqn:sf_xbasis_exp} \\
+    \buv{y} &= y_1\buv{i} + y_2\buv{j} + y_3\buv{k}
+    \label{eqn:sf_ybasis_exp} \\
+    \buv{z} &= z_1\buv{i} + z_2\buv{j} + z_3\buv{k}
+    \label{eqn:sf_zbasis_exp}
+\end{align}
+%%%
+Then the velocity vector components in \gls{ARF} are obtained as follows:
+%%%
+\begin{align}
+    v_x &= V . \left[ x_1 \cos\eta \sin\chi + y_1 \sin\eta \sin\chi + z_1 \cos\chi \right]
+    \label{eqn:xVelocity} \\
+    v_y &= V . \left[ x_2 \cos\eta \sin\chi + y_2 \sin\eta \sin\chi + z_2 \cos\chi \right]
+    \label{eqn:yVelocity} \\
+    v_z &= V . \left[ x_3 \cos\eta \sin\chi + y_3 \sin\eta \sin\chi + z_3 \cos\chi \right]
+    \label{eqn:zVelocity}
+\end{align}
+%%%
+where $V$ is the magnitude of the velocity chosen manually at the start of the simulation. Thus in this manner, and for the same velocity magnitude, we can simulate particles being launched in different directions from the same launch location, which in turn helps us understand the role of launch direction in the final fate of ejecta.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{surfaceFrame_longestEdge.pdf}
+\caption{An example of the \gls{SF} at the launch location of latitude and longitude \SI{0}{\degree} i.e. the longest edge of the asteroid. The x-axis points to the local North; z-axis is in the direction of the unit normal vector at the launch location; and finally the y-axis completes right-hand rule orthogonal frame.}
+\label{fig:surface_frame}
+\end{figure}
+\FloatBarrier
+%%%
+As said earlier, the x-basis vector for the \gls{SF} can not be defined by the method described previously for launch locations on the two poles of the asteroid. Hence we use two alternate definitions for the x-basis vector in those scenarios however all other computations remain the same as described before. If the launch location is the North pole, then the x-basis vector of the \gls{SF} is defined as $\buv{x}=[1, 0, 0]$ and for South pole it is defined as $\buv{x}=[-1, 0, 0]$.
 
 \section{Non-conservative Escape Speed}
 \label{sec:escape_speed_derivation}
