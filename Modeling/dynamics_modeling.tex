@@ -590,8 +590,67 @@ In \Cref{eqn:lagrangian_potential_eval}, the first term denotes the acceleration
 
 \section{Particle Initial Conditions}
 \label{sec:init_conditions}
-The \gls{EOM} established in the previous section are difficult to solve analytically and hence we make use of a numerical integrator to propagate the state vector of an orbiting particle in time.
+The \gls{EOM} established in the previous section are difficult to solve analytically and hence we make use of a numerical integrator to propagate the state vector of an orbiting particle in time. To do this, we need to establish robust methods for providing initial conditions. These initial conditions basically form the state vector with which the particle is lofted from the surface of an asteroid.
 
+\subsection{Launch Location}
+\label{subsec:launch_location}
+This section will present a method to efficiently calculate the launch location of a particle, in the form of a Cartesian position vector from the centre of the asteroid. The formulation is such that the resulting position vector will always point to a location on the surface of the asteroid.
+%
+\newline\newline
+%
+Consider the equation for the ellipsoid given as follows:
+%%%
+\begin{align}
+    \frac{x^2}{\alpha^2} + \frac{y^2}{\beta^2} + \frac{z^2}{\gamma^2} &= 1
+    \label{eqn:launch_loc_ellipsoid_eqn_cartesian}
+\end{align}
+%%%
+where $(x,y,z)$ is the coordinate of any point \emph{on} the surface. An alternate way of writing \Cref{eqn:launch_loc_ellipsoid_eqn_cartesian}, in vector format, is given as follows:
+%%%
+\begin{align}
+    \bv{r}.E.\bv{r} &= 1
+    \label{eqn:launch_loc_ellipsoid_eqn_vectorForm} \\
+    E &=
+    \begin{bmatrix}
+        1/\alpha^2 & 0 & 0 \\
+        0 & 1/\beta^2 & 0 \\
+        0 & 0 & 1/\gamma^2
+    \end{bmatrix}
+\end{align}
+%%%
+where \bvt{r} is a general position vector expressed in the \gls{ARF}. Continuing with \Cref{eqn:launch_loc_ellipsoid_eqn_vectorForm}:
+%%%
+\begin{align}
+    \bv{r}.\bv{r} &= \frac{1}{E} \\
+    r^2 &= \frac{1}{\buvec{u}.E.\buvec{u}}
+    \label{eqn:launch_loc_r_square}
+\end{align}
+%%%
+where $\buvec{u}$ is a unit vector expressed in \gls{ARF}, pointing in the direction of the launch location from the asteroid's centre, with components $(u_x, u_y, u_z)$. The unit vector can be stated in terms of the latitude $(\delta)$ and longitude $(\lambda)$ of the launch point as follows:
+%%%
+\begin{align}
+    \buvec{u} &= \cos\delta \cos\lambda \buvec{x} + \cos\delta \sin\lambda \buvec{y} + \sin\delta \buvec{z}
+\end{align}
+%%%
+where $(\buvec{x},\buvec{y},\buvec{z})$ are the basis vectors forming the \gls{ARF}. Thus, \Cref{eqn:launch_loc_r_square} can be written as:
+%%%
+\begin{align}
+    r^2 &= \frac{1}{ (u_x^2/\alpha^2) + (u_y^2/\beta^2) + (u_z^2/\gamma^2) }
+    \label{eqn:launch_loc_r_square_expanded}
+\end{align}
+%%%
+The final position vector to the launch location, from the origin of \gls{ARF} or the asteroid's centre, is given as follows:
+%%%
+\begin{align}
+    \bv{r}_s &= r\buvec{u}
+    \label{eqn:launch_vector}
+\end{align}
+%%%
+where $r$ is obtained from \Cref{eqn:launch_loc_r_square_expanded}. Thus, just by specifying the latitude and longitude of any desired launch point, the position vector to it is obtained. This, thus, acts as the initial position state of the particle.
+
+\subsection{Launch Velocity}
+\label{subsec:launch_velocity}
+Once we know the position of the particle, we need to provide an initial velocity to launch it into an orbit around the asteroid.
 
 \section{Non-conservative Escape Speed}
 \label{sec:escape_speed_derivation}
