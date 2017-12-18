@@ -859,26 +859,26 @@ Note we can write $H_0 = \bv{r}_0 \times \bv{v}_{I_0}$, where $\bv{r_0}$ is expr
 We need to evaluate the second term on the left hand side of \Cref{eqn:jacobian_equate_equatorial} using the angle definitions given in \Cref{fig:velocity_vector_angles}. In that, $\gamma$ is the angle between the velocity vector and the plane perpendicular to the position vector; $\delta$ is the launch declination angle as explained in \Cref{subsec:launch_velocity}; $\alpha$ is the angle between the normal vector and the position vector direction and finally, $\beta$ is the angle between the velocity vector and the position vector direction. Using these definitions, the cross product in \Cref{eqn:jacobian_equate_equatorial} is evaluated as follows:
 %%%
 \begin{align}
-    \bv{\omega} \cdotp (\bv{r}_0 \times \bv{v}_{I_0}) &= \omega r_0 v_{I_0} \sin(\beta) \\
-    &= \omega r_0 v_{I_0} \sin(-(90 - \gamma)) \\
-    &= -\omega r_0 v_{I_0} \cos(\gamma) \\
-    &= -\omega r_0 v_{I_0} \cos(90 - \alpha + \delta) \\
-    &= -\omega r_0 v_{I_0} \sin(\alpha - \delta) \\
-    &= \omega r_0 v_{I_0} \sin(\delta - \alpha)
+    \bv{\omega} \cdotp (\bv{r}_0 \times \bv{v}_{I_0}) &= \bv{\omega} \cdotp (r_0 v_{I_0} \sin(\beta) \buv{h}) \\
+    % &= \omega r_0 v_{I_0} \sin(-(90 - \gamma)) \\
+    % &= -\omega r_0 v_{I_0} \cos(\gamma) \\
+    % &= -\omega r_0 v_{I_0} \cos(90 - \alpha + \delta) \\
+    % &= -\omega r_0 v_{I_0} \sin(\alpha - \delta) \\
+    &= (r_0 v_{I_0} \sin(\delta - \alpha)) \bv{\omega} \cdotp \buv{h}
     \label{eqn:cross_product_eval}
 \end{align}
 %%%
-The angle definitions given in \Cref{fig:velocity_vector_angles} remains valid even for a launch location at the trailing edge of the asteroid and hence the angular definitions remain generalized. In addition to having an equatorial orbit, we can further simplify \Cref{eqn:cross_product_eval} by keeping the launch site at the longest edge of the ellipsoid which means that we can make $\alpha=0$. Thus \Cref{eqn:jacobian_equate_equatorial} can be re-written as:
+where $\buv{h}$ specifies the direction of the cross product, i.e. the angular momentum vector $\bv{H}_0$. The angle definitions given in \Cref{fig:velocity_vector_angles} remains valid even for a launch location at the trailing edge of the asteroid and hence the angular definitions remain generalized. In addition to having an equatorial orbit, we can further simplify \Cref{eqn:cross_product_eval} by keeping the launch site at the longest edge of the ellipsoid which means that we can make $\alpha=0$. Thus \Cref{eqn:jacobian_equate_equatorial} can be re-written as:
 %%%
 \begin{align}
-    \frac{1}{2} v_{I_0}^2 - \omega r_0 v_{I_0} \sin(\delta) - U(\bv{r}_0) &= -\omega \sqrt{2\mu q_{\infty}}
+    \frac{1}{2} v_{I_0}^2 - (\omega r_0 v_{I_0} \sin(\delta)) \bv{\omega}\cdotp\buv{h} - U(\bv{r}_0) &= -\omega \sqrt{2\mu q_{\infty}}
     \label{eqn:jacobian_equate_equatorial_mod}
 \end{align}
 %%%
 \Cref{eqn:jacobian_equate_equatorial_mod} is a quadratic equation in $v_{I_0}$ which is solved to provide the following solution:
 %%%
 \begin{align}
-    v_{I_0} &= \omega r_0 \sin\delta \pm \sqrt{(\omega r_0 \sin\delta)^2 + 2U - 2\omega\sqrt{2\mu q_\infty}}
+    v_{I_0} &= (r_0 \sin\delta) \bv{\omega}\cdotp\buv{h} \pm \sqrt{((r_0 \sin\delta)\bv{\omega}\cdotp\buv{h})^2 + 2U - 2\omega\sqrt{2\mu q_\infty}}
     \label{eqn:non_conservative_inertial_guaranteed_escape_speed}
 \end{align}
 %%%
@@ -889,7 +889,7 @@ Thus instead of using $v_{I_0} = \sqrt{2U_{max}}$ in \Cref{eqn:conservative_quad
     \label{eqn:nonconservative_escape_speed}
 \end{align}
 %%%
-where instead of using $\buv{n}$ we use the unit vector $\buv{d}$, representing a general direction of launch and not just the normal direction.
+where instead of using $\buv{n}$ we use the unit vector $\buv{d}$, representing a general direction of launch and not just the normal direction. Note that \Cref{eqn:jacobian_equate_equatorial_mod,eqn:non_conservative_inertial_guaranteed_escape_speed} are valid only for the launch location at the longest edge of the ellipsoid. We simplified the equations by making $\alpha=0$ so that testing this approach for a non-conservative guaranteed escape speed can be made easy, however the approach can be generalized by using a non-zero value for $\alpha$ in \Cref{eqn:cross_product_eval} as well.
 
 \section{Conclusion}
 \label{sec:dynamics_conclusion}
