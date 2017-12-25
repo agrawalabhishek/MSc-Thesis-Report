@@ -740,7 +740,8 @@ Up until now we discussed the dynamics involved with the particle motion around 
 %
 \newline\newline
 %
-The conservative guarantee escape speed method is obtained by making use of the maximum gravitational potential, between the actual potential of the irregular body and an equivalent point mass potential, at the location of the launch of the particle. If the launch speed is above the conservative guarantee escape speed, then the particle will escape immediately after launch. This method however, does not account for the cases which result in an escape situation after completing one or more orbital revolutions around the asteroid or basically the cases where the launch speed is below the conservative guarantee escape speed and still result in an escape scenario. The idea of developing a new analytical method stems from this problem and we call it the non-conservative guarantee escape speed since we aim to account for those cases as well where the escape does not happen immediately.
+The conservative guarantee escape speed method is obtained by making use of the maximum gravitational potential, between the actual potential of the irregular body and an equivalent point mass potential, at the location of the launch of the particle. If the launch speed is above the conservative guarantee escape speed, then the particle will escape immediately after launch. The conservative guaranteed escape speed method works best for uniform gravity field models, as we'll see later in \Cref{subsec:nonconservative}, but fails when one accounts for non-uniform gravity field models such as the \gls{CDE} model.
+% This method however, does not account for the cases which result in an escape situation after completing one or more orbital revolutions around the asteroid or basically the cases where the launch speed is below the conservative guarantee escape speed and still result in an escape scenario. The idea of developing a new analytical method stems from this problem and we call it the non-conservative guarantee escape speed since we aim to account for those cases as well where the escape does not happen immediately.
 %
 \newline\newline
 %
@@ -871,7 +872,7 @@ We need to evaluate the second term on the left hand side of \Cref{eqn:jacobian_
 where $\buv{h}$ specifies the direction of the cross product, i.e. the angular momentum vector $\bv{H}_0$. The angle definitions given in \Cref{fig:velocity_vector_angles} remains valid even for a launch location at the trailing edge of the asteroid and hence the angular definitions remain generalized. In addition to having an equatorial orbit, we can further simplify \Cref{eqn:cross_product_eval} by keeping the launch site at the longest edge of the ellipsoid which means that we can make $\alpha=0$. Thus \Cref{eqn:jacobian_equate_equatorial} can be re-written as:
 %%%
 \begin{align}
-    \frac{1}{2} v_{I_0}^2 - (\omega r_0 v_{I_0} \sin(\delta)) \bv{\omega}\cdotp\buv{h} - U(\bv{r}_0) &= -\omega \sqrt{2\mu q_{\infty}}
+    \frac{1}{2} v_{I_0}^2 - (r_0 v_{I_0} \sin(\delta)) \bv{\omega}\cdotp\buv{h} - U(\bv{r}_0) &= -\omega \sqrt{2\mu q_{\infty}}
     \label{eqn:jacobian_equate_equatorial_mod}
 \end{align}
 %%%
