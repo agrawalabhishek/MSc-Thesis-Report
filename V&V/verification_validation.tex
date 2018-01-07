@@ -237,7 +237,94 @@ Unit x-axis surface frame & -0.8496329 & -0.4905357 & 0.1936455 & \multicolumn{1
 
 \section{Regolith Orbital Motion}
 \label{sec:orbital_motion_vv}
+In this section, we will present results on test simulations that verify and validate the numerical integration of the equations of motion for the regolith in \gls{NAOS}, and in extension, the numerical integrator, the gravity potential model and the relatively smaller functional aspects of the simulator. The tests were done by using the \gls{CDE} gravity potential model, which means that gravity perturbations were accounted for, but excluded the Solar perturbations. This is so that we can test the validity of the simulator by observing the conservation properties of the Jacobi Integral and the Keplerian Energy of an orbiting particle. Both of these would not be conserved if perturbations were included in the test.
 
+\subsection{Spherical Asteroid}
+\label{subsec:spherical_asteroid__orbital_mech_vv}
+We first test the simulator for a particle launched from the surface of a spherical asteroid of radius \SI{20}{\kilo \metre}. The launch site was located at \SI{0}{\degree} Longitude and Latitude. A single particle was launched with a velocity of \SI{10.0}{\metre \per \second} with an azimuth angle of \SI{135}{\degree} and declination angle of \SI{45}{\degree}. Note that the \gls{CDE} potential model was still used for this simulation with all three semi-major axes made equal to the sphere radii. If the gravity potential model is formulated properly, then with all three semi-major axes being equal, the potential model will act like a point-mass model. This would make the gravity field uniform and hence conserve the Keplerian Energy. The Jacobi integral and the Keplerian energy for this test is shown in \Cref{fig:spherical_asteroid_jacobi_energy_vv}. From the conservation of these values, we can infer that atleast for a spherical asteroid, the simulator works correctly.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Images/spherical_asteroid_jacobi_energy.pdf}
+\caption{Jacobi Integral and Keplerian Energy for the regolith launched from the surface of a spherical asteroid at Latitude and Longitude \SI{0}{\degree} remains conserved.}
+\label{fig:spherical_asteroid_jacobi_energy_vv}
+\end{figure}
+\FloatBarrier
+%%%
+
+\subsection{\gls{CDE} Asteroid}
+\label{subsec:CDE_asteroid_orbital_mech_vv}
+We'll perform a similar test as before but this time for a \gls{CDE} shaped asteroid of semi-major axes $\alpha$ = \SI{20}{\kilo \metre}, $\beta$ = \SI{7}{\kilo \metre}, $\gamma$ = \SI{7}{\kilo \metre}. A single regolith was launched from the surface at site Longitude \SI{30}{\degree} and Latitude \SI{60}{\degree}. The particle was launched with a velocity of \SI{10}{\metre \per \second}, azimuth angle of \SI{135}{\degree} and declination angle of \SI{30}{\degree}. Now since the gravity potential model is a non-uniform one, unlike that in the case of the spherical asteroid, the Jacobi integral would remain conserved however the Keplerian energy of the particle should not remain conserved. We see this outcome in \Cref{fig:cde_asteroid_jacobi_energy_vv}. This result further validates the simulator since the Jacobi remains conserved, implying that the equations of motion, the gravity potential model, the numerical integrator and several other background functions of the simulator work correctly.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Images/cde_asteroid_long30_lat60_jacobi_energy.pdf}
+\caption{Jacobi Integral and Keplerian Energy for the regolith launched from the surface of a \gls{CDE} shaped asteroid at Latitude \SI{60}{\degree} and Longitude \SI{30}{\degree}.}
+\label{fig:cde_asteroid_jacobi_energy_vv}
+\end{figure}
+\FloatBarrier
+%%%
+Post this, two other tests were performed from the leading edge of the asteroid, one of which resulted in re-impact and the other which resulted in an escape situation. The Jacobi integral for the two simulation was computed which again turned out to be constant throughout the duration of the respective trajectories. The results and initial conditions for the re-impact case are shown in \Cref{fig:cde_asteroid_jacobi_reimpact_vv} and for the escape case are shown in \Cref{fig:cde_asteroid_jacobi_escape_vv}. The launch declination in both cases is \SI{45}{\degree}. The results further validate the functionality of the simulator.
+%%%
+\begin{figure}[htb]
+% \begin{adjustwidth}{-1in}{-1in}
+\centering
+\captionsetup{justification=centering}
+\includegraphics[angle=90, height=0.8\textheight, keepaspectratio=true]{Images/jacobi_test_after_asteroid_interaction_long_term_simulation.png}
+\caption{Jacobi Integral for the regolith launched from the leading edge of a \gls{CDE} shaped asteroid which eventually re-impacts the surface of the asteroid.}
+\label{fig:cde_asteroid_jacobi_reimpact_vv}
+% \end{adjustwidth}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.6\textheight]{Images/jacobi_test_for_escaped_particle.png}
+\caption{Jacobi Integral for the regolith launched from the leading edge of a \gls{CDE} shaped asteroid which eventually escapes the gravitational attraction of the asteroid.}
+\label{fig:cde_asteroid_jacobi_escape_vv}
+\end{figure}
+\FloatBarrier
+%%%
+
+\subsection{Integrator Performance}
+\label{subsec:integrator_tuning_vv}
+The integrator used in our simulator \gls{NAOS} was from an external library called \emph{boost}. We use this library because coding higher order numerical integrators is an extremely daunting task which would have swayed away time and focus from the thesis at hand. On top of that, the boost library provides verified integrator subroutines (among other things) and hence this reduces our task to just verify that it has been used properly in our simulator. From the results in the previous two subsections, we can say that the integrator has been properly accommodated in \gls{NAOS} otherwise the behavior of the Jacobi integral and the Keplerian energy would have been different. Here, we will briefly discuss the performance of the integrator under different configurations of itself, for the same particle launch conditions as mentioned in \Cref{subsec:CDE_asteroid_orbital_mech_vv}. But first we'll give a brief description of the integrators adaptive behavior before we can look at some numbers on the performance.
+%
+\newline\newline
+%
+The integrator used is a Runge-Kutta-Fehlberg78, which is an 8th order integrator with the 7th order used for error control. The integrator uses an adaptive step size, which means that the step size for integration, from one epoch to another, changes continuously depending on the magnitude of integration error at each step. What this means is that the number of steps taken to integrate from an initial epoch to the final one changes, for every instance of integration in a sequence. So to propagate the state vector from, say, time $t_0$ to $t_1$, the integrator first performs a single step of integration based on an initial guess for the step-size. This is done first using an order 8 process then again using a 7th order process. The difference in the outcome between the two is then treated as the numerical error for that step. This process of error estimation of-course repeats for every other step of integration performed, to go from time $t_0$ to $t_1$. The estimated error is compared with the following equation:
+\begin{align}
+abs_{tol} + rel_{tol} \times ( X + ( dt * dXdt ) )
+\label{eqn:integrator_abs_rel_tol}
+\end{align}
+where $abs_{tol}$ and $rel_{tol}$ are the absolute and relative error tolerances of the integrator, and their values can be set by the user; $X$ is the state vector, $dt$ is the time step for integration, and $dXdt$ is the first order differential equation for the state vector (so basically the equations of motion in our case). Now if the estimated error is smaller than \Cref{eqn:integrator_abs_rel_tol}, the integration step is accepted and the integrator moves on to the next step. If, however, the estimated error is larger, then the step size is reduced and the integration is performed again. There are other processes that run internally
+within the subroutine, that ensure that the step-size does not become too small or too large, the details of which can be found at \parencite{boost_odeint}.
+%
+\newline\newline
+%
+\Cref{tab:integrator_performance} gives values for certain metrics that showcase the variation in performance of the Runge-Kutta-Fehlberg78 integrator. Note that we propagated the trajectory of the regolith for the same initial conditions as mentioned in \Cref{subsec:CDE_asteroid_orbital_mech_vv}. The metric CPU time refers to the total time taken by the computer processor to integrate the entire problem from start to end. The total CPU time shouldn't be taken at face value but rather at the order of magnitude because background processes in the computer could delay the time taken to perform a given simulation. The entire simulation, from the start till the end, is broken down into a series of smaller integration instances. For each instance then, the number of steps to perform the integration changes since the step-size keeps on changing. Thus, the column \emph{max. step} refers to the maximum number of steps undertaken for any integration instance in the entirety of the simulation. Similarly, the column \emph{min. step} gives the values for the least number of steps. Each row in \Cref{tab:integrator_performance} corresponds to one entire simulation performed with the given absolute and relative tolerances.
+%%%
+\begin{table}[htb]
+\centering
+\captionsetup{justification=centering}
+\caption{Variation in integrator performance for different error tolerance values.}
+\label{tab:integrator_performance}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{\begin{tabular}[c]{@{}c@{}}Absolute\\ Tolerance\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Relative\\ Tolerance\end{tabular}} & \textbf{CPU time {[}s{]}} & \textbf{Max. Steps} & \textbf{Min. Steps} \\ \hline
+$10^{-2}$ & $10^{-2}$ & 0.54 & 6 & 3 \\ \hline
+$10^{-6}$ & $10^{-6}$ & 0.47 & 6 & 3 \\ \hline
+$10^{-15}$ & $10^{-15}$ & 0.41 & 6 & 3 \\ \hline
+$10^{-20}$ & $10^{-20}$ & 2.43 & 2468 & 5 \\ \hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+%%%
+It is important to note that the integrity of the simulation from the dynamics point of view was not hampered for any of the combinations of absolute and relative tolerances given in \Cref{tab:integrator_performance}. They all gave the same result as that in \Cref{fig:cde_asteroid_jacobi_energy_vv}. A logical inference to be drawn from this is that even when the tolerance is relatively large, the simulation results turn out to be the same because the estimated error in integration itself is very small in the first place. We see a visible difference in the performance only when the tolerances are made extremely small, such as $10^{-20}$, which ultimately causes the integrator to perform computations at much smaller step-sizes because now the estimated error gets larger in comparison to \Cref{eqn:integrator_abs_rel_tol}. Not shown in \Cref{tab:integrator_performance}, but the tolerances were further reduced to $10^{-30}$ at which point the simulation got extremely slow and never ceased within a reasonable amount of time. Thus extremely small tolerances, i.e. beyond $10^{-15}$, should not used for the purposes of this thesis since we are simulating several thousand particles at the same time. We ultimately decided to use an absolute and relative tolerance of $10^{-15}$ since it gave the same performance as any other higher tolerance value.
 
 \section{Solar Perturbations}
 \label{sec:perturbations_vv}
