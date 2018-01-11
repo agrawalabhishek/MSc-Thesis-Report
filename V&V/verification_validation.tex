@@ -328,7 +328,112 @@ It is important to note that the integrity of the simulation from the dynamics p
 
 \section{Solar Perturbations}
 \label{sec:perturbations_vv}
+In this section we will provide results on tests performed to validate the perturbing force models. The test data was taken from, the already verified, unit test files of \gls{TUDAT} \footnote{\gls{TUDAT} is an open source astrodynamics toolbox, developed and maintained by the department of astrodynamics and space missions at the Delft University of Technology and the toolbox can be found at \url{https://github.com/tudat/}.}. We benchmark the force models used in \gls{NAOS} by performing tests with data from \gls{TUDAT} and data obtained from some simplified hand-based calculations as well. The subroutines for the force models in \gls{NAOS} were modular enough and no changes were made to the function codes to accommodate the validation process.
 
+\subsection{Solar Third-Body Effect}
+\label{subsec:stbe_vv}
+We'll begin by presenting validation data for the \gls{STBE} perturbing acceleration. The position vector of the target location where the perturbing acceleration had to be calculated, and the position vector to a random perturbing body, are both mentioned with respect to some common arbitrary frame of reference. The definition of the latter does not matter or affect the computation within the \gls{STBE} force model. The gravitational parameter of the perturbing body is \SI{4900.0e9}{\metre \cubed \per \second \squared}. The computed acceleration values matched those provided in the \gls{TUDAT} unit test files, shown in \Cref{tab:stbe_vv_tudat_data}, thus validating the \gls{STBE} force model for a more generalized 3D data.
+%%%
+\begin{table}[htb]
+\centering
+\captionsetup{justification=centering}
+\caption{Validation data for testing the \gls{STBE} force model, taken from unit test files in \gls{TUDAT}. The gravitational parameter of the perturbing body is \SI{4900.0e9}{\metre \cubed \per \second \squared}.}
+\label{tab:stbe_vv_tudat_data}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Vector}} & \multicolumn{3}{c|}{\textbf{Component}} \\ \hline
+\multicolumn{1}{|c|}{} & x & y & z \\ \hline
+Target position {[}m{]} & -40000000.0 & 9000000.0 & -9500000.0 \\ \hline
+Perturber position {[}m{]} & 25000000.0 & -380000000.0 & -55000000.0 \\ \hline
+Perturbing acceleration {[}\si{\metre \per \second \squared}{]} & 2.93946e-06 & 2.22539e-06 & 1.16801e-06 \\ \hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+%%%
+The second test was a more simplified one and uses hand-based calculations to verify the software routine. This was done to test if the routine performs correctly even for an edge case. The test considers a planar situation wherein the regolith is on the positive x-axis with respect to the asteroid (consider looking at \Cref{fig:stbe_inertialFrame} to visualize the set up) and the Sun is in the equatorial plane of the asteroid on the negative x-axis. The position vectors for the two bodies and the corresponding acceleration values, both hand-calculated and software computed, are shown in \Cref{tab:stbe_vv_handcalculated_data}.
+%%%
+\begin{table}[htb]
+\centering
+\captionsetup{justification=centering}
+\caption{Validating the \gls{STBE} force model using hand-calculated acceleration values for a specific edge case.}
+\label{tab:stbe_vv_handcalculated_data}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Vector}} & \multicolumn{3}{c|}{\textbf{Component}} \\ \hline
+\multicolumn{2}{|c|}{} & x & y & z \\ \hline
+\multicolumn{2}{|l|}{Target position {[}m{]}} & 25000.0 & 0.0 & 0.0 \\ \hline
+\multicolumn{2}{|l|}{Perturber position {[}m{]}} & -1.0 AU & 0.0 & 0.0 \\ \hline
+\multirow{2}{*}{Perturbing acceleration {[}\si{\metre \per \second \squared}{]}} & Hand-calculated & 1.98201e-09 & 0.0 & 0.0 \\ \cline{2-5}
+ & Software computed & \multicolumn{1}{l|}{1.98201e-09} & \multicolumn{1}{l|}{-3.64089e-25} & \multicolumn{1}{l|}{0.0} \\ \hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+%%%
+There is an extremely small round off error in the y-component of the software computed perturbation acceleration but apart from that the software values match the hand-calculated ones in terms of both magnitude and direction.
+
+\subsection{Solar Radiation Pressure}
+\label{subsec:srp_vv}
+We'll now present validation data for the \gls{SRP} force model. The first test assumes a spacecraft near Venus. The parametric data for the test was again taken from the \gls{TUDAT} unit test files and is shown in \Cref{tab:srp_vv_tudat_data_1}. The acceleration due to \gls{SRP} computed from the software routine matched in direction and magnitude with the test data. The position vector goes from the target to the Sun and is defined with respect to an arbitrary frame. The definition of the frame does not matter for the software routine to calculate the perturbing accelerations, apart from the fact that the values will be defined with respect to the arbitrary frame.
+%%%
+\begin{table}[htb]
+\centering
+\captionsetup{justification=centering}
+\caption{Validation of \gls{SRP} model using test data from \gls{TUDAT}. The test assumes a satellite somewhere near Venus and considers a planar case.}
+\label{tab:srp_vv_tudat_data_1}
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{Value}} \\ \hline
+Target to Sun position vector {[}m{]} (x, y, z) & (77432181578.46405, 77432181578.46405, 0.0) \\ \hline
+Target emissivity & 0.5 \\ \hline
+Solar incident area {[}\si{\metre \squared}{]} & 0.005 \\ \hline
+Target mass {[}kg{]} & 0.0022 \\ \hline
+Solar constant & 1.0205062450596109e+17 \\ \hline
+Perturbing acceleration {[}\si{\metre \per \second \squared}{]} (x, y, z) & (-2.05148e-05, -2.05148e-05, 0.0) \\ \hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+%%%
+The second test, again taken from \gls{TUDAT}, assumes a random location for the target in 3D, thus providing a more generalized test scenario. The incident area and target mass are also extremely exaggerated. The parametric data used for the test and the output acceleration values are shown in \Cref{tab:srp_vv_tudat_data_2}.
+%%%
+\begin{table}[htb]
+\centering
+\captionsetup{justification=centering}
+\caption{Validation of \gls{SRP} model using test data from \gls{TUDAT}. The test assumes an exaggerated target body at a random location and considers a general 3D scenario.}
+\label{tab:srp_vv_tudat_data_2}
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{Value}} \\ \hline
+Target to Sun position vector {[}m{]} (x, y, z) & (94359740.25, 90831886.1, 14668782.92) \\ \hline
+Target emissivity & 0.4058 \\ \hline
+Solar incident area {[}\si{\metre \squared}{]} & 514701.9505 \\ \hline
+Target mass {[}kg{]} & 1.0 \\ \hline
+Solar constant & 1.0205062450596109e+17 \\ \hline
+Perturbing acceleration {[}\si{\metre \per \second \squared}{]} (x, y, z) & (-3.04373e+06, -2.92993e+06, -473166) \\ \hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+%%%
+The perturbing accelerations computed from the software routine for \gls{SRP} in \gls{NAOS} matches the test data from \gls{TUDAT}, thus validating the software model. Just like for \gls{STBE}, we present a case of validation against hand-calculated data for a set of very simple parametric values. The results and test data are given in \Cref{tab:srp_vv_hand_calc_data}. There is an extremely small round-off error in the x-component of the computed acceleration, but the magnitude and direction matches that of the hand-computed values. Thus with this final test, we can say that the software is verified.
+%%%
+\begin{table}[htb]
+\centering
+\captionsetup{justification=centering}
+\caption{Validation of \gls{SRP} model in \gls{NAOS} for an edge case against hand-calculated data.}
+\label{tab:srp_vv_hand_calc_data}
+\begin{tabular}{|l|l|l|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{Value}} \\ \hline
+\multicolumn{2}{|l|}{Target to Sun position vector {[}m{]} (x, y, z)} & (0.0, 0.1 AU, 0.0) \\ \hline
+\multicolumn{2}{|l|}{Target emissivity} & 1.0 \\ \hline
+\multicolumn{2}{|l|}{Solar incident area {[}\si{\metre \squared}{]}} & 1.0 \\ \hline
+\multicolumn{2}{|l|}{Target mass {[}kg{]}} & 1.0 \\ \hline
+\multicolumn{2}{|l|}{Solar constant} & 1.0e+17 \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Perturbing acceleration {[}\si{\metre \per \second \squared}{]} (x, y, z)}} & Hand-calculated & (0.0, -0.000893674, 0.0) \\ \cline{2-3}
+\multicolumn{1}{|c|}{} & Software computed & (-5.47218e-19,-0.000893674, 0.0) \\ \hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+%%%
 
 \section{Regolith Final Fate}
 \label{sec:final_fate_vv}
