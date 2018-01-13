@@ -437,3 +437,74 @@ The perturbing accelerations computed from the software routine for \gls{SRP} in
 
 \section{Regolith Final Fate}
 \label{sec:final_fate_vv}
+Now that we have verified the gravity model, the orbital dynamics and the perturbing force models, the last major validation that we need to perform is to check whether the final fate of a regolith is correctly determined. We do the check for test simulations run from the leading edge of the asteroid while including perturbations. The launch location was at Longitude \SI{30}{\degree} and Latitude \SI{60}{\degree}. Multiple regolith were launched from the site with all possible combinations of the following launch conditions: velocities ranging from \SI{10}{\metre \per \second} to \SI{13}{\metre \per \second}, launch azimuth angles varying in steps of \SI{45}{\degree}, and launch declination angles of \SI{30}{\degree} and \SI{60}{\degree}. The initial Solar phase angle was \SI{315}{\degree}.
+%
+\newline\newline
+%
+This set of launch site and initial conditions provides a very generalized scenario for testing the eventual outcome of the regolith. \Cref{fig:finalfate_vv_escape} shows the results for all recorded escape cases from the test simulation. Every particle that has escaped satisfies the necessary condition of having eccentricity greater than or equal to one and energy being positive. Note that these values are given for the final epoch in the simulation i.e. when any of the possible final fates is realized and the simulation is stopped.
+%
+\newline\newline
+%
+We can validate the re-impact situations by evaluating the triaxial ellipsoid equation for the state vector at the final epoch of the simulation. This was done for all cases that had been identified, by the simulator, to have re-impacted the surface of the asteroid. If the solution turns out to be zero, then we know that the particle is on the ellipsoid itself. In \Cref{fig:finalfate_vv_crash}, we do see that all impacted particles provide the desired solution to the triaxial ellipsoid equation. The results are shown only for a subset of re-impact cases, i.e., only for those regoliths whose initial velocity was \SI{13}{\metre \per \second}.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{Images/escape_vv.pdf}
+\caption{Energy v/s eccentricity plot for regolith that eventually escaped after being launched from the surface of the asteroid. When the energy is positive and eccentricity is greater than or equal to one, the regolith escapes. In the legend, the launch velocity and the two angles are expressed in \si{\metre \per \second} and degrees respectively.}
+\label{fig:finalfate_vv_escape}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{Images/crash_vv.pdf}
+\caption{Solution to the triaxial ellipsoid equation for a subset of re-impacted particles. This solution is obtained for the state vector at the final epoch of the simulation, for the given subset of re-impacted particles. In the legend, the launch velocity and the two angles are expressed in \si{\metre \per \second} and degrees respectively.}
+\label{fig:finalfate_vv_crash}
+\end{figure}
+\FloatBarrier
+%%%
+In the test just performed, from the leading edge of the asteroid, we did not obtain any capture cases. To validate this special final fate, we ran another simulation from the longest edge of the asteroid. Note that a capture case is indirectly detected when the simulator propagates the regolith and it doesn't escape or re-impacts the surface of the asteroid. So we perform an internal passive test for a known capture case, wherein we check that the particle doesn't have escape characteristics when far away from the asteroid and neither does it have re-impact characteristics when extremely close to the asteroid.
+%
+\newline\newline
+%
+A single regolith was launched from Longitude and Latitude \SI{0}{\degree}, with launch velocity magnitude of \SI{10}{\metre \per \second}, azimuth angle of \SI{45}{\degree} and declination angle of \SI{45}{\degree}. The initial Solar phase angle was \SI{315}{\degree}. \Cref{fig:capture_vv_energy_eccentricity} shows the osculating Keplerian energy and eccentricity of the regolith when it is far away from the asteroid, i.e., when the range to the particle is equal to or beyond 10 times the largest semi-major axis of the asteroid, which is \SI{200}{\kilo \metre} in this particular case. When far away, the regolith always maintains a negative total Keplerian energy and an eccentricity less than 1.0, thereby staying bounded to the asteroid.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{Images/capture_vv_energy_eccentricity_10AlphaUpwards.pdf}
+\caption{Osculating Keplerian energy versus eccentricity plot for the regolith with temporary capture as its final fate. The data points plotted here are for the case when the particle has a range beyond 10 times the largest semi-major axis of the \gls{CDE} (i.e. \SI{200}{\kilo \metre} in this test). This check was performed to ensure that the particle does not have escape characteristics when far away from the asteroid.}
+\label{fig:capture_vv_energy_eccentricity}
+\end{figure}
+\FloatBarrier
+%%%
+The second indirect test is to check if the particle ever interacts with the surface of the asteroid, that goes unnoticed by the simulator for any reason at all. In this regard this test case is special since we witness that the regolith comes extremely close to the asteroid. We do this by plotting the trajectory data points of the regolith, expressed in \gls{ARF}, when it lies within a range of 1.5$\alpha$ (i.e. $\leq$ \SI{30}{\kilo \metre}). \Cref{fig:capture_vv_3d_plot} shows two different views of a part of the 3D trajectory of the captured regolith. It's easy to see that although the particle comes extremely close to the asteroid, it does not collide with it. Note that in \Cref{fig:capture_vv_3d_plot_2}, the trajectory points that appear to connect to the longest edge of the asteroid actually depict the launch of the particle and not a re-impact scenario.
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\subfloat[]{
+    \includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{Images/capture_vv_closeProximity3D.pdf}
+    \label{fig:capture_vv_3d_plot_1}
+}
+
+\subfloat[]{
+    \includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{Images/capture_vv_closeProximity3D_frontview.pdf}
+    \label{fig:capture_vv_3d_plot_2}
+}
+\caption{3D trajectory data points for a capture scenario. The data points plotted here are for the case when the particle has a range $\leq 1.5\alpha$, i.e., 1.5 times the largest semi major axis of the asteroid. This check was performed to ensure that the particle has not experienced a re-impact situation that went unnoticed by the simulator.}
+\label{fig:capture_vv_3d_plot}
+\end{figure}
+\FloatBarrier
+%%%
+
+\section{Conclusion}
+\label{sec:conclusion_vv}
+In this chapter, we presented results for verification and validation of the simulator \gls{NAOS}. The tests, and the results from it, proved the authenticity of \gls{NAOS} as we verified its high-level functioning layers such as the perturbing force models, gravity field model, numerical propagator, regolith orbital dynamics, regolith launch parameters and final fate. Validating the aforementioned, in general, validates the functioning of the simulator developed for thesis. However, it must be noted that the high-level validation tests may, often, not act as proofs of correct performance for the lower functional layers of any simulator and hence individual unit tests and sanity checks should be written within the simulator itself to check for bugs that may appear under special circumstances.
+%
+\newline\newline
+%
+In this regard, it should be noted that \gls{NAOS} has certain unit test files to validate the lower functional layers using external verified data, for example the cubic root solver for the gravity potential model. In addition to this, the code for \gls{NAOS} was developed sequentially and by using modular functions and C++ template files that enable unit testing of several features of the code without changing it to accommodate external data. There are several internal sanity checks as well at various points within the \gls{NAOS} code to ensure bugs can be spotted before compromising the integrity of the simulated data.
