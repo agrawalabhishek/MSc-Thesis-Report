@@ -94,7 +94,7 @@ Carl Sagan
 \input{Research_Questions/researchQuestions}
 \part{Dynamics Modeling \& Simulator}
 \input{Modeling/dynamics_modeling}
-\input{NAOS/naos}
+% \input{NAOS/naos}
 \input{V&V/verification_validation}
 \part{Numerical Simulation Results}
 \input{Results/nonconservative_escapespeed}
@@ -113,6 +113,24 @@ Carl Sagan
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
   \chapter{Extra Figures}
   This appendix contains figures which are used to support the explanation of certain results, arguments and conclusions in the main part of the Thesis report.
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \subfloat[]{
+        \includegraphics[width=0.5\textwidth, height=0.4\textheight, keepaspectratio=true]{Results/Images/longest_edge_no_perturbations/5ms_crash_traj_90DegAzim.pdf}
+        \label{fig:5ms_traj_90deg_noSP}
+    }
+
+    \subfloat[]{
+        \includegraphics[width=0.5\textwidth, height=0.4\textheight, keepaspectratio=true]{Results/Images/longest_edge_no_perturbations/5ms_crash_traj_10DegAzim.pdf}
+        \label{fig:5ms_traj_10deg_noSP}
+    }
+    \caption{Re-impact trajectory for regolith launched from the longest edge of the asteroid at \SI{5}{\metre\per\second}. Trajectories for two different launch azimuths is shown, i.e., \SI{90}{\degree} and \SI{10}{\degree}.}
+    \label{fig:5ms_traj_90and10_azim_noSP}
+    \end{figure}
+    \FloatBarrier
+    %%%
     %%%
     \begin{figure}[htb]
     \centering
