@@ -342,11 +342,11 @@
                 \includegraphics{cover/back}
             };
             \node at (current page.south east)[anchor=south east,inner sep=0pt]{
-                \includegraphics{cover/front}
+                \includegraphics{cover/front_new}
             };
         \else
             \node at (current page.south west)[anchor=south west,inner sep=0pt]{
-                \includegraphics{cover/front}
+                \includegraphics{cover/front_new}
             };
         \fi
         %% Calculate the coordinate of the top left corner of the front cover.
