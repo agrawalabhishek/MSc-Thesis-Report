@@ -22,6 +22,8 @@ The simulator designed as part of this research (see \Cref{chap:naos}) involves 
 
 \item The slant angle of the \textit{"ejecta cone"} (henceforth the declination angle) from the local surface normal is kept constant at \SI{45.0}{\degree} (which is a middle value in the entire declination range from \SI{0.0}{\degree} - \SI{90.0}{\degree}). We want to consider a general case and not introduce another degree-of-freedom in terms of varying declination angles.
 
+\item The simulations were subjected to run for a maximum of 270 days and were terminated earlier if a particular trajectory resulted in escape or surface re-impact. This number was obtained by looking at the close-proximity operational time periods of exploration missions to small bodies of our solar system. We wanted a maximum simulation time in the context of a man-made mission and hence this approach was taken. We accounted for four missions, two from the past and two planned for the future, which have direct contact with a small body as part of their mission and continued the mission around the small body afterwards (hence, not just disposal and/or fly-by). These are the Philae (Rosetta), Hayabusa, Hayabusa-2, and the \gls{OSIRIS-REx} mission. The close-proximity design operation time period for Philae lander was 3 months \parencite{philaeMissionTimeline}, 3 months for Hayabusa \parencite{hayabusaCloseProximity}, 18 months for the Hayabusa-2 mission \parencite{TsudaHayabusa2SystemDesign}, and finally 12 months for the \gls{OSIRIS-REx} mission \parencite{osirisMissionOverview}. The average of all of this comes out to be 9.0 months, which is what we have considered to be the maximum simulation time. In this regard, we are also categorizing orbital behavior that does not result in escape or re-impact in those 270 days, as capture orbits.
+
 \item The loss of material and mass from the asteroid, when the regolith is lofted from the surface, is not modeled in the simulation since it is assumed that a very small amount of material will be displaced by a spacecraft activity. This assumption is based on the sample collected by the Hayabusa mission (see \Cref{sec:past_missions} and the references therein).
 
 \item Interaction between individual regolith grain is not accounted for because we are simulating multiple particles being lofted at the same time and granular interaction on such a scale would be extremely complex and beyond the scope of this thesis.
@@ -892,5 +894,5 @@ Thus instead of using $v_{I_0} = \sqrt{2U_{max}}$ in \Cref{eqn:conservative_quad
 %%%
 where instead of using $\buv{n}$ we use the unit vector $\buv{d}$, representing a general direction of launch and not just the normal direction. Note that \Cref{eqn:jacobian_equate_equatorial_mod,eqn:non_conservative_inertial_guaranteed_escape_speed} are valid only for the launch location at the longest edge of the ellipsoid. We simplified the equations by making $\alpha=0$ so that testing this approach for a non-conservative guaranteed escape speed can be made easy, however the approach can be generalized by using a non-zero value for $\alpha$ in \Cref{eqn:cross_product_eval} as well.
 
-\section{Conclusion}
-\label{sec:dynamics_conclusion}
+% \section{Conclusion}
+% \label{sec:dynamics_conclusion}

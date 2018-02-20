@@ -1,3 +1,44 @@
 \chapter{Conclusions}
 \label{chap:conclusions}
-\graphicspath{{Conclusions/Images/}}
+\graphicspath{{Conclusions/}}
+
+This chapter, finally, marks the end of the work done in this thesis. The work presented in this report was an effort to contributing towards understanding and characterizing the orbital motion of regolith and its final fate, once it was lofted from the surface of an asteroid. Much of the work done in the past involved mostly analytical methods to understand the orbital motion of the regolith, however, in this thesis we employed mainly a numerical simulation approach. For this, a simulator, called \gls{NAOS}, was developed from scratch that can perform high fidelity simulation for an orbiting particle and with high accuracy when it comes to close proximity motion.
+%
+\newline\newline
+%
+A constant density ellipsoid model was used to model the asteroid so as to account for a non-uniform gravity field without posing the known divergence problems of other gravity field models such as the spherical harmonics. The polyhedron model was not used either to decouple any irregular body shape effects on the motion of the regolith and correctly judge the influence of perturbations. The simulator also accounted for perturbations from the Sun, namely the \gls{SRP} and the \gls{STBE}. Every single particle lofted from the surface of the asteroid, was given a specific velocity and a direction relative to the local North direction and the local surface Normal. By this method we were able to create and launch multiple particles, shaping out like a cone, resembling how regolith would be lofted when an object impacts the asteroid's surface. For each regolith in this cone of particles, the simulator would then create a launch location position vector (from a given longitude and latitude) relative to the asteroid's centre and then launch it with the specified velocity and direction. We launched particles from three different launch locations, i.e. from the leading, trailing and longest edge of the ellipsoid shaped asteroid.
+%
+\newline\newline
+%
+We'll now present a summary of all the results by providing answers to all the sub-research questions mention in \Cref{chap:research_questions}.
+\begin{enumerate}
+\item \textbf{Does the regolith, launched from different locations such as leading, trailing, longest edge of an asteroid, show characteristic differences with regard to its final fate?} \newline
+Yes, there were significant differences in terms of final fate between particles launched from the three distinct launch locations. In case of the longest edge, there were an almost equal number of escape and re-impact cases, and relative to those, very few temporary capture cases. For the leading edge, the majority of the particles resulted in re-impact (much more than that for the longest edge case) and only very few resulted in an escape. Even fewer particles attained temporary capture orbits. The largest number of re-impact cases were observed for particles launched from the trailing edge. Subsequently, it recorded the lowest escape and temporary capture cases.
+
+A relationship was observed between the distribution of \gls{HEV} data points and the number of orbital revolutions it took for a particle to escape. If the distribution of the points was uniform and continuous, then it was correlated to particles escaping without completing even a single orbital revolution. However, this correlation was found to be completely true for only the longest and leading edge cases. For the trailing edge scenario as well, this correlation could be established with all launch velocities that lead to an escape, but, one particular launch velocity case presented an exception. The correlation turned out to be false in case of this exception.
+
+The re-impact maps for the leading edge case appeared to have the least amount of separation for different regolith types, followed by the trailing edge and then the longest edge.
+
+\item \textbf{Can we establish a non-conservative analytical expression to determine guarantee escape speed in presence of perturbations?}\newline
+A new semi-analytical method was developed to determine a non-conservative guaranteed escape speed for the regolith as the conservative guaranteed escape speed method couldn't detect escape cases where the launch velocity was below it. The new method, however, did not work as expected and proved to be of no use in detecting any escape cases.
+
+In addition to this, we also observed that the conventional guaranteed escape speed method could not be used to distinguish between cases that took one or more revolutions before escaping and those which took zero revolutions.
+
+Note that this sub-research question was analyzed by conducting simulations only from the longest edge of the asteroid and in absence of Solar perturbations.
+
+\item \textbf{What causes the regolith to enter into a temporary capture orbit around the asteroid?}\newline
+The answer to this question was found by comparing two particles launched with the same initial conditions, but one in the presence (perturbed scenario) and the other in the absence of Solar perturbations (unperturbed scenario). It was found that the perturbations would produce enough changes in the trajectory of a regolith such that its phase with respect to the asteroid would change relative to the unperturbed scenario. These changes, for example in terms of range to the particle, would slowly develop as cm level difference and eventually build up to km level differences. Because of these changes, for the same epoch, the particles from the perturbed and unperturbed scenario would have significantly different locations along the trajectory. Thus this (favorable)change in the \emph{phase} of the particle with respect to the asteroid ultimately leads to a capture orbit.
+
+Along with this, it was also discovered that both \gls{SRP} and \gls{STBE} are important in obtaining a capture orbit. This was inferred when for the existing capture cases, the simulation was re-run with the same initial conditions but by removing one of the perturbations each time. The effect of removing \gls{STBE} was not as drastic as that of removing \gls{SRP}, however both were needed to get the original capture orbit.
+
+\item \textbf{For the same launch conditions, how does the orbital behavior and final fate of the regolith differ for different particle sizes and densities?}\newline
+For the same launch conditions, all regolith types don't necessarily need to have the same final outcome. There is no way in which we can predetermine their final fates either without running a simulation. That said, when we look at the trajectory plots for all regoliths launched with the same conditions, we note that the particles initially have overlapping trajectories, but eventually the trajectories start separating out from each other. The order of separation is determined by the area-to-mass ratio of the particle wherein the one with the maximum ratio separates out first. The eventual trajectory difference between the particles of successive area-to-mass ratios is also significantly large.
+
+We witnessed certain cases where all regolith types eventually have the same final fate, when launched with the same initial conditions. If it was escape, they had different \gls{HEV} and if it was re-impact, then they re-impacted the surface at different locations.
+
+\item \textbf{Can we exploit the orbital behavior of lofted regolith for sorting material of different sizes and densities as an application for asteroid mining?}\newline
+The research done for this question was extremely rudimentary however we were able to derive some preliminary conclusions out of it. We compared orbital motion of regoliths of two different densities and sizes. One of the methods was to see if these particles would re-impact the surface on extremely different and far away locations such that they would be passively sorted. However, this was not found out to be true. For all three launch locations, majority of the particles had overlapping re-impact locations which rendered this method unfeasible.
+
+The second method was to see if passive sorting can be achieved while the particles were in orbit. This method provided more success than the previous one in sorting out the regoliths. We observed only those cases where the regoliths would spend more than one Earth day in orbit in order to account for time taken by spacecraft to maneuver and position itself to collect the sorted material in orbit. However, the number of such cases was small and even within those, the method seemed impractical since the particle trajectories would go in all possible directions and collecting them all at once by a single spacecraft is impossible.
+
+\end{enumerate}

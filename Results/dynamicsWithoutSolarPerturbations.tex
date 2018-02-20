@@ -59,7 +59,9 @@ We now look at the velocity extremes in \Cref{fig:final_fate_hist_noSP} which re
 \end{figure}
 \FloatBarrier
 %%%
-\Cref{fig:crashmap_all_noSP} shows a map of re-impact locations on the surface of the asteroid for all launch velocities that led to this particular fate. The distinction due to launch azimuth is not plotted explicitly. The qualitative map in the plot is simply a 2D histogram plot with hexagonal shaped bins. These bins don't represent the amount of particles within a given location but instead represent the initial launch velocities that led to a re-impact in that location. From the qualitative map, we can observe that particles launched with the lowermost velocities mostly re-impact very close to the launch site itself. The intermediate velocities seems to confine the re-impact locations within the \SI{-30}{\degree} to \SI{+30}{\degree} latitude range and lie mostly on the West of the launch site. And finally, the higher velocity range cause the particle to re-impact mostly on the upper latitudes in both the North and the South. Thus the qualitative map gives an excellent description of how the re-impact locations change with increasing launch velocities. The map with the actual re-impact locations in \Cref{fig:crashmap_all_noSP} shows that the bulk of all re-impacted particles lie around the two longest edges of the asteroid. Everywhere in between has a very scarce distribution of particles. A pattern in the re-impact location becomes apparent if one visualizes the launch azimuth angles, especially for the lower launch velocity range and is discussed shortly.
+
+\subsection{Re-impact behavior}
+This section will discuss certain characteristic behavior that is specific to the re-impact scenario. \Cref{fig:crashmap_all_noSP} shows a map of re-impact locations on the surface of the asteroid for all launch velocities that led to this particular fate. The distinction due to launch azimuth is not plotted explicitly. The qualitative map in the plot is simply a 2D histogram plot with hexagonal shaped bins. These bins don't represent the amount of particles within a given location but instead represent the initial launch velocities that led to a re-impact in that location. From the qualitative map, we can observe that particles launched with the lowermost velocities mostly re-impact very close to the launch site itself. The intermediate velocities seems to confine the re-impact locations within the \SI{-30}{\degree} to \SI{+30}{\degree} latitude range and lie mostly on the West of the launch site. And finally, the higher velocity range cause the particle to re-impact mostly on the upper latitudes in both the North and the South. Thus the qualitative map gives an excellent description of how the re-impact locations change with increasing launch velocities. The map with the actual re-impact locations in \Cref{fig:crashmap_all_noSP} shows that the bulk of all re-impacted particles lie around the two longest edges of the asteroid. Everywhere in between has a very scarce distribution of particles. A pattern in the re-impact location becomes apparent if one visualizes the launch azimuth angles, especially for the lower launch velocity range and is discussed shortly.
 %%%
 \begin{figure}[htb]
 \centering
@@ -160,9 +162,9 @@ Similarly, for the launch case of \SI{13}{\metre\per\second} in \Cref{fig:crashm
 \FloatBarrier
 %%%
 Thus, for lower launch velocities, a continuous curve of re-impact locations can be linked to the launch direction which in our case is the launch azimuth angle \footnote{The launch declination angle for our simulation was kept constant}. But the same can not be said for higher launch velocities. Another intriguing observation in \Cref{fig:crashmap_launchAzimuth_noSP} is made for the launch velocity of \SI{5}{\metre\per\second}. We see that the particle launched with azimuth angle of \SI{90}{\degree} goes further away than, for example, a particle launched with an azimuth angle of \SI{10}{\degree}. This happens even though the former launch case will experience more resistance in launch since it is directly opposite to the asteroid's rotational direction. The reason for this is simple and becomes apparent if one looks at the trajectory plots shown in \Cref{fig:5ms_traj_90and10_azim_noSP}.
-%
-\newline\newline
-%
+
+\subsection{Escape Behavior}
+\label{subsec:escape_behavior_noSP}
 We now present a brief discussion on the particles that resulted in an escape situation, and do so for the same launch velocities used for explaining the re-impact scenarios. For these launch velocities, \Cref{fig:hev_escapeHist_noSP} shows the \gls{HEV} for all escaped regolith.
 %%%
 \begin{figure}[htb]
@@ -197,12 +199,12 @@ As the velocity increases from \SI{5}{\metre\per\second} to \SI{13}{\metre\per\s
 \end{figure}
 \FloatBarrier
 %%%
-So for the data points with uniformly reducing \gls{HEV} values, we observe that the energy never becomes negative and the eccentricity always stays above 1.0, which means that the corresponding regoliths are on an escape trajectory immediately after launch. It doesn't take a gravity assist from the fast rotating asteroid to put these regolith on an escape route. This is an important distinction against the randomly distributed data points in \Cref{fig:hev_9ms_lowerAzimuths_noSP}.For the latter, from the eccentricity and energy curves, we can witness that the particles briefly enter bounded orbits around the asteroid but eventually escape with a sudden increase in energy (becoming positive) and eccentricity (going above 1.0). This happens because, after launch, the particle trajectories get gravity assist from the asteroid that is sufficient to put the particle on an escape route. Thus, just by looking at the \gls{HEV} plot, we can now determine which launch azimuths led to an immediate escape and which ones required gravity assist from the asteroid to escape. The trajectory plots for a few launch azimuths that highlight this distinction is shown in \Cref{fig:escape_example_traj_9ms_noSP}.
+So for the data points with uniformly reducing \gls{HEV} values, we observe that the energy never becomes negative and the eccentricity always stays above 1.0, which means that the corresponding regoliths are on an escape trajectory immediately after launch. It doesn't take a gravity assist from the fast rotating asteroid to put these regolith on an escape route. This is an important distinction against the randomly distributed data points in \Cref{fig:hev_9ms_lowerAzimuths_noSP}.For the latter, from the eccentricity and energy curves, we can witness that the particles briefly enter bounded orbits around the asteroid but eventually escape with a sudden increase in energy (becoming positive) and eccentricity (going above 1.0). This happens because, after launch, the particle trajectories get gravity assist from the asteroid that is sufficient to put the particle on an escape route. What was shown here for an example of \SI{9}{\metre\per\second} was not an isolated case and was found to be true for other launch velocities as well, but their results are not shown here for brevity. Thus, just by looking at the \gls{HEV} plot, we can now determine which launch azimuths led to an immediate escape and which ones required gravity assist from the asteroid to escape. The trajectory plots for a few launch azimuths that highlight this distinction is shown in \Cref{fig:escape_example_traj_9ms_noSP}.
 %%%
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.32\textheight, keepaspectratio=true]{Images/longest_edge_no_perturbations/9ms_escape_example_trajectories.pdf}
+\includegraphics[width=\textwidth, height=0.3\textheight, keepaspectratio=true]{Images/longest_edge_no_perturbations/9ms_escape_example_trajectories.pdf}
 \caption{Example escape case trajectory plots for a few launch azimuths.}
 \label{fig:escape_example_traj_9ms_noSP}
 \end{figure}
@@ -218,15 +220,74 @@ So for the data points with uniformly reducing \gls{HEV} values, we observe that
 \end{figure}
 \FloatBarrier
 %%%
-From the previous observation, we can also confirm the pattern of variation in the \gls{HEV} values for non-chaotic data points in \Cref{fig:hev_escapeHist_noSP}. If we consider looking at the \SI{13}{\metre\per\second} case, as an example, we see that the \gls{HEV} increases with increasing launch azimuth values beyond \SI{100}{\degree} up until \SI{270}{\degree}. This happens because for increasing launch azimuths in this range, the particle's inertial launch velocity increases as well as the azimuths align more and more in the asteroid's rotational direction and becomes maximum for the exact azimuth of \SI{270}{\degree}. Now we saw earlier that these particles are inherently on an escape trajectory immediately after launch and don't require gravity assists from the rotating asteroid to be on one. This implies that if the inertial launch velocity itself is high, then the inertial velocity at the instance of escape remains high too, which is what is observed in the plots.
+From the previous observation, we can also confirm the pattern of variation in the \gls{HEV} values for non-chaotic data points in \Cref{fig:hev_escapeHist_noSP}. If we consider looking at the \SI{13}{\metre\per\second} case, as an example, we see that the \gls{HEV} increases with increasing launch azimuth values beyond \SI{100}{\degree} up until \SI{270}{\degree}. This happens because for increasing launch azimuths in this range, the particle's inertial launch velocity increases as well as the azimuths align more and more in the asteroid's rotational direction and becomes maximum for the exact azimuth of \SI{270}{\degree}. Now we saw earlier that these particles are inherently on an escape trajectory immediately after launch and don't require gravity assists from the rotating asteroid to be on one. This implies that if the inertial launch velocity itself is high, then the inertial velocity at the instance of escape remains high too, which is what we observe in the plots.
 
-\subsection{Final Fate Predetermination From Initial Orbital Elements}
-\label{subsec:final_fate_predetermine_noSP}
-
+% \subsection{Final Fate Predetermination}
+% \label{subsec:final_fate_predetermine_noSP}
+% From all the results that we have seen so far, we get a hint that it is not easy to distinguish between escape and re-impact\footnote{Capture case wasn't witnessed for the simulation type being discussed in this chapter}. The boundary between them is blurred. In this section, we'll look at the initial values for the osculating semi-major axis and eccentricity to see if final fate can be distinguished based on the shape of the initial osculating orbit. Then we take a look at the initial values for the osculating inclination, \gls{RAAN}, and \gls{AOP} to see if final fates can be distinguished based on the orientation of the initial osculating orbit. We also look at the progression of the eccentricity and inclination vector to see if there is a distinct demarcation between the re-impact and escape cases. Results are presented only for particles launched with a velocity of \SI{8}{\metre\per\second} and in all azimuth directions. This is done to ensure the plots don't get overcrowded with data points from all launch velocities and also because a single launch velocity was sufficient to represent the relevant information.
+% %%%
+% \begin{figure}[htb]
+% \centering
+% \captionsetup{justification=centering}
+% \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{Images/longest_edge_no_perturbations/initial_orbital_elements_8ms_edited.pdf}
+% \caption{Initial values of the osculating orbital elements for regolith launched with a velocity of \SI{8}{\metre\per\second} and in all azimuth directions.}
+% \label{fig:init_orbitalElements_8ms_noSP}
+% \end{figure}
+% \FloatBarrier
+% %%%
 
 \subsection{Sensitivity To Launch Conditions}
 \label{subsec:sensitivity_noSP}
+In this section, we will briefly highlight how regolith motion is sensitive in terms of their final fate, i.e., escape or re-impact. If you recall from \Cref{sec:simulation_setup_noSP}, the launch site and launch declination angle remain constant in this simulation exercise. We vary only the launch azimuth angle and the launch velocity of the regolith while lofting them. Hence, we judge the sensitivity in terms of these two initial elements.
+%
+\newline\newline
+%
+\Cref{fig:270Azim_traj_noSP} highlights the difference between two trajectories that were launched with the same azimuth angle but differently launch velocities. An escape situation is encountered when the particle is launched with a velocity of \SI{4}{\metre\per\second} while the same particle re-impacts when launched with a velocity of \SI{5}{\metre\per\second}. With the resolution of launch conditions established in general for our simulation, and for every other launch condition being the same, the particle is sensitive to either of the final fates with \SI{1}{\metre\per\second} of a difference in the launch velocity.
+%
+\newline\newline
+%
+\Cref{fig:10ms_traj_noSP} highlights the difference between two trajectories when the launch velocity is the same, i.e. \SI{10}{\metre\per\second}, but the launch azimuths are different. So at azimuth \SI{41}{\degree}, the particle escapes while at \SI{42}{\degree} the particle re-impacts the asteroid. Thus, for all other launch conditions being the same, the particle is sensitive to either of the final fates to a \SI{1}{\degree} launch azimuth resolution.
+%
+\newline\newline
+%
+The current discussion, albeit short, was to see if the sensitivity (in terms of final fate acquired by regolith) had a magnitude equal to the resolution of varying the launch conditions in the current simulation scenario. This was found to be true, but, from all the results that we have seen so far and looking at how blurry the line in distinguishing the two fates, a similar sensitivity behavior can be expected if the resolution of launch conditions is lowered.
 
+% \section{Conclusions}
+% \label{sec:conclusions_noSP}
 
-\section{Conclusions}
-\label{sec:conclusions_noSP}
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\subfloat[]{
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Images/longest_edge_no_perturbations/4ms_270Azim_escape.pdf}
+    \label{fig:4ms_270Azim_traj_noSP}
+}
+
+\subfloat[]{
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Images/longest_edge_no_perturbations/5ms_270Azim_reimpact.pdf}
+    \label{fig:5ms_270Azim_traj_noSP}
+}
+\caption{Regolith trajectory, expressed in the \gls{AIF}, for particles launched with azimuth \SI{270}{\degree} and velocity of \protect\subref{fig:4ms_270Azim_traj_noSP} \SI{4}{\metre\per\second} and \protect\subref{fig:5ms_270Azim_traj_noSP} \SI{5}{\metre\per\second}.}
+\label{fig:270Azim_traj_noSP}
+\end{figure}
+\FloatBarrier
+%%%
+%%%
+\begin{figure}[htb]
+\centering
+\captionsetup{justification=centering}
+\subfloat[]{
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Images/longest_edge_no_perturbations/10ms_41Azim_escape.pdf}
+    \label{fig:10ms_41Azim_traj_noSP}
+}
+
+\subfloat[]{
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Images/longest_edge_no_perturbations/10ms_42Azim_reimpact.pdf}
+    \label{fig:10ms_42Azim_traj_noSP}
+}
+\caption{Regolith trajectory, expressed in the \gls{AIF}, for particles launched with velocity \SI{10}{\metre\per\second} and azimuth of \protect\subref{fig:10ms_41Azim_traj_noSP} \SI{41}{\degree} and \protect\subref{fig:10ms_42Azim_traj_noSP} \SI{42}{\degree}.}
+\label{fig:10ms_traj_noSP}
+\end{figure}
+\FloatBarrier
+%%%

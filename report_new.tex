@@ -21,6 +21,9 @@
 \usepackage[per-mode=symbol]{siunitx}
 \usepackage{chngpage}
 
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
 \newcommand{\bvector}[1]{\vv{\bm{#1}}}
 \newcommand{\buvec}[1]{\hat{\bm{#1}}}
 \newcommand{\bv}[1]{\bvector{#1}}
@@ -128,6 +131,226 @@ Carl Sagan
     }
     \caption{Re-impact trajectory for regolith launched from the longest edge of the asteroid at \SI{5}{\metre\per\second}. Trajectories for two different launch azimuths is shown, i.e., \SI{90}{\degree} and \SI{10}{\degree}.}
     \label{fig:5ms_traj_90and10_azim_noSP}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/allPhases_crashMap_3P2_7P5_density_5cm_Radius.pdf}
+    \caption{Re-impact locations for regoliths of different density but same size (i.e. 5 cm). The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:crashmap_3.2_7.5_density_5cmRadius}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/allPhases_crashMap_7P5_density_1cm_5cm_Radius.pdf}
+    \caption{Re-impact locations for regoliths of different sizes but same density (i.e. \SI{7.5}{\gram\per\centi\metre\cubed}). The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:crashmap_7.5_density_1cm_5cmRadius}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/phase135_escapeHEV.pdf}
+    \caption{\gls{HEV}, shown for all regolith types used in this thesis, but only for three specific launch velocities. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:longestEdge_allParticles_escape_hev_solarPhase135}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/phase225_escapeHEV.pdf}
+    \caption{\gls{HEV}, shown for all regolith types used in this thesis, but only for three specific launch velocities. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:longestEdge_allParticles_escape_hev_solarPhase225}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/phase315_escapeHEV.pdf}
+    \caption{\gls{HEV}, shown for all regolith types used in this thesis, but only for three specific launch velocities. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:longestEdge_allParticles_escape_hev_solarPhase315}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/escape_traj_5ms_225Azim_45solarPhase_zoomed.pdf}
+    \caption{Zoomed in version of the escape trajectory shown in \Cref{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase}. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase_zoomed}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{Results/Images/leading_edge_perturbations/reimpact_traj_14ms_115Azim_225solarPhase.pdf}
+    \caption{Re-impact trajectories for all regolith types, launched with the same initial conditions. Particle trajectories are visibly separated from each other because of the Solar perturbations. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:crash_traj_14ms_115Azim_225solarPhase_leadingEdge}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{Results/Images/leading_edge_perturbations/reimpact_traj_14ms_115Azim_315solarPhase.pdf}
+    \caption{Re-impact trajectories for all regolith types, launched with the same initial conditions. Particle trajectories are visibly separated from each other because of the Solar perturbations. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:crash_traj_14ms_115Azim_315solarPhase_leadingEdge}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/leading_edge_perturbations/logsp1_escape_energy_ecc_12ms_solarPhase225.pdf}
+    \caption{Plot depicting the variation in energy and eccentricity with time for all escape cases for particle LoGSP-1 launched with a velocity of 12 m/s from \protect\Cref{fig:leadingEdge_allParticles_hev_225solarPhase}.}
+    \label{fig:leadingEdge_logsp1_escape_energy_ecc_12ms_solar225}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/leading_edge_perturbations/logsp1_escape_traj_12ms_solarPhase225.pdf}
+    \caption{Plot depicting the trajectory evolution for all escape cases for particle LoGSP-1 launched with a velocity of 12 m/s from \protect\Cref{fig:leadingEdge_allParticles_hev_225solarPhase}.}
+    \label{fig:leadingEdge_logsp1_escape_traj_12ms_solar225}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/leading_edge_perturbations/logsp1_escape_energy_ecc_14ms_solarPhase225.pdf}
+    \caption{Plot depicting the variation in energy and eccentricity with time for escape cases, for particle LoGSP-1 launched with a velocity of 14 m/s and azimuth \SI{30}{\degree} to \SI{100}{\degree}, from \protect\Cref{fig:leadingEdge_allParticles_hev_225solarPhase}.}
+    \label{fig:leadingEdge_logsp1_escape_energy_ecc_14ms_solar225}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/leading_edge_perturbations/logsp1_escape_traj_14ms_solarPhase225.pdf}
+    \caption{Plot depicting the trajectory evolution for escape cases, for particle LoGSP-1 launched with a velocity of 14 m/s and azimuth \SI{30}{\degree} to \SI{100}{\degree}, from \protect\Cref{fig:leadingEdge_allParticles_hev_225solarPhase}.}
+    \label{fig:leadingEdge_logsp1_escape_traj_14ms_solar225}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/leading_edge_perturbations/logsp1_escape_energy_ecc_14ms_200_to_250_azim_solarPhase225.pdf}
+    \caption{Plot depicting the variation in energy and eccentricity with time for escape cases, for particle LoGSP-1 launched with a velocity of 14 m/s and azimuth \SI{200}{\degree} to \SI{250}{\degree}, from \protect\Cref{fig:leadingEdge_allParticles_hev_225solarPhase}.}
+    \label{fig:leadingEdge_logsp1_escape_energy_ecc_14ms_200_250_azim_solar225}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/leading_edge_perturbations/logsp1_escape_traj_14ms_200_to_250_azim_solarPhase225.pdf}
+    \caption{Plot depicting the trajectory evolution for escape cases, for particle LoGSP-1 launched with a velocity of 14 m/s and azimuth \SI{200}{\degree} to \SI{250}{\degree}, from \protect\Cref{fig:leadingEdge_allParticles_hev_225solarPhase}.}
+    \label{fig:leadingEdge_logsp1_escape_traj_14ms_200_250_azim_solar225}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/trailing_edge_perturbations/reimpact_traj_12ms_270Azim_45solarPhase.pdf}
+    \caption{Re-impact trajectories shown for all regolith types, for launch velocity 12 m/s, azimuth \SI{270}{\degree} and initial Solar phase angle of \SI{45}{\degree}. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:trailingEdge_reimpact_traj_12ms_270azim_45solar}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/trailing_edge_perturbations/reimpact_traj_12ms_270Azim_135solarPhase.pdf}
+    \caption{Re-impact trajectories shown for all regolith types, for launch velocity 12 m/s, azimuth \SI{270}{\degree} and initial Solar phase angle of \SI{135}{\degree}. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:trailingEdge_reimpact_traj_12ms_270azim_135solar}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/trailing_edge_perturbations/reimpact_traj_12ms_270Azim_225solarPhase.pdf}
+    \caption{Re-impact trajectories shown for all regolith types, for launch velocity 12 m/s, azimuth \SI{270}{\degree} and initial Solar phase angle of \SI{225}{\degree}. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:trailingEdge_reimpact_traj_12ms_270azim_225solar}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/trailing_edge_perturbations/logsp1_escape_energy_ecc_9ms_solarPhase225.pdf}
+    \caption{Plot depicting the variation in energy and eccentricity with time for escape cases, for particle LoGSP-1 launched with a velocity of 9 m/s, from \protect\Cref{fig:trailingEdge_hev_solarPhase225}.}
+    \label{fig:trailingEdge_logsp1_escape_energy_ecc_9ms_solar225}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/trailing_edge_perturbations/logsp1_escape_traj_9ms_solarPhase225.pdf}
+    \caption{Plot depicting the trajectory evolution for escape cases, for particle LoGSP-1 launched with a velocity of 9 m/s, from \protect\Cref{fig:trailingEdge_hev_solarPhase225}.}
+    \label{fig:trailingEdge_logsp1_escape_traj_9ms_solar225}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/asteroid_mining/longestEdge_orbitMoreThanOneDay.pdf}
+    \caption{Plot depicting the initial conditions for particles LoGSP-1 and LoGSP-4 wherein the orbits last longer than one Earth day. The regoliths were launched from the longest edge.}
+    \label{fig:longestEdge_IC_for_24h_orbits}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/asteroid_mining/leadingEdge_orbitMoreThanOneDay.pdf}
+    \caption{Plot depicting the initial conditions for particles LoGSP-1 and LoGSP-4 wherein the orbits last longer than one Earth day. The regoliths were launched from the leading edge.}
+    \label{fig:leadingEdge_IC_for_24h_orbits}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/asteroid_mining/trailingEdge_orbitMoreThanOneDay.pdf}
+    \caption{Plot depicting the initial conditions for particles LoGSP-1 and LoGSP-4 wherein the orbits last longer than one Earth day. The regoliths were launched from the trailing edge.}
+    \label{fig:trailingEdge_IC_for_24h_orbits}
     \end{figure}
     \FloatBarrier
     %%%
