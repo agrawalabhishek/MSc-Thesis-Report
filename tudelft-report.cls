@@ -310,7 +310,7 @@
     %% Create a purple empty page without margins.
     \clearpage%
     \newgeometry{margin=0pt}%
-    \pagecolor{tudelft-purple}%
+    \pagecolor{tudelft-white}%
     \thispagestyle{empty}%
     %% We need the this to perform coordinate calculations in TikZ.
     \usetikzlibrary{calc}%
@@ -399,14 +399,14 @@
         \node at (front top left)[anchor=north west,inner sep=\@cover@margin]{
             \begin{minipage}[t][\@cover@fronttextheight]{\@cover@fronttextwidth}
                 %% Print the title and optional subtitle at the top in white.
-                \tudsffamily\color{tudelft-white}\Huge\textbf{\@title}
+                \tudsffamily\color{tudelft-black}\Huge\textbf{\@title}
                 \ifx\@subtitle\undefined\else
                     \\
                     \LARGE\@subtitle
                 \fi
                 %% Print the author at the bottom in cyan.
                 \vfill
-                \color{tudelft-cyan}\LARGE\@author
+                \color{tudelft-black}\LARGE\@author
             \end{minipage}
         };
         %% Draw the back box in cyan.
