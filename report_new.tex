@@ -54,7 +54,7 @@
 \frontmatter
 
 % \cleardoublepage
-\title[MSc Thesis Report]{Perturbed orbital motion of \\ regolith around asteroids}
+\title[MSc Thesis Report]{Orbital motion of \\ regolith around asteroids}
 \author{Abhishek Agrawal}
 \affiliation{Delft University of Technology}
 % \coverimage{backgroundimg_asteroid_2.jpg}
@@ -76,7 +76,9 @@
 Carl Sagan
 \end{center}}
 
-\input{preface}
+% \input{preface}
+\input{acknowledgments}
+\input{abstract}
 \tableofcontents
 \input{LOS_3}
 \glsaddall
@@ -116,6 +118,7 @@ Carl Sagan
 
 \begin{appendices}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{4}}
+  \input{Modeling/other_gravity_potential_models}
   \input{V&V/verification_validation}
   \chapter{Extra Figures}
   This appendix contains figures which are used to support the explanation of certain results, arguments and conclusions in the main part of the Thesis report.

@@ -2,52 +2,54 @@
 \label{chap:dynamics_modeling}
 \graphicspath{{Modeling/Images/}}
 
-This chapter will focus on accurate modeling of the asteroid environment and the equations of motion of a particle around it in presence of gravitational and Solar perturbations.
+This chapter will focus on accurate modeling of the asteroid environment and the equations of motion of a particle around it in presence of gravity and Solar perturbations.
 
 \section{Modeling Assumptions}
 \label{sec:assumptions}
-The simulator designed as part of this research involves some degree of approximation of the real-world dynamical environment around the asteroid. Every degree-of-freedom and complexity added to a simulator to resemble the real-world, will also act as a potential source of error. By designing a relatively simpler simulator, we can explain the characteristic behavior of regolith through fundamentals while keeping the sources of error to as low as possible. Ofcourse, we verify the simulator (see \Cref{chap:v_and_v}) but by including a higher degree of fidelity in the simulator, we increase the workload on the verification process as well, thereby reducing the scientific output in the end. Moreover, the current simulator and the results from it will act as a benchmark for a higher-fidelity simulator in the future. Thus, the approximations made in this thesis are mentioned as follows:
+The simulator \footnote{The simulator is called \gls{NAOS} and can be downloaded from \url{https://github.com/agrawalabhishek/NAOS/tree/devcode2}} designed as part of this research involves some degree of approximation of the real-world dynamical environment around the asteroid. Every degree of freedom and complexity added to a simulator to resemble the real-world, will also act as a potential source of error. By designing a relatively simple simulator, we can explain the characteristic behavior of regolith through fundamentals while keeping the sources of error as low as possible. Of course, we verify the simulator (see \Cref{chap:v_and_v} for a detailed verification and validation process) but by including a higher degree of fidelity in the simulator, we increase the workload on the verification process as well, thereby reducing the scientific output in the end. Moreover, the current simulator and the results from it will act as a benchmark for a higher-fidelity simulator in the future. Thus, the approximations made in this thesis are as follows:
 % Every research involves some degree of approximation of the natural world, on Earth or otherwise, to understand or explain any phenomenon. Through this thesis work, we hope to understand the orbital behavior of regolith around an asteroid and we have to do it with a relatively simplified model because recreating an exact replica of an asteroid's dynamical environment is out of the scope of this thesis. Although we are making simplifications, but it does not mean that the scientific returns from it would be any less. The particle trajectories might not be exact when we conduct the simulation based experiments in real world but the underlying science explaining the orbital behavior would remain unchanged (this would become more clear in \Cref{chap:results}). Thus, the simplifying assumptions we make for modeling the asteroid-regolith system are mentioned as follows:
 %%%
 \begin{enumerate}
-\item The asteroid body is modeled as a smooth triaxial ellipsoid to account for its non-uniform gravity. The triaxial model is chosen over the spherical and ellipsoidal harmonics approach because we want to study motion of regolith close to the surface of the asteroid; in particular the re-impact scenarios. This can't be done with the harmonics model as the gravitational potential diverges, within the circumscribing volume, from the true potential of an irregular body (see \Cref{sec:gravity}). We chose not to use a polyhedron model either, even though it can account for surface irregularities of an irregular body much better than the triaxial ellipsoid. This is because we want to decouple the fundamental phenomenon, associated with the motion of the regolith, from any effects of a truly irregular shape such as in the case of a polyhedron model.
+\item The asteroid body is modeled as a smooth triaxial ellipsoid to account for its non-uniform gravity. The triaxial model is chosen over the spherical and ellipsoidal harmonics approach because we want to study the motion of regolith close to the surface of the asteroid; in particular the re-impact scenarios. This can not be done with the harmonics model as the gravity potential diverges, within the circumscribing volume, from the true potential of an irregular body. We chose to not use a polyhedron model either, even though it can account for surface irregularities of an irregular body much better than the triaxial ellipsoid. This decision was made to reduce the complexity of the simulator, however, we do not sacrifice on the qualitative aspect of the results since the triaxial model also provides a non-uniform gravity field.
+% This is because we want to decouple the fundamental phenomenon, associated with the motion of the regolith, from any effects of a truly irregular shape such as in the case of a polyhedron model.
 
-\item Craters, surface depressions, mountains or any other terrain deformity on the asteroid is not considered in the simulation. The body is considered to have a uniform density. This is to simplify calculations of the gravitational acceleration.
+\item Craters, surface depressions, mountains and any other terrain deformity on the asteroid are not considered in the simulation. The body is considered to have a uniform density. This is to simplify calculations of the gravitational acceleration.
 
 \item The asteroid is rotating uniformly about its shortest axis. This is considered for simplicity and also because most Solar System bodies would dissipate energy to eventually enter a rotational state that is uniform and about its axis of maximum moment of inertia \parencite{scheeresBook}. Hence, the approximation for the asteroid remains valid.
 
-\item The regolith grains are assumed to be spherical in shape to simplify the \gls{SRP} calculation as the cross-sectional area of a sphere would remain the same irrespective of its attitude. In addition to this, the grains are assumed to have albedo equal to one which means that any impinging Solar photons are completely reflected and this is done to account for maximum perturbation from \gls{SRP} for a given location and Area-To-Mass ratio (see \Cref{subsec:srp} for more details).
+\item The regolith grains are assumed to be spherical in shape to simplify the \gls{SRP} calculation as the cross-sectional area of a sphere would remain the same irrespective of its attitude. In addition to this, the grains are assumed to have an albedo equal to one, which means that any impinging Solar photons are completely reflected and this is done to account for maximum perturbation from \gls{SRP} for a given location and area-to-mass ratio (see \Cref{subsec:srp} for more details).
 
-\item Multiple regolith particles are launched from a given location on the asteroid in the form of a cone to replicate ejecta from a cratering event. But all particles are assumed to be coming off from the same point, unlike that in the case of an actual cratering event. This is because the pretext of the thesis was that the regolith is lofted due to an activity from a spacecraft and such would result in relatively smaller craters (from artificial cratering events) or surface depressions. Thus assuming that all particles in this \textit{"ejecta cone"} emerge from the same point on the asteroid is reasonable and simplifies the simulation.
+\item Multiple regolith particles are launched from a given location on the asteroid in the form of a cone to replicate ejecta from a cratering event. But all particles are assumed to be coming off from the same point, unlike that in the case of an actual cratering event. This is because the pretext of the thesis was that the regolith is lofted due to an activity from a spacecraft which would result in relatively smaller craters or surface depressions. Thus assuming that all particles in this \textit{"ejecta cone"} emerge from the same point on the asteroid is reasonable and simplifies the simulation.
 
-\item The slant angle of the \textit{"ejecta cone"} (henceforth the declination angle) from the local surface normal is kept constant at \SI{45.0}{\degree} (which is a middle value in the entire declination range from \SI{0.0}{\degree} - \SI{90.0}{\degree}). We want to consider a general case and not introduce another degree-of-freedom in terms of varying declination angles.
+\item The slant angle of the \textit{"ejecta cone"} (henceforth the declination angle) from the local surface normal is kept constant at \SI{45.0}{\degree} (which is a middle value in the entire declination range from \SI{0.0}{\degree} - \SI{90.0}{\degree}). We want to consider a general case and not introduce another degree-of-freedom in terms of varying declination angles, however, it should be noted that the results from simulation for any other declination angle would be different. There is an exception to the fixed declination angle assumption though; only in \Cref{chap:nonconservative}, we use a range of declination angles at which regolith is launched.
 
-\item The simulations were subjected to run for a maximum of 270 days and were terminated earlier if a particular trajectory resulted in escape or surface re-impact. This number was obtained by looking at the close-proximity operational time periods of exploration missions to small bodies of our solar system. We wanted a maximum simulation time in the context of a man-made mission and hence this approach was taken. We accounted for four missions, two from the past and two planned for the future, which have direct contact with a small body as part of their mission and continued the mission around the small body afterwards (hence, not just disposal and/or fly-by). These are the Philae (Rosetta), Hayabusa, Hayabusa-2, and the \gls{OSIRIS-REx} mission. The close-proximity design operation time period for Philae lander was 3 months \parencite{philaeMissionTimeline}, 3 months for Hayabusa \parencite{hayabusaCloseProximity}, 18 months for the Hayabusa-2 mission \parencite{TsudaHayabusa2SystemDesign}, and finally 12 months for the \gls{OSIRIS-REx} mission \parencite{osirisMissionOverview}. The average of all of this comes out to be 9.0 months, which is what we have considered to be the maximum simulation time. In this regard, we are also categorizing orbital behavior that does not result in escape or re-impact in those 270 days, as capture orbits.
+\item The calculations were subjected to simulate a maximum of 270 days and were terminated earlier if a particular trajectory resulted in escape or surface re-impact. This number was obtained by looking at the close-proximity operational time periods of exploration missions to small bodies of our Solar System. We wanted a maximum simulation time in the context of a man-made mission and hence this approach was taken. We accounted for four missions, two from the past and two planned for the future, which have direct contact with a small body as part of their mission and continued the mission around the small body afterwards (hence, not just disposal and/or fly-by). These are the Philae (Rosetta), Hayabusa, Hayabusa-2, and the \gls{OSIRIS-REx} missions. The close-proximity design operation time period for the Philae lander was three months \parencite{philaeMissionTimeline}, three months for Hayabusa \parencite{hayabusaCloseProximity}, eighteen months for the Hayabusa-2 mission \parencite{TsudaHayabusa2SystemDesign}, and finally twelve months for the \gls{OSIRIS-REx} mission \parencite{osirisMissionOverview}. The average of all of this comes out to be nine months, which is what we have considered to be the maximum simulation time. In this regard, we are also categorizing orbital behavior that does not result in escape or re-impact in those 270 days, as capture orbits.
 
-\item The loss of material and mass from the asteroid, when the regolith is lofted from the surface, is not modeled in the simulation since it is assumed that a very small amount of material will be displaced by a spacecraft activity. This assumption is based on the sample collected by the Hayabusa mission (see \Cref{sec:past_missions} and the references therein).
+\item The loss of material and mass from the asteroid, when the regolith is lofted from the surface, is not modeled in the simulation since it is assumed that a very small amount of material will be displaced by a spacecraft activity (impact and/or sampling). This assumption is based on the sample collected by the Hayabusa mission (see \Cref{sec:past_missions} and the references therein).
 
-\item Interaction between individual regolith grain is not accounted for because we are simulating multiple particles being lofted at the same time and granular interaction on such a scale would be extremely complex and beyond the scope of this thesis.
+\item Interaction between individual regolith grains is not accounted for because we are simulating multiple particles being lofted at the same time and granular interaction on such a scale would be extremely complex and small and beyond the scope of this thesis.
 
-\item Secondary motion of regolith, after re-impacting the surface is not modeled and it is assumed that the particles just come to a standstill.
+\item Secondary motion of regolith, after re-impacting the surface, is not modeled and it is assumed that the particles just come to a standstill.
 
-\item The shadow region of the asteroid is not modeled which means that the solar perturbations are always acting on the regolith grain and this simplification was made since asteroids are extremely small compared to planets, and thus the orbiting particles wouldn't spend long periods of time in the shadow.
+\item The shadow region of the asteroid is not modeled which means that the solar perturbations are always acting on the regolith grain. This simplification was made since asteroids are extremely small compared to planets, and thus, the chances of an orbiting particle spending long periods of time in the shadow are very small.
 
-\item Perturbations are considered only from the Sun. \gls{SRP} is important because regolith grains will have higher Area-To-Mass ratios, relative to a spacecraft, and so the radiation pressure would be significantly large for them. We model the third body attraction from the Sun (\gls{STBE}) as well but not from any of the planets because we are assuming that the small body does not pass close to any planet, thus rendering the perturbations from them insignificant.
+\item Perturbations are considered only from the Sun. \gls{SRP} is important because regolith grains will have higher area-to-mass ratios, relative to a spacecraft, and so the radiation pressure would be significantly large for them. We model the third-body attraction from the Sun (\gls{STBE}) as well but not from any of the planets because we are assuming that the small body does not pass close to any planet, thus rendering the perturbations from them insignificant.
 % The magnitude of perturbation from the \gls{STBE} itself is atleast 5 orders of magnitude smaller than the gravitational acceleration (for a sample asteroid assumed to be in a circular orbit at 1 AU from the Sun) when the regolith is in close proximity to the asteroid (see \Cref{chap:results}).
 
-\item The apparent motion of the Sun around the asteroid is considered circular and in the equatorial plane of the asteroid and this was based on the orbital element measurements of all observed asteroids. Majority of these asteroids have small orbital eccentricities \parencite{malhotra2016_eccentricityDistribution}, quite a few of which have a nearly circular orbit. \cite{jedicke1998_orbitalElements} presents debiased measurements for the inclination of the \gls{MBO} and shows that a large number of asteroids have near-zero inclinations.
+\item The apparent motion of the Sun around the asteroid is considered circular and in the equatorial plane of the asteroid, again, to restrict another degree of freedom in the simulations and consider a general case.
+% \item The apparent motion of the Sun around the asteroid is considered circular and in the equatorial plane of the asteroid; this was based on the orbital element measurements of all observed asteroids. The majority of these asteroids have small orbital eccentricities \parencite{malhotra2016_eccentricityDistribution}. \cite{jedicke1998_orbitalElements} presents debiased measurements for the inclination of the \gls{MBO} and shows that a large number of asteroids have near-zero inclinations.
 \end{enumerate}
 %%%
 \newpage
 \section{Reference Frames}
 \label{sec:reference_frames}
-Before describing the motion of regolith around the asteroid, its important to define the frames of reference with respect to which this motion is defined and the transformation of state vectors between these frames. We use two asteroid centric reference frames, both of which are depicted in \Cref{fig:reference_frame}. Since we will be using a triaxial ellipsoid to model an asteroid (for details, see \Cref{sec:gravity}), the body-fixed rotating frame and the inertial frame with respect to this model are shown in \Cref{fig:ellipsoid_rotating_frame,fig:solar_phase_and_inertial_frame} respectively.
+Before describing the motion of regolith around the asteroid, it is important to define the frames of reference with respect to which this motion is defined and the transformation of state vectors between these frames. We use two asteroid-centric reference frames, both of which are depicted in \Cref{fig:reference_frame}. Since we will be using a triaxial ellipsoid to model an asteroid (for details, see \Cref{sec:gravity}), the body-fixed rotating frame and the inertial frame with respect to this model are shown in \Cref{fig:ellipsoid_rotating_frame,fig:solar_phase_and_inertial_frame} respectively.
 %%%
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
 \includegraphics[width=\textwidth, height=0.30\textheight, keepaspectratio=true]{reference_frames.pdf}
-\caption{The diagram depicts two asteroid centric reference frames, one being Inertial (depicted by solid line and the subscript \emph{I}) and the other being a body-fixed Rotating frame (denoted by dashed line and the subscript \emph{B}). The position vector to a regolith particle is shown as $\protect\vv{\bm{r}}_{P,B}$, whereas the position vector to the Sun from the asteroid is shown as $\protect\vv{\bm{r}}_{S,I}$.}
+\caption{Two asteroid-centric reference frames, one being inertial (depicted by solid lines and the subscript I) and the other being a body-fixed rotating frame (denoted by dashed lines and the subscript B). The position vector to a regolith particle is shown as $\protect\vv{\bm{r}}_{P,B}$, whereas the position vector to the Sun is shown as $\protect\vv{\bm{r}}_{S,I}$.}
 \label{fig:reference_frame}
 \end{figure}
 \FloatBarrier
@@ -55,18 +57,18 @@ Before describing the motion of regolith around the asteroid, its important to d
 The two frames are defined as follows:
 %%%
 \begin{enumerate}
-\item \gls{AIF} - This is a non-rotating frame fixed inertially in space with its origin at the centre of mass of the asteroid . \Cref{fig:solar_phase_and_inertial_frame} shows the orientation of the frame (in \emph{x-y} plane) such that the \emph{x-axis} is pointing to the Sun when the Longitude of the Sun (or effectively the True Anomaly of the apparent circular motion of the Sun around the asteroid) $\vartheta$ is zero. The \emph{y-axis}, thus, points to the sun when $\vartheta = 90^o$ and finally the \emph{z-axis} is obtained by following the right-hand rule, coming out of the sheet in 3D.
+\item \gls{AIF} - This is a non-rotating frame fixed inertially in space with its origin at the centre of mass of the asteroid. \Cref{fig:solar_phase_and_inertial_frame} shows the orientation of the frame (in x-y plane) such that the x-axis is pointing to the Sun when the longitude of the Sun (or effectively the true anomaly of the apparent circular motion of the Sun around the asteroid) $\vartheta$ is zero. The y-axis, thus, points to the Sun when $\vartheta = 90^o$ and finally the z-axis is obtained by following the right-hand rule, coming out of the sheet in 3D.
 %
-\item \gls{ARF} - This frame is fixed to the rotating asteroid with its origin at the centre of mass of the asteroid and axes aligned with the principle axes of the asteroid. \Cref{fig:ellipsoid_rotating_frame} shows the orientation of this frame, assuming a triaxial ellipsoid model for our asteroid (for details see \Cref{sec:gravity}). The \emph{x-axis} is pointing along the longest axis of the triaxial ellipsoid, and the \emph{z-axis} is pointing along the shortest axis of the ellipsoid. It is also aligned with the $z_I$ axis of \gls{AIF} as shown in \Cref{fig:reference_frame}. The \emph{y-axis} points in the direction of the remaining third axis, satisfying the right-hand rule. The asteroid (and effectively the \gls{ARF}) is rotating in a counter-clockwise sense, with respect to the \gls{AIF}, with constant angular velocity $\omega$ about the $z_B$ axis as depicted in \Cref{fig:reference_frame}.
+\item \gls{ARF} - This frame is fixed to the rotating asteroid with its origin at the centre of mass of the asteroid and its axes aligned with the principle axes of the asteroid. \Cref{fig:ellipsoid_rotating_frame} shows the orientation of this frame, assuming a triaxial ellipsoid model (for details see \Cref{sec:gravity}). The x-axis is pointing along the longest axis of the triaxial ellipsoid, and the z-axis is pointing along the shortest axis. It is also aligned with the $z_I$-axis of the \gls{AIF} as shown in \Cref{fig:reference_frame}. The y-axis points in the direction of the remaining third axis, satisfying the right-hand rule. The asteroid (and effectively the \gls{ARF}) is rotating in a counter-clockwise sense with respect to the \gls{AIF}, with constant angular velocity $\omega$ about the $z_B$-axis as depicted in \Cref{fig:reference_frame}.
 \end{enumerate}
 %%%
 %%%
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.35\textheight, keepaspectratio=true]{body_fixed_ellipsoid_frame.pdf}
-\caption{Representation of the body-fixed rotating frame for a triaxial ellipsoid model of an asteroid. $\bm{x_{B}}$ is aligned with the longest axis, $\bm{z_{B}}$ is aligned with the shortest axis and $\bm{y_{B}}$ is aligned with the remaining last axis of the ellipsoid, satisfying the right-hand rule.}
-\label{fig:ellipsoid_rotating_frame}
+\includegraphics[width=\textwidth, height=0.35\textheight, keepaspectratio=true]{solar_phase_and_inertial_frame_3.pdf}
+\caption{Asteroid-centric inertial frame x-y plane. The position vector to the Sun is shown as $\protect\vv{\bm{r}}_{S,I}$ with $\vartheta$ as the longitude of the Sun (or effectively the true anomaly). The four phases are for a broader identification of the Sun's location with respect to the asteroid.}
+\label{fig:solar_phase_and_inertial_frame}
 \end{figure}
 \FloatBarrier
 %%%
@@ -74,13 +76,13 @@ The two frames are defined as follows:
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.35\textheight, keepaspectratio=true]{solar_phase_and_inertial_frame_3.pdf}
-\caption{Asteroid-centric inertial frame \emph{x-y} plane. The position vector to the Sun is shown as $\protect\vv{\bm{r}}_{S,I}$. The apparent motion of the Sun around the asteroid, assumed a circular orbit, is also depicted with $\vartheta$ as the Longitude of Sun (or effectively the True Anomaly). The four phases are for a broader identification of the Sun's location with respect to the asteroid.}
-\label{fig:solar_phase_and_inertial_frame}
+\includegraphics[width=\textwidth, height=0.35\textheight, keepaspectratio=true]{body_fixed_ellipsoid_frame.pdf}
+\caption{Representation of the body-fixed rotating frame for a triaxial ellipsoid model of an asteroid. $\bm{x_{B}}$ is aligned with the longest axis, $\bm{z_{B}}$ is aligned with the shortest axis and $\bm{y_{B}}$ is aligned with the remaining last axis of the ellipsoid, satisfying the right-hand rule. The asteroid rotates uniformly about the $\bm{z_{B}}$-axis.}
+\label{fig:ellipsoid_rotating_frame}
 \end{figure}
 \FloatBarrier
 %%%
-We have two different frames of reference because it is important to visualize the same orbital motion with respect to both an inertial frame and a non-inertial frame to get a better understanding of the underlying dynamics. In this regard, it is thus important to be able to transfer a state vector between the two frames. The transfer matrix to transform a state vector from \gls{ARF} to \gls{AIF} is given as follows \parencite{schaub2003Book}:
+We have two different frames of reference because it is important to visualize the same orbital motion with respect to both an inertial frame and a non-inertial frame to get a better understanding of the underlying dynamics. In this regard, it is thus important to be able to transfer a state vector between the two frames. The transfer matrix to transform a state vector from the \gls{ARF} to the \gls{AIF} is given as follows \parencite{schaub2003Book}:
 %%%
 \begin{equation}
     \begin{aligned}
@@ -96,7 +98,7 @@ We have two different frames of reference because it is important to visualize t
     \label{eqn:arf_to_aif_transformation matrix}
 \end{equation}
 %%%
-In \Cref{eqn:arf_to_aif_transformation matrix}, $\theta$ is the angle of rotation between the \gls{ARF} and the \gls{AIF} at any given time $t$; and $\omega$ is the constant angular velocity of the rotating asteroid about $z_I / z_B$ axis as shown in \Cref{fig:reference_frame}. The position vector is then transformed, from \gls{ARF} to \gls{AIF}, as follows \parencite{schaub2003Book}:
+In \Cref{eqn:arf_to_aif_transformation matrix}, $\theta$ is the angle of rotation between the \gls{ARF} and the \gls{AIF} at any given time $t$; and $\omega$ is the constant angular velocity of the rotating asteroid about the $z_I / z_B$-axis as shown in \Cref{fig:reference_frame}. The position vector is then transformed, from \gls{ARF} to \gls{AIF}, as follows \parencite{schaub2003Book}:
 %%%
 \begin{align}
     \begin{bmatrix}
@@ -105,11 +107,7 @@ In \Cref{eqn:arf_to_aif_transformation matrix}, $\theta$ is the angle of rotatio
         z_I
     \end{bmatrix}
     =
-    \begin{bmatrix}
-        \cos\theta & -\sin\theta & 0 \\
-        \sin\theta & \cos\theta & 0 \\
-        0 & 0 & 1
-    \end{bmatrix}
+    \phi_{B}^{I}
     \begin{bmatrix}
         x_B \\
         y_B \\
@@ -118,7 +116,7 @@ In \Cref{eqn:arf_to_aif_transformation matrix}, $\theta$ is the angle of rotatio
     \label{eqn:arf_to_aif_position_transformation}
 \end{align}
 %%%
-In \Cref{eqn:arf_to_aif_position_transformation}, $x_I$ and $x_B$ are the x-components of the position vector in \gls{AIF} and \gls{ARF} respectively; other components follow similar definitions. The velocity transformation takes place by first using the \textit{transport theorem} and then multiplying the resultant with the transformation matrix $\phi_{B}^{I}$ \parencite{schaub2003Book}. The transformation is shown as follows:
+In \Cref{eqn:arf_to_aif_position_transformation}, ($x_I$, $y_I$, $z_I$) and ($x_B$, $y_B$, $z_B$) are the components of the position vector in the \gls{AIF} and the \gls{ARF} respectively. The velocity transformation takes place by first using the \textit{transport theorem} and then multiplying the resultant with the transformation matrix $\phi_{B}^{I}$ \parencite{schaub2003Book}. The transformation is shown as follows:
 %%%
 \begin{align}
     \vv{\bm{v}}_{I}^{B} &= \vv{\bm{v}}_{B} + \vv{\bm{\omega}} \times \vv{\bm{r}}_{B}
@@ -127,11 +125,11 @@ In \Cref{eqn:arf_to_aif_position_transformation}, $x_I$ and $x_B$ are the x-comp
     \label{eqn:arf_to_aif_velocity_transformation}
 \end{align}
 %%%
-\Cref{eqn:arf_to_aif_transport_theorem} is the application of the transport theorem to get the \gls{AIF} velocity in \gls{ARF} components ($\vv{\bm{v}}_{I}^{B}$). In that, $\vv{\bm{v}}_{B}$ is the velocity vector in the \gls{ARF}, $\vv{\bm{\omega}}$ is the angular velocity vector for the asteroid's rotation (note that we have only uniform rotation about the $z_B$ axis), and $\vv{\bm{r}}_{B}$ is the position vector defined in the \gls{ARF}. In \Cref{eqn:arf_to_aif_velocity_transformation}, $\vv{\bm{v}}_I$ is the velocity vector in the \gls{AIF}.
+\Cref{eqn:arf_to_aif_transport_theorem} is the application of the transport theorem to get the \gls{AIF} velocity in \gls{ARF} components ($\vv{\bm{v}}_{I}^{B}$). In that, $\vv{\bm{v}}_{B}$ is the velocity vector in the \gls{ARF}, $\vv{\bm{\omega}}$ is the angular velocity vector for the asteroid's rotation (note that we have only uniform rotation about the $z_B$-axis), and $\vv{\bm{r}}_{B}$ is the position vector defined in the \gls{ARF}. In \Cref{eqn:arf_to_aif_velocity_transformation}, $\vv{\bm{v}}_I$ is the velocity vector in the \gls{AIF}.
 %
 \newline\newline
 %
-The transfer matrix to transform a state vector from \gls{AIF} to \gls{ARF} is just the transpose of $\phi_B^I$ as it is orthogonal \parencite{schaub2003Book}. It is given as follows:
+The transfer matrix to transform a state vector from the \gls{AIF} to the \gls{ARF} is just the transpose of $\phi_B^I$ as it is orthogonal \parencite{schaub2003Book}. It is given as follows:
 %%%
 \begin{align}
     \phi_{I}^{B} &=
@@ -156,144 +154,13 @@ Then the state vector transformation from \gls{AIF} to \gls{ARF} takes place as 
 %%%
 where $\bvector{v}_B^I$ is the \gls{ARF} velocity in \gls{AIF} components, and $\bvector{r}_I$ is the position vector in the \gls{AIF}.
 
-\section{Gravitational Potential}
+\section{Gravity Potential}
 \label{sec:gravity}
-% ...elliptic integral method and how the accelerations are calculated and the third order equation solving for lambda...
-The key feature that differentiates small bodies, or asteroids for our particular case, from planets is their highly irregular shapes and thus non-spherical mass distributions \parencite{scheeresBook}. This is why the dynamics close to an asteroid are deemed as interesting and hence it is very important that the gravitational potential is modeled properly.
-
-\subsection{Spherical and Ellipsoidal Harmonics}
-\label{subsec:spherical_ellipsoidal_harmonics}
-One of the most common methods for modeling gravity potential of any celestial body is the \textit{spherical harmonics} model. In that, a sphere whose radius is equal to the maximum dimension of the irregular body, circumscribes it and this sphere is called the \textit{Brillouin sphere} (see \Cref{fig:brillouin_sphere}). The spherical harmonics model then induces deformities on the Brillouin sphere, thereby producing a non-spherical gravity field. The spherical harmonics gravity potential is stated as follows \parencite{scheeresBook}:
-%%%
-\begin{align}
-    U(r, \delta, \lambda) = \frac{\mu}{r} \sum_{l=0}^{\infty} \sum_{m=0}^{l} \left(\frac{r_0}{r}\right)^l P_{lm} (\sin\delta) [C_{lm}\cos m\lambda + S_{lm}\sin m\lambda]
-    \label{eqn:spherical_harmonics_general}
-\end{align}
-%%%
-where $U$ is the gravitational potential calculated at a distance $r$ from the centre of the Brillouin sphere at latitude $\delta$ and longitude $\lambda$, $\mu$ is the gravitational parameter of the irregular body or asteroid, $r_0$ is the radius of the Brillouin sphere, $P_{lm}$ are the associated Legendre functions, $C_{lm}$ and $S_{lm}$ are the spherical harmonic coefficients which account for shape and density variations \parencite{romain2001ellipsoidal}, and $l$ and $m$ are the degree and order, respectively, of the spherical harmonic expansion. The definitions and calculations for the associated Legendre functions and the harmonics coefficients has been explained in detail by \cite{scheeresBook} and is not repeated here for brevity. The majority of gravity field perturbations can be accounted for by just considering the second degree and order in the spherical harmonics expansion. The potential is then expressed as follows \parencite{scheeresBook}:
-%%%
-\begin{align}
-    U = \frac{\mu}{r} \left[ 1 + \left(\frac{r_0}{r}\right)^2 \left\{C_{20} \left(1-\frac{3}{2}\cos^2\delta\right) + 3C_{22}\cos^2\delta \cos(2\lambda) \right\} \right]
-    \label{eqn:spherical_harmonics_second_degree}
-\end{align}
-%%%
-where the spherical harmonic coefficients can be obtained from the principle moments of inertia as defined in \cite{scheeresBook}.
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.25\textheight, keepaspectratio=true]{Brillouin_sphere.pdf}
-\caption{Brillouin sphere or the circumscribing sphere around an irregular body \parencite{romain2001ellipsoidal}.}
-\label{fig:brillouin_sphere}
-\end{figure}
-\FloatBarrier
-%%%
-Now consider a general statement for the gravity field of any arbitrary mass distribution $\mathcal{B}$ \parencite{scheeresBook}:
-%%%
-\begin{align}
-    U = \frac{\mu}{V} \int_{\mathcal{B}} \frac{dV}{|\bvector{r} - \bvector{\rho}|}
-    \label{eqn:general_gravity_field}
-\end{align}
-%%%
-where $V$ is the volume, $\bvector{r}$ is the position vector to the point where the potential is being calculated, $\bvector{\rho}$ is the position vector to the discrete mass distribution within $\mathcal{B}$. If the potential is being calculated for a point that lies outside the maximum radius of the mass distribution being considered, then the integrand in \Cref{eqn:general_gravity_field} can be expanded into the following Laplace series form \parencite{scheeresBook}:
-%%%
-\begin{align}
-    \frac{1}{|\bvector{r} - \bvector{\rho}|} = \frac{1}{r} \sum_{i=0}^{\infty} \left(\frac{\rho}{r}\right)^i P_{i0} \left(\frac{\bvector{r} \cdot \bvector{\rho}}{r\rho}\right)
-    \label{eqn:general_grav_term_laplace_series}
-\end{align}
-%%%
-where $P_{i0}$ are the Legendre polynomials. Thus using \Cref{eqn:general_grav_term_laplace_series}, the integral in \Cref{eqn:general_gravity_field} can be restated as follows \parencite{scheeresBook}:
-%%%
-\begin{align}
-    \frac{1}{V} \int_{\mathcal{B}} \left(\frac{\rho}{r}\right)^i P_{i0} \left(\frac{\bvector{r} \cdot \bvector{\rho}}{r\rho}\right) dV
-    \label{eqn:general_gravity_field_modified_integral}
-\end{align}
-%%%
-There is a one-to-one correspondence between the integral in \Cref{eqn:general_gravity_field_modified_integral} and the $i$th degree and order spherical harmonics gravity field. Thus by looking at the Laplace series in \Cref{eqn:general_grav_term_laplace_series} and the integral in \Cref{eqn:general_gravity_field_modified_integral}, we can infer on the convergence or divergence of the spherical harmonics gravity field. Since the maximum radius of the mass distribution in case of the spherical harmonics model would be that of the circumscribing or Brillouin sphere, then for a point on this sphere, i.e. $r = |\bvector{\rho}|$, the Laplace series is not defined and for a point inside the sphere, i.e. $r < |\bvector{\rho}|$, the Laplace series diverges. This is the limitation for using the spherical harmonics model for an irregular body when one wants to compute orbital motion in close-proximity to the body. If the computation points are within the Brillouin sphere then the spherical harmonics series might diverge to a value that does not represent the true gravitational potential value and hence lead to errors in orbit computations. We can see from \Cref{fig:brillouin_sphere} that the volume of divergence for irregularly shaped asteroids can be quite significant. Thus, this model is definitely not suitable for our research since we are dealing with close-proximity orbits and above all, particle re-impact scenarios.
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.25\textheight, keepaspectratio=true]{Brillouin_ellipsoid.pdf}
-\caption{Brillouin ellipsoid or the circumscribing ellipsoid around an irregular body \parencite{romain2001ellipsoidal}.}
-\label{fig:brillouin_ellipsoid}
-\end{figure}
-\FloatBarrier
-%%%
-The above problem can be mitigated, to a certain extent, by using the \textit{ellipsoidal harmonics} expansion for representing the gravity potential of an irregular body. An extremely detail account on this model is given by \cite{dechambre2002transformation}. In the ellipsoidal harmonics model, instead of a sphere, a triaxial ellipsoid is used to circumscribe the irregular body and proves to be a better fit as shown in \Cref{fig:brillouin_ellipsoid}. The ellipsoidal harmonics potential is then given as follows \parencite{dechambre2002transformation}:
-%%%
-\begin{align}
-    U(\lambda_1, \lambda_2, \lambda_3) &= \mu \sum_{n=0}^{\infty} \sum_{p=1}^{2n+1} \alpha_{np} \frac{E_n^p(\lambda_1)}{E_n^p(\lambda_1^{ref})} \times E_n^p(\lambda_2) E_n^p(\lambda_3) \text{; $\lambda_1 \leq \lambda_1^{ref}$}
-    \label{eqn:ellipsoidal_harmonics_inside} \\
-    U(\lambda_1, \lambda_2, \lambda_3) &= \mu \sum_{n=0}^{\infty} \sum_{p=1}^{2n+1} \alpha_{np} \frac{F_n^p(\lambda_1)}{F_n^p(\lambda_1^{ref})} \times E_n^p(\lambda_2) E_n^p(\lambda_3) \text{; $\lambda_1 \geq \lambda_1^{ref}$}
-    \label{eqn:ellipsoidal_harmonics_outside}
-\end{align}
-%%%
-where $(\lambda_1, \lambda_2, \lambda_3)$ are the ellipsoidal coordinates, which are basically three real roots (solutions) in terms of $s$ for the following conic equation \parencite{garmier2002modeling}:
-%%%
-\begin{align}
-    \frac{x^2}{s^2 + a^2} + \frac{y^2}{s^2 + b^2} + \frac{z^2}{s^2 + c^2} = 1
-    \label{eqn:conic_ellipsoidal}
-\end{align}
-%%%
-where $(x, y, z)$ are the Cartesian coordinates and $(a, b, c)$ are the semi-major axes of the reference ellipsoid circumscribing the irregular body (note that $a=\lambda_1^{ref}$). In \Cref{eqn:ellipsoidal_harmonics_inside,eqn:ellipsoidal_harmonics_outside}, $(\lambda_1, \lambda_2, \lambda_3)$ are analogous to the radius $r$, latitude $\delta$ and longitude $\lambda$, respectively, of \Cref{eqn:spherical_harmonics_general}; $\alpha_{np}$ is the ellipsoidal harmonics expansion coefficient similar to the spherical harmonics coefficient $C_{lm}$ and $S_{lm}$; $F_n^p()$ are the Lam\'e function of second kind of degree $n$ and order $p$ and is analogous to the attenuation term $(r_0 / r)^l$ of the spherical harmonics expansion in \Cref{eqn:spherical_harmonics_general}; $E_{n}^p()$ is the Lam\'e function of the first kind of degree $n$ and order $p$; and finally, the product term $E_{n}^p(\lambda_2)E_{n}^p(\lambda_3)$ is analogous to the product term $P_{lm} (\sin\delta) [C_{lm}\cos m\lambda + S_{lm}\sin m\lambda]$ which in both cases models the surface harmonic \parencite{garmier2002modeling}. A detailed description on definition and calculation of the ellipsoidal harmonic coefficients and the Lam\'e functions of the first and the second kind can be found in \cite{dechambre2002transformation} and is not repeated here for brevity.
-%
-\newline\newline
-%
-Even in the case of ellipsoidal harmonics expansion model, the gravity potential calculated for a point inside the circumscribing ellipsoid can diverge from the true potential. But the advantage of this model over the spherical harmonics expansion is that the circumscribing reference ellipsoid reduces the volume of divergence around the irregular body, relative to a sphere, making close-proximity evaluations possible. However, relative to spherical harmonics expansion, the computation of the basis functions for ellipsoidal harmonics, i.e. the Lam\'e functions of the first and the second kind, is extremely complex. On top of that, with increasing degree of the harmonics model, the order of magnitude of the Lam\'e functions increases, which then runs the risk of arithmetic overflow, thereby impeding accurate calculations of the harmonic expansion for degrees above 10 to 15 \parencite{reimond2016spheroidal}. However, in their research, \cite{reimond2016spheroidal} have devised a new method to calculate the basis functions using logarithmic expressions which allows accurate harmonic expansions for degrees of upto 500 but the computational complexity also increases tremendously as stated by them. Ultimately, since we wish to express the motion of particles close to the surface of the asteroid, which also involves surface interactions, the approach of ellipsoidal harmonics expansion also fails.
-
-\subsection{Constant Density Polyhedron}
-\label{subsec:polyhedron}
-The gravity potential modeling methods discussed so far involved the use of surface harmonics on the circumscribing object (sphere or ellipsoid) to simulate a non-homogeneous gravity field for an irregular body. The major drawback with the harmonics approach was its divergence from the true potential value within the circumscribing volume. This problem can be mitigated all together by assuming a specific shape and density distribution for the irregular body in question. In this realm, there are the \gls{CDE} and constant density polyhedron gravity potential models. Unlike the harmonics expansion approach, these potential models are valid upto and on the surface of the shape that has been assumed for the irregular body in question \parencite{scheeresBook}. Hence, these models are perfect to study close-proximity motion of particles or spacecraft around an asteroid.
-%
-\newline\newline
-%
-The irregular shape of an asteroid can be best represented by a polyhedron shape model (henceforth polyhedron) as shown in \Cref{fig:polyhedron_example}. Surface irregularities in the form of craters, large boulders, mountains etc. can be easily modeled with this method. A polyhedron is basically a 3D body that consists of several \textit{vertices} which form triangular faces or \textit{facets} that are connected to each other through the \textit{edges} of each face. A triangular facet thus comprises of three vertices, three edges and a surface normal as shown in \Cref{fig:single_facet} \parencite{scheeresBook}. A detailed derivation for the polyhedron gravitational potential model is given in \cite{scheeres_polyhedra} and concisely presented in \cite{scheeresBook} as well. Hence, we will only present a summary of this method in this section.
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.3\textheight, keepaspectratio=true]{polyhedra_example.pdf}
-\caption{Polyhedron shape model estimated for asteroid \textit{Kleopatra} and shown in $\pm x, \pm y, \pm z$ axis directions. Constant density has been assumed in this modeling process. Surface deformities are easily modeled by this method \parencite{polyhedra_example}.}
-\label{fig:polyhedron_example}
-\end{figure}
-\FloatBarrier
-%%%
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.2\textheight, keepaspectratio=true]{single_facet.pdf}
-\caption{Single facet of a polyhedron model depicting three vertices, three edges and a surface normal, associated with each facet in general \parencite{scheeresBook}.}
-\label{fig:single_facet}
-\end{figure}
-\FloatBarrier
-%%%
-Each face or facet \textit{'f'} of the polyhedron is associated with three vertex vectors given as $\bvector{r}_i^f$, where $i=1,2,3$, and a unit normal vector $\buvec{n}_f$. The vector $\bv{r}_i^f$ goes from each vertex of a facet to the field point \textbf{P} where the potential has to be calculated. Each edge \textit{'e'} is associated to two vertex vectors $\bvector{r}_i^e$, for $i=1,2$, and this edge connects two adjacent faces \textit{f} and \textit{f'}. Again, the vector $\bv{r}_i^e$ goes from the edge vertices to the field point \textbf{P}. The edge normal, corresponding to facet \textit{f}, is denoted as $\buvec{n}_e^f$ such that it is perpendicular to the edge and the facet normal $\buvec{n}_f$ and is pointing away from the centre of the facet. For the same edge shared by facet \textit{f'}, the edge normal $\buvec{n}_e^{f'}$ points in a different direction than $\buvec{n}_e^f$ and may not be parallel to it. With these definitions, the general formula for the polyhedron gravitational potential is given as follows \parencite{scheeresBook}:
-%%%
-\begin{align}
-    U(\bvector{r}) &= \frac{\mathcal{G}\sigma}{2} \left[ \sum_{e\in edges} \bvector{r}_e \cdotp \bm{E}_e \cdotp \bvector{r}_e L_e - \sum_{f\in faces} \bvector{r}_f \cdotp \bm{F}_f \cdotp \bvector{r}_f \omega_f \right]
-    \label{eqn:polyhedron_potential} \\
-    \bm{E}_e &= \buvec{n}_f \buvec{n}_e^f + \buvec{n}_{f'} \buvec{n}_e^{f'}
-    \label{eqn:polyhedron_E_term} \\
-    \bm{F}_f &= \buvec{n}_f \buvec{n}_f
-    \label{eqn:polyhedron_F_term} \\
-    L_e &= ln\left(\frac{r_1^e + r_2^e + e_e}{r_1^e + r_2^e - e_e} \right)
-    \label{eqn:polyhedron_L_term} \\
-    e_e &= |\bvector{r}_1^e - \bvector{r}_2^e|
-    \label{eqn:polyhedron_e_term} \\
-    \omega_f &= 2 \tan^{-1} \left(\frac{\bv{r}_1^f \cdotp (\bv{r}_2^f \times \bv{r}_3^f)}{r_1^f r_2^f r_3^f + r_1^f(\bv{r}_2^f \cdotp \bv{r}_3^f) + r_2^f(\bv{r}_3^f \cdotp \bv{r}_1^f) + r_3^f(\bv{r}_1^f \cdotp \bv{r}_2^f)} \right)
-\end{align}
-%%%
-where \bvt{r} is the position vector to the field point \textbf{P} from the origin of an asteroid-fixed reference frame; $\mathcal{G}$ is the universal gravitational constant and $\sigma$ is the density of the body being modeled; $\bvector{r}_e$ is the vector from any point along the edge \textit{'e'} to \bvt{r} or the field point \textbf{P} and in the same way $\bvector{r}_f$ denotes a vector from any point on the facet \textit{f} to \bvt{r} \parencite{scheeresBook}; the term $\omega_f$ represents the solid angle subtended by a facet when viewed from the field point \textbf{P}, or alternately, it is the angle subtended by the facet of the polyhedron on to a unit sphere centered at the field point \textbf{P}; $L_e$ is analogous to the potential of a 1D straight \textit{'wire'} and is computed for all facet edges in a polyhedron \parencite{scheeres_polyhedra}; $\bm{E}_e$ is the edge dyad and is expressed as the sum of two outer-products, forming a 3x3 matrix; and finally $\bm{F}_f$ is the facet dyad which is simply the outer-product of the facet normal vector with itself \parencite{scheeres_polyhedra}.
-%
-\newline\newline
-%
-The constant density polyhedron gravitational potential model provides a realistic shape for an irregular body by accounting for topographical irregularities, however, the polyhedron model is computationally expensive \parencite{scheeresBook}. This thesis work does not make use of this model, but instead, employs a triaxial ellipsoid to model the gravitational potential (explained in the following section). This is because we wanted to understand the fundamental phenomenon associated with the motion and final fate of regolith in presence of gravity and Solar perturbations. This fundamental phenomenon would be difficult to decouple from other effects of a true irregular body, such as in the case of a polyhedron model and hence it was not used in this thesis. A triaxial ellipsoid itself is a very good approximation of real small body shapes \parencite{broschart2005control} and hence we don't loose out on the validity of explanations for the fundamental features of regolith motion by excluding the polyhedron model.
+The key feature that differentiates small bodies, or asteroids for our particular case, from planets is their highly irregular shapes and thus non-spherical mass distributions \parencite{scheeresBook}. This is why the dynamics close to an asteroid are deemed as interesting and hence it is very important that the gravity potential is modeled properly.
 
 \subsection{Constant Density Ellipsoid}
 \label{subsec:constant_density_ellipsoid}
-Consider a \gls{CDE} with semi-major axes $(\alpha, \beta, \gamma)$ such that $\gamma \leq \beta \leq \alpha$. The shape of the triaxial ellipsoid is completely defined by the equation $(x/\alpha)^2 + (y/\beta)^2 + (z/\gamma)^2 \leq 1$. The density of the ellipsoid is assumed to be constant. An example for a \gls{CDE} model is shown in \Cref{fig:cde}.  Then the gravitational potential for a point external to such a body, i.e. \gls{CDE}, is defined by the following equation \parencite{scheeresBook}:
+Consider a \gls{CDE} with semi-major axes $(\alpha, \beta, \gamma)$ such that $\gamma \leq \beta \leq \alpha$. The shape of the triaxial ellipsoid is completely defined by the equation $(x/\alpha)^2 + (y/\beta)^2 + (z/\gamma)^2 \leq 1$. The density of the ellipsoid is assumed to be constant. An example for a \gls{CDE} model is shown in \Cref{fig:cde}.  Then the gravity potential for a point external to such a body, i.e. \gls{CDE}, is defined by the following equation \parencite{scheeresBook}:
 %%%
 \begin{align}
     U(\bvector{r}) &= -\frac{3\mu}{4} \int_{\lambda(\bvector{r})}^{\infty} \phi(\bvector{r}, u) \frac{du}{\Delta(u)}
@@ -339,11 +206,11 @@ where $u$ is a real-valued parameter whose value defines the type of the confoca
 \end{align}
 %%%
 where $u_1$ is the maximum real root possible and at that value, \Cref{eqn:confocal_quadrics} defines another ellipsoid which is confocal to the original one defined by the semi-major axes $\rightarrow$ $\alpha, \beta, \gamma$ \parencite{ellipsoid_potential_model}. Thus, the value of $\lambda$ in \Cref{eqn:ellipsoid_potential_short_form} conforms to a confocal ellipsoid for a given point external to the original ellipsoid (which in turn is modeling the asteroid).
-% The standard definition of gravitational potential at a point is defined as the work required to move that point from infinity to the location of the point in question and in \Cref{eqn:ellipsoid_potential_short_form}, this is being done by moving through a family of confocal ellipsoids.
+% The standard definition of gravity potential at a point is defined as the work required to move that point from infinity to the location of the point in question and in \Cref{eqn:ellipsoid_potential_short_form}, this is being done by moving through a family of confocal ellipsoids.
 %
 \newline\newline
 %
-The potential defined by \Cref{eqn:ellipsoid_potential_short_form} appears to have a complicated computational process due to its integral form. However, the integral can be split into multiple parts such that each can be solved with the help of standard functions called \textit{Carlson's Elliptic Integrals} \parencite{carlsonEllipticIntegral}. Software routines for these integrals exist in several computing languages which, for our case, helps in computing the \gls{CDE} gravitational potential. The integral defined in \Cref{eqn:ellipsoid_potential_short_form,eqn:ellipsoid_potential_phi,eqn:ellipsoid_potential_delta} is restated in its complete form as follows:
+The potential defined by \Cref{eqn:ellipsoid_potential_short_form} appears to have a complicated computational process due to its integral form. However, the integral can be split into multiple parts such that each can be solved with the help of standard functions called \textit{Carlson's Elliptic Integrals} \parencite{carlsonEllipticIntegral}. Software routines for these integrals exist in several computing languages which, for our case, helps in computing the \gls{CDE} gravity potential. The integral defined in \Cref{eqn:ellipsoid_potential_short_form,eqn:ellipsoid_potential_phi,eqn:ellipsoid_potential_delta} is restated in its complete form as follows:
 %%%
 \begin{align}
     U(\bvector{r}) &= -\frac{3\mu}{4} \int_{\lambda(\bvector{r})}^{\infty} \left(\frac{x^2}{\alpha^2 + u} + \frac{y^2}{\beta^2 + u} + \frac{z^2}{\gamma^2 + u} - 1\right) \frac{du}{\sqrt{(\alpha^2 + u)(\beta^2 + u)(\gamma^2 + u)}}
@@ -415,7 +282,7 @@ using which, \Cref{eqn:ellipsoid_potential_split_4} is re-written as follows:
     \label{eqn:ellipsoid_potential_split_4_carlson}
 \end{align}
 %%%
-Thus, to calculate the \gls{CDE} gravitational potential $U$ at any given point $(x,y,z)$ external to the ellipsoid, we first calculate the corresponding value of $\lambda$ from \Cref{eqn:cubicPolynomial} and then substitute this value into \Cref{eqn:ellipsoid_potential_split_1_carlson,eqn:ellipsoid_potential_split_2_carlson,eqn:ellipsoid_potential_split_3_carlson,eqn:ellipsoid_potential_split_4_carlson}, the sum of which is the final potential value.
+Thus, to calculate the \gls{CDE} gravity potential $U$ at any given point $(x,y,z)$ external to the ellipsoid, we first calculate the corresponding value of $\lambda$ from \Cref{eqn:cubicPolynomial} and then substitute this value into \Cref{eqn:ellipsoid_potential_split_1_carlson,eqn:ellipsoid_potential_split_2_carlson,eqn:ellipsoid_potential_split_3_carlson,eqn:ellipsoid_potential_split_4_carlson}, the sum of which is the final potential value.
 %
 \newline\newline
 %
@@ -430,7 +297,7 @@ The gravitational acceleration components are obtained by taking a partial deriv
     \label{eqn:grav_acc_z}
 \end{align}
 %%%
-where $(U_x, U_y, U_z)$ are the gravitational acceleration terms and all other terms have the same definition as explained before for the \gls{CDE} potential term. Just like with the gravitational potential, the acceleration terms can be reduced to standard Carlson's elliptic integrals by using the same substitution parameters as defined in \Cref{eqn:ellipsoidal_potential_substitution_1,eqn:ellipsoidal_potential_substitution_2,eqn:ellipsoidal_potential_substitution_3,eqn:ellipsoidal_potential_substitution_4}. After substitution, for example, the x-component of the acceleration term is written as follows:
+where $(U_x, U_y, U_z)$ are the gravitational acceleration terms and all other terms have the same definition as explained before for the \gls{CDE} potential term. Just like with the gravity potential, the acceleration terms can be reduced to standard Carlson's elliptic integrals by using the same substitution parameters as defined in \Cref{eqn:ellipsoidal_potential_substitution_1,eqn:ellipsoidal_potential_substitution_2,eqn:ellipsoidal_potential_substitution_3,eqn:ellipsoidal_potential_substitution_4}. After substitution, for example, the x-component of the acceleration term is written as follows:
 %%%
 \begin{align}
     U_x &= -\frac{-3\mu x}{2} \int_{0}^{\infty} \frac{dv}{(\alpha^2 + v + \lambda)\sqrt{(\alpha^2 + v + \lambda)(\beta^2 + v + \lambda)(\gamma^2 + v + \lambda)}} \\
@@ -533,7 +400,7 @@ where $\rho$ is the albedo of the particle; $P_0$ is a Solar constant whose valu
 
 \section{Perturbed Two-Body Problem}
 \label{sec:2BP}
-We have discussed the gravitational potential and the perturbations model to be used for our system, and now we'll present the \gls{EOM} that govern the motion of the lofted particle. Note that the \gls{CDE} potential model is defined for a body-fixed frame inherently which means the accelerations that we get out of it are directly defined for the \gls{ARF} frame. The same applies for the \gls{STBE} and \gls{SRP} perturbing accelerations. This is why we define the equations of motion too in the \gls{ARF} frame and transform the propagated state to the \gls{AIF} frame post-simulation.
+We have discussed the gravity potential and the perturbations model to be used for our system, and now we'll present the \gls{EOM} that govern the motion of the lofted particle. Note that the \gls{CDE} potential model is defined for a body-fixed frame inherently which means the accelerations that we get out of it are directly defined for the \gls{ARF} frame. The same applies for the \gls{STBE} and \gls{SRP} perturbing accelerations. This is why we define the equations of motion too in the \gls{ARF} frame and transform the propagated state to the \gls{AIF} frame post-simulation.
 %
 \newline\newline
 %
@@ -607,7 +474,7 @@ Consider the equation for the ellipsoid given as follows:
     \label{eqn:launch_loc_ellipsoid_eqn_cartesian}
 \end{align}
 %%%
-where $(x,y,z)$ is the coordinate of any point \emph{on} the surface. An alternate way of writing \Cref{eqn:launch_loc_ellipsoid_eqn_cartesian}, in vector format, is given as follows:
+where $(x,y,z)$ is the coordinate of any point on the surface. An alternate way of writing \Cref{eqn:launch_loc_ellipsoid_eqn_cartesian}, in vector format, is given as follows:
 %%%
 \begin{align}
     \bv{r}.E.\bv{r} &= 1
@@ -652,7 +519,7 @@ where $r$ is obtained from \Cref{eqn:launch_loc_r_square_expanded}. Thus, just b
 
 \subsection{Launch Velocity}
 \label{subsec:launch_velocity}
-Once we know the position of the particle, we need to provide an initial velocity to launch it into an orbit around the asteroid. But this has to do much more than just providing a velocity magnitude. The velocity magnitude is accompanied by a launch direction which is defined by two angles, namely, \emph{Launch Azimuth} ($\eta$) and \emph{Launch Declination} ($\chi$).
+Once we know the position of the particle, we need to provide an initial velocity to launch it into an orbit around the asteroid. But this has to do much more than just providing a velocity magnitude. The velocity magnitude is accompanied by a launch direction which is defined by two angles, namely, Launch Azimuth ($\eta$) and Launch Declination ($\chi$).
 %
 \newline\newline
 %
@@ -697,7 +564,7 @@ where $\bv{r}_s$ is the position vector to the launch location from the centre o
 %
 \newline\newline
 %
-$\buv{x}$ is also viewed as the x-axis basis vector for a frame of reference fixed and centered at the launch location. This frame of reference is termed as the \gls{SF}. Note that the \gls{SF} is not used to define the orbital motion of the regolith and hence it is not one of the standard reference frames. This is why it wasn't mentioned in \Cref{sec:reference_frames} and is only defined here since it's use is only for obtaining the velocity vector. The z-axis of \gls{SF} is defined in the direction of the unit normal vector at the launch location and the y-axis is obtained by following the right-hand rule to form the orthogonal frame. The \gls{SF} is shown in \Cref{fig:surface_frame}.
+$\buv{x}$ is also viewed as the x-axis basis vector for a frame of reference fixed and centered at the launch location. This frame of reference is termed as the \gls{SF}. Note that the \gls{SF} is not used to define the orbital motion of the regolith and hence it is not one of the standard reference frames. This is why it was not mentioned in \Cref{sec:reference_frames} and is only defined here since it's use is only for obtaining the velocity vector. The z-axis of \gls{SF} is defined in the direction of the unit normal vector at the launch location and the y-axis is obtained by following the right-hand rule to form the orthogonal frame. The \gls{SF} is shown in \Cref{fig:surface_frame}.
 %
 \newline\newline
 %
@@ -742,7 +609,7 @@ Up until now we discussed the dynamics involved with the particle motion around 
 %
 \newline\newline
 %
-The conservative guarantee escape speed method is obtained by making use of the maximum gravitational potential, between the actual potential of the irregular body and an equivalent point mass potential, at the location of the launch of the particle. If the launch speed is above the conservative guarantee escape speed, then the particle will escape immediately after launch. The conservative guaranteed escape speed method works best for uniform gravity field models, as we'll see later in \Cref{subsec:nonconservative}, but fails when one accounts for non-uniform gravity field models such as the \gls{CDE} model.
+The conservative guarantee escape speed method is obtained by making use of the maximum gravity potential, between the actual potential of the irregular body and an equivalent point mass potential, at the location of the launch of the particle. If the launch speed is above the conservative guarantee escape speed, then the particle will escape immediately after launch. The conservative guaranteed escape speed method works best for uniform gravity field models, as we'll see later in \Cref{subsec:nonconservative}, but fails when one accounts for non-uniform gravity field models such as the \gls{CDE} model.
 % This method however, does not account for the cases which result in an escape situation after completing one or more orbital revolutions around the asteroid or basically the cases where the launch speed is below the conservative guarantee escape speed and still result in an escape scenario. The idea of developing a new analytical method stems from this problem and we call it the non-conservative guarantee escape speed since we aim to account for those cases as well where the escape does not happen immediately.
 %
 \newline\newline
@@ -780,7 +647,7 @@ where $v_e\buv{n}$ is the velocity, expressed in \gls{ARF}, with which a particl
     v_e &= -(\buv{n} \cdotp (\bv{\omega} \times \bv{r})) \pm \sqrt{(\buv{n} \cdotp (\bv{\omega} \times \bv{r}))^2 + 2U_{max} - (\bv{\omega} \times {\bv{r}})^2}
 \end{align}
 %%%
-Since the speed can't be negative, the formula is re-written as:
+Since the speed can not be negative, the formula is re-written as:
 %%%
 \begin{align}
     v_e &= -(\buv{n} \cdotp (\bv{\omega} \times \bv{r})) + \sqrt{(\buv{n} \cdotp (\bv{\omega} \times \bv{r}))^2 + 2U_{max} - (\bv{\omega} \times {\bv{r}})^2}
@@ -795,14 +662,14 @@ Now for a non-conservative approach, we will not use $\bv{v}_I = \sqrt{2U_{max}}
 %
 \newline\newline
 %
-Consider the \gls{EOM} mentioned in \Cref{eqn:p2bp}, with the exception that we only consider the gravitational potential and remove all external perturbations on the left hand side of the equation. These equations do not have an explicit dependence on time which means that the Jacobian for the system exists and is conserved \parencite{scheeresBook}. The Jacobian, expressed in the \gls{ARF}, is given as follows \parencite{scheeresBook}:
+Consider the \gls{EOM} mentioned in \Cref{eqn:p2bp}, with the exception that we only consider the gravity potential and remove all external perturbations on the left hand side of the equation. These equations do not have an explicit dependence on time which means that the Jacobian for the system exists and is conserved \parencite{scheeresBook}. The Jacobian, expressed in the \gls{ARF}, is given as follows \parencite{scheeresBook}:
 %%%
 \begin{align}
     J &= \frac{1}{2} v_B^2 - \frac{1}{2} \omega^2(x^2 + y^2) - U(\bv{r})
     \label{eqn:jacobian}
 \end{align}
 %%%
-where $v_B$ is the velocity of the particle in the \gls{ARF}; $\omega$ is the magnitude of the angular velocity of the rotating asteroid and is along the z-axis of the \gls{ARF}; $(x,y)$ are the x-y coordinate of the orbiting particle; $U(\bv{r})$ is the small-body gravitational potential, which in our case is the \gls{CDE} potential model. From transport theorem, we use the relation between an inertial velocity and the rotating frame velocity:
+where $v_B$ is the velocity of the particle in the \gls{ARF}; $\omega$ is the magnitude of the angular velocity of the rotating asteroid and is along the z-axis of the \gls{ARF}; $(x,y)$ are the x-y coordinate of the orbiting particle; $U(\bv{r})$ is the small-body gravity potential, which in our case is the \gls{CDE} potential model. From transport theorem, we use the relation between an inertial velocity and the rotating frame velocity:
 %%%
 \begin{align}
     \bv{v}_B &= \bv{v}_I - (\bv{\omega} \times \bv{r}) \\
