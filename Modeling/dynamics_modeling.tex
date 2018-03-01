@@ -13,7 +13,7 @@ The simulator \footnote{The simulator is called \gls{NAOS} and can be downloaded
 \item The asteroid body is modeled as a smooth triaxial ellipsoid to account for its non-uniform gravity. The triaxial model is chosen over the spherical and ellipsoidal harmonics approach because we want to study the motion of regolith close to the surface of the asteroid; in particular the re-impact scenarios. This can not be done with the harmonics model as the gravity potential diverges, within the circumscribing volume, from the true potential of an irregular body. We chose to not use a polyhedron model either, even though it can account for surface irregularities of an irregular body much better than the triaxial ellipsoid. This decision was made to reduce the complexity of the simulator, however, we do not sacrifice on the qualitative aspect of the results since the triaxial model also provides a non-uniform gravity field.
 % This is because we want to decouple the fundamental phenomenon, associated with the motion of the regolith, from any effects of a truly irregular shape such as in the case of a polyhedron model.
 
-\item Craters, surface depressions, mountains and any other terrain deformity on the asteroid are not considered in the simulation. The body is considered to have a uniform density. This is to simplify calculations of the gravitational acceleration.
+\item Craters, surface depressions, mountains and any other terrain deformity on the asteroid are not considered in the simulation. The body is considered to have a uniform density. This is to simplify calculations of the gravity acceleration.
 
 \item The asteroid is rotating uniformly about its shortest axis. This is considered for simplicity and also because most Solar System bodies would dissipate energy to eventually enter a rotational state that is uniform and about its axis of maximum moment of inertia \parencite{scheeresBook}. Hence, the approximation for the asteroid remains valid.
 
@@ -34,7 +34,7 @@ The simulator \footnote{The simulator is called \gls{NAOS} and can be downloaded
 \item The shadow region of the asteroid is not modeled which means that the solar perturbations are always acting on the regolith grain. This simplification was made since asteroids are extremely small compared to planets, and thus, the chances of an orbiting particle spending long periods of time in the shadow are very small.
 
 \item Perturbations are considered only from the Sun. \gls{SRP} is important because regolith grains will have higher area-to-mass ratios, relative to a spacecraft, and so the radiation pressure would be significantly large for them. We model the third-body attraction from the Sun (\gls{STBE}) as well but not from any of the planets because we are assuming that the small body does not pass close to any planet, thus rendering the perturbations from them insignificant.
-% The magnitude of perturbation from the \gls{STBE} itself is atleast 5 orders of magnitude smaller than the gravitational acceleration (for a sample asteroid assumed to be in a circular orbit at 1 AU from the Sun) when the regolith is in close proximity to the asteroid (see \Cref{chap:results}).
+% The magnitude of perturbation from the \gls{STBE} itself is atleast 5 orders of magnitude smaller than the gravity acceleration (for a sample asteroid assumed to be in a circular orbit at 1 AU from the Sun) when the regolith is in close proximity to the asteroid (see \Cref{chap:results}).
 
 \item The apparent motion of the Sun around the asteroid is considered circular and in the equatorial plane of the asteroid, again, to restrict another degree of freedom in the simulations and consider a general case.
 % \item The apparent motion of the Sun around the asteroid is considered circular and in the equatorial plane of the asteroid; this was based on the orbital element measurements of all observed asteroids. The majority of these asteroids have small orbital eccentricities \parencite{malhotra2016_eccentricityDistribution}. \cite{jedicke1998_orbitalElements} presents debiased measurements for the inclination of the \gls{MBO} and shows that a large number of asteroids have near-zero inclinations.
@@ -156,11 +156,11 @@ where $\bvector{v}_B^I$ is the \gls{ARF} velocity in \gls{AIF} components, and $
 
 \section{Gravity Potential}
 \label{sec:gravity}
-The key feature that differentiates small bodies, or asteroids for our particular case, from planets is their highly irregular shapes and thus non-spherical mass distributions \parencite{scheeresBook}. This is why the dynamics close to an asteroid are deemed as interesting and hence it is very important that the gravity potential is modeled properly.
+The key feature that differentiates small bodies, or asteroids for our particular case, from planets is their highly irregular shapes and thus non-spherical mass distributions \parencite{scheeresBook}. This is why the dynamics close to an asteroid are deemed as interesting and hence it is very important that the gravity potential is modeled properly. We will only discuss the \gls{CDE} model in this chapter since we chose to work with it, however, a small discussion on the spherical and ellipsoidal harmonics and the constant-density polyhedron models are presented in \Cref{subsec:spherical_ellipsoidal_harmonics} and \Cref{subsec:polyhedron} respectively.
 
 \subsection{Constant Density Ellipsoid}
 \label{subsec:constant_density_ellipsoid}
-Consider a \gls{CDE} with semi-major axes $(\alpha, \beta, \gamma)$ such that $\gamma \leq \beta \leq \alpha$. The shape of the triaxial ellipsoid is completely defined by the equation $(x/\alpha)^2 + (y/\beta)^2 + (z/\gamma)^2 \leq 1$. The density of the ellipsoid is assumed to be constant. An example for a \gls{CDE} model is shown in \Cref{fig:cde}.  Then the gravity potential for a point external to such a body, i.e. \gls{CDE}, is defined by the following equation \parencite{scheeresBook}:
+Consider a \gls{CDE} with semi-axes $(\alpha, \beta, \gamma)$ such that $\gamma \leq \beta \leq \alpha$. The shape of the triaxial ellipsoid is completely defined by the equation $(x/\alpha)^2 + (y/\beta)^2 + (z/\gamma)^2 = 1$. The density of the ellipsoid is assumed to be constant. An example for a \gls{CDE} model is shown in \Cref{fig:cde}.  The gravity potential for a point external to such a body, i.e. \gls{CDE}, is defined by the following equations \parencite{scheeresBook}:
 %%%
 \begin{align}
     U(\bvector{r}) &= -\frac{3\mu}{4} \int_{\lambda(\bvector{r})}^{\infty} \phi(\bvector{r}, u) \frac{du}{\Delta(u)}
@@ -186,26 +186,26 @@ where $\bvector{r}$ is the position vector to the point, external to the \gls{CD
 \centering
 \captionsetup{justification=centering}
 \includegraphics[width=\textwidth, height=0.27\textheight, keepaspectratio=true]{cde.pdf}
-\caption{Triaxial ellipsoid model with semi-major axes $\alpha=20$ km, $\beta=7$ km, $\gamma=7$ km.}
+\caption{Triaxial ellipsoid model with semi-axes $\alpha=20$ km, $\beta=7$ km, $\gamma=7$ km.}
 \label{fig:cde}
 \end{figure}
 \FloatBarrier
 %%%
-For a given point $(x, y, z)$ in space around the \gls{CDE}, the only unknown in \Cref{eqn:cubicPolynomial} is $\lambda$ which is solved for using the standard Cardano's formula (see \cite{cubic_formula}). Now for the given ellipsoid, the equation for the family of confocal quadratic surfaces is given as follows \parencite{ellipsoid_potential_model}:
+For a given point $(x, y, z)$ in space around the \gls{CDE}, the only unknown in \Cref{eqn:cubicPolynomial} is $\lambda$ which is solved for using the standard Cardano's formula (see \cite{cubic_formula}). For the given ellipsoid, the equation for the family of confocal quadratic surfaces is given as follows \parencite{ellipsoid_potential_model}:
 %%%
 \begin{align}
     \frac{x^2}{\alpha^2 + u} + \frac{y^2}{\beta^2 + u} + \frac{z^2}{\gamma^2 + u} &= 1
     \label{eqn:confocal_quadrics}
 \end{align}
 %%%
-where $u$ is a real-valued parameter whose value defines the type of the confocal quadratic surface. \Cref{eqn:confocal_quadrics} is a cubic polynomial in $u$ and can be solved to obtain three unequal real roots - $u_1, u_2, u_3$, such that the following relation holds true \parencite{ellipsoid_potential_model}:
+where $u$ is a real-valued parameter whose value defines the type of the confocal quadratic surface. \Cref{eqn:confocal_quadrics} is a cubic polynomial in $u$ and can be solved to obtain three unequal real roots $u_1, u_2, u_3$, such that the following relation holds true \parencite{ellipsoid_potential_model}:
 %%%
 \begin{align}
     -\alpha^2 < u_3 < -\beta^2 < u_2 < -\gamma^2 < u_1 < +\infty
     \label{eqn:confocal_quadrics_all_real_roots}
 \end{align}
 %%%
-where $u_1$ is the maximum real root possible and at that value, \Cref{eqn:confocal_quadrics} defines another ellipsoid which is confocal to the original one defined by the semi-major axes $\rightarrow$ $\alpha, \beta, \gamma$ \parencite{ellipsoid_potential_model}. Thus, the value of $\lambda$ in \Cref{eqn:ellipsoid_potential_short_form} conforms to a confocal ellipsoid for a given point external to the original ellipsoid (which in turn is modeling the asteroid).
+where $u_1$ is the maximum real root possible and at that value, \Cref{eqn:confocal_quadrics} defines another ellipsoid which is confocal to the original one defined by the semi-axes $\alpha, \beta, \gamma$ \parencite{ellipsoid_potential_model}. Thus, the value of $\lambda$ in \Cref{eqn:ellipsoid_potential_short_form} conforms to a confocal ellipsoid for a given point external to the original ellipsoid (which in turn is modeling the asteroid).
 % The standard definition of gravity potential at a point is defined as the work required to move that point from infinity to the location of the point in question and in \Cref{eqn:ellipsoid_potential_short_form}, this is being done by moving through a family of confocal ellipsoids.
 %
 \newline\newline
@@ -217,7 +217,7 @@ The potential defined by \Cref{eqn:ellipsoid_potential_short_form} appears to ha
     \label{eqn:ellipsoid_potential_long_form}
 \end{align}
 %%%
-\Cref{eqn:ellipsoid_potential_long_form} can be split into 4 parts which are stated as follows:
+\Cref{eqn:ellipsoid_potential_long_form} can be split into four parts which are as follows:
 %%%
 \begin{align}
     U_1 &= -\frac{\mu}{2} \cdotp \frac{3}{2} \int_{\lambda}^{\infty} \frac{x^2}{(\alpha^2 + u)^{3/2}(\beta^2 + u)^{1/2}(\gamma^2 + u)^{1/2}} du
@@ -252,7 +252,7 @@ With these substitutions, \Cref{eqn:ellipsoid_potential_split_1}, for example, c
     \label{eqn:ellipsoid_potential_split_1_carlson}
 \end{align}
 %%%
-In \Cref{eqn:ellipsoid_potential_split_1_mod}, the expression within the square braces conforms to the standard elliptic integral function $R_D$ as defined by \cite{carlsonEllipticIntegral} and is given as follows:
+In \Cref{eqn:ellipsoid_potential_split_1_mod}, the expression within the square brackets conforms to the standard elliptic integral function $R_D$ as defined by \cite{carlsonEllipticIntegral} and is given as follows:
 %%%
 \begin{align}
     R_D(x, y, z) &= \frac{3}{2} \int_0^{\infty} \frac{dt}{(t+x)^{1/2}(t+y)^{1/2}(t+z)^{3/2}}
@@ -286,7 +286,7 @@ Thus, to calculate the \gls{CDE} gravity potential $U$ at any given point $(x,y,
 %
 \newline\newline
 %
-The gravitational acceleration components are obtained by taking a partial derivatives of the potential equation given in \Cref{eqn:ellipsoid_potential_long_form} \parencite{scheeresBook}:
+The gravity acceleration components are obtained by taking the partial derivatives of the potential equation given in \Cref{eqn:ellipsoid_potential_long_form} \parencite{scheeresBook}:
 %%%
 \begin{align}
     U_x &= -\frac{3\mu x}{2} \int_{\lambda(\bvector{r})}^{\infty} \frac{du}{(\alpha^2 + u) \Delta u}
@@ -297,7 +297,7 @@ The gravitational acceleration components are obtained by taking a partial deriv
     \label{eqn:grav_acc_z}
 \end{align}
 %%%
-where $(U_x, U_y, U_z)$ are the gravitational acceleration terms and all other terms have the same definition as explained before for the \gls{CDE} potential term. Just like with the gravity potential, the acceleration terms can be reduced to standard Carlson's elliptic integrals by using the same substitution parameters as defined in \Cref{eqn:ellipsoidal_potential_substitution_1,eqn:ellipsoidal_potential_substitution_2,eqn:ellipsoidal_potential_substitution_3,eqn:ellipsoidal_potential_substitution_4}. After substitution, for example, the x-component of the acceleration term is written as follows:
+where $U_x, U_y, U_z$ are the gravity acceleration terms and all other terms have the same definition as explained before for the \gls{CDE} potential term. Just like with the gravity potential, the acceleration terms can be reduced to standard Carlson's elliptic integrals by using the same substitution parameters as defined in \Cref{eqn:ellipsoidal_potential_substitution_1,eqn:ellipsoidal_potential_substitution_2,eqn:ellipsoidal_potential_substitution_3,eqn:ellipsoidal_potential_substitution_4}. After substitution, for example, the x-component of the acceleration term is written as follows:
 %%%
 \begin{align}
     U_x &= -\frac{-3\mu x}{2} \int_{0}^{\infty} \frac{dv}{(\alpha^2 + v + \lambda)\sqrt{(\alpha^2 + v + \lambda)(\beta^2 + v + \lambda)(\gamma^2 + v + \lambda)}} \\
@@ -306,7 +306,7 @@ where $(U_x, U_y, U_z)$ are the gravitational acceleration terms and all other t
     \label{eqn:grav_acc_x_carlson}
 \end{align}
 %%%
-Similarly, the other components of the gravitational acceleration (defined in the \gls{ARF}) can be written as follows:
+Similarly, the other components of the gravity acceleration (defined in the \gls{ARF}) can be written as follows:
 %%%
 \begin{align}
     U_y &= -\mu y \cdotp R_D((\alpha^2 + \lambda), (\gamma^2 + \lambda), (\beta^2 + \lambda))
@@ -319,15 +319,15 @@ For any point $(x,y,z)$ outside of the \gls{CDE}, we calculate the value for $\l
 
 \section{Solar Perturbations}
 \label{sec:solar_perturbations}
-The dominant force acting on an orbiting particle in the vicinity of an asteroid is from its gravity field. However, perturbations, both gravitational and non-gravitational, can be significant especially when the particle is further away from the asteroid \parencite{scheeresBook}. The two most significant sources of perturbations are from the Sun and we will be discussing them briefly in this section.
+The dominant force acting on an orbiting particle in the vicinity of an asteroid is from its gravity field. However, perturbations, both gravitational and non-gravitational, can be significant especially when the particle is further away from the asteroid \parencite{scheeresBook}. The two most significant sources of perturbations are from the Sun and we will discuss them briefly in this section.
 
-\subsection{Solar Third-Body Effect (STBE)}
+\subsection{Solar Third-Body Effect}
 \label{subsec:stbe}
-We consider a simple two-body problem, wherein the asteroid has a circular, Heliocentric orbit in the Ecliptic plane. This is a reasonable approximation, as mentioned earlier in \Cref{sec:assumptions}, since several asteroids have been observed to have circular orbits around the Sun with near-zero inclinations. The gravitational effect of the Sun on the motion of regolith (henceforth \gls{STBE}) around the asteroid is not modeled through a three-body problem because the order of magnitude of the perturbing acceleration is extremely small relative to the gravitational acceleration of the asteroid (atleast 5 orders of magnitude smaller in the vicinity of a sample asteroid at 1 AU from the Sun) and hence it is sufficient to model it as an external perturbing acceleration.
+We consider a simple two-body problem, wherein the asteroid has a circular, heliocentric orbit in the ecliptic plane. This is a reasonable approximation, as mentioned earlier in \Cref{sec:assumptions}, since several asteroids have been observed to have circular orbits around the Sun with near-zero inclinations. The gravitational effect of the Sun on the motion of regolith (henceforth \gls{STBE}) around the asteroid is not modeled through a three-body problem because the order of magnitude of the perturbing acceleration is extremely small relative to the gravitational acceleration of the asteroid (at least five orders of magnitude smaller in the vicinity of a sample asteroid at 1 AU from the Sun) and hence it is sufficient to model it as an external perturbing acceleration.
 %
 \newline\newline
 %
-The absolute gravitational acceleration, due to the Sun, experienced by a particle (of mass negligible compared to that of the Sun) in orbital motion around the asteroid is given as \parencite{scheeresBook}:
+The absolute gravity acceleration, due to the Sun, experienced by a particle (of mass negligible compared to that of the Sun) in orbital motion around the asteroid is given as \parencite{scheeresBook}:
 %%%
 \begin{align}
     \bv{a}_{abs, p} &= -\frac{\mu_S}{|\bv{r} - \bv{d}|^3} (\bv{r} - \bv{d})
@@ -340,19 +340,19 @@ where $\mu_S$ is the gravitational parameter of the Sun; \bvt{r} and \bvt{d} are
 \centering
 \captionsetup{justification=centering}
 \includegraphics[width=\textwidth, height=0.35\textheight, keepaspectratio=true]{stbe_bodyframe_edit_2.pdf}
-\caption{A schematic representing the orientation of position vectors of the Sun and the orbiting particle/regolith around the asteroid, in the \gls{AIF}. Diagram is not to scale and the rotation state of asteroid is such that the \gls{ARF} and \gls{AIF} are coinciding.}
+\caption{The orientation of position vectors of the Sun and the orbiting particle/regolith around the asteroid, in the \gls{AIF}. Diagram is not to scale and the rotation state of the asteroid is such that the \gls{ARF} and \gls{AIF} are coinciding.}
 \label{fig:stbe_inertialFrame}
 \end{figure}
 \FloatBarrier
 %%%
-Now the absolute gravitational acceleration, due to the Sun, experienced by the asteroid is given as follows \parencite{scheeresBook}:
+Now the absolute gravity acceleration, due to the Sun, experienced by the asteroid is given as follows \parencite{scheeresBook}:
 %%%
 \begin{align}
     \bv{a}_{abs, a} &= +\frac{\mu_S}{|\bv{d}|^3} (\bv{d})
     \label{eqn:stbe_asteroid_abs_acc}
 \end{align}
 %%%
-where the definition of all variables is the same as that for \Cref{eqn:stbe_particle_abs_acc}. Thus, the perturbing acceleration acting on the particle due to the \gls{STBE} is the difference between the absolute accelerations experienced by the particle (\Cref{eqn:stbe_particle_abs_acc}) and the asteroid (\Cref{eqn:stbe_asteroid_abs_acc}) \parencite{scheeresBook}:
+where the definition of all variables is the same as that for \Cref{eqn:stbe_particle_abs_acc}. Thus, the relative perturbing acceleration acting on the particle due to the \gls{STBE} is the difference between the absolute accelerations experienced by the particle and the asteroid \parencite{scheeresBook}:
 %%%
 \begin{align}
     \bv{a}_{STBE} &= -\mu_S \left[ \frac{(\bv{r} - \bv{d})}{|\bv{r} - \bv{d}|^3} + \frac{\bv{d}}{|\bv{d}|^3} \right]
@@ -367,16 +367,16 @@ The perturbing acceleration in \Cref{eqn:stbe_acc} can be re-written in the form
     \bv{a}_{STBE} &= \frac{\delta \mathcal{R}_{STBE}}{\delta\bv{r}}
 \end{align}
 %%%
-In \Cref{eqn:stbe_acc}, we can directly substitute the position vectors as defined in \gls{ARF} such that the acceleration term obtained is also in the \gls{ARF}. This is possible because the position magnitude terms would remain the same in either of the reference frames. Also, the rotation matrix $\phi_I^B$ multiplied either outside the square bracket or inside, in \Cref{eqn:stbe_acc}, with the two numerator terms would ultimately give the same result.
+In \Cref{eqn:stbe_acc}, we can directly substitute the position vectors as defined in the \gls{ARF} such that the acceleration term obtained is also in the \gls{ARF}. This is possible because the position magnitude terms would remain the same in either of the reference frames. Also, the rotation matrix $\phi_I^B$ multiplied either outside the square bracket or inside, in \Cref{eqn:stbe_acc}, with the two numerator terms would ultimately give the same result.
 %%%
 \begin{align}
     \ddot{\bv{d}} &= -\frac{\mu_S}{|\bv{d}|^3} (\bv{d})
     \label{eqn:sun_around_asteroid}
 \end{align}
 %%%
-The apparent position of the Sun, relative to the asteroid, can be obtained in two ways. We could either numerically integrate the second order differential equation for the standard two-body problem as stated in \Cref{eqn:sun_around_asteroid} or solve, what is historically known as, the \textit{Kepler's problem}. We use the latter since the apparent position of the Sun can be obtained for any time value directly by using the Kepler's problem algorithm as stated by \cite{chobotovBook}. Although the Kepler's problem algorithm is not completely analytical and uses a numerical iteration method to solve for the true anomaly, it is relatively easier to use within the simulator than employing a numerical integrator to propagate the position from an initial condition for every time value. The algorithm for solving the Kepler's problem is not stated here for brevity; A detailed explanation for it is given by \cite{chobotovBook}.
+The apparent position of the Sun, relative to the asteroid, can be obtained in two ways. We could either numerically integrate the second-order differential equation for the standard two-body problem as stated in \Cref{eqn:sun_around_asteroid} or solve, what is historically known as, \textit{Kepler's problem}. We use the latter since the apparent position of the Sun can be obtained for any time value directly by using the Kepler's problem algorithm as stated by \cite{chobotovBook}. Although the Kepler's problem algorithm is not completely analytical and uses a numerical iteration method to solve for the true anomaly, it is relatively easier to use within the simulator than employing a numerical integrator to propagate the position from an initial condition for every time value. The algorithm for solving Kepler's problem is not stated here for brevity; a detailed explanation for it is given by \cite{chobotovBook}.
 
-\subsection{Solar Radiation Pressure (SRP)}
+\subsection{Solar Radiation Pressure}
 \label{subsec:srp}
 With the heliocentric orbit of the asteroid, in addition to the \gls{STBE}, is a non-gravitational source of perturbation acting on an asteroid-orbiting particle, called \gls{SRP}. Momentum transfer takes place from the Solar photons that strike and recoil from the surface of the particle, which thus perturbs the orbital motion \parencite{scheeresBook}.
 %
@@ -400,7 +400,7 @@ where $\rho$ is the albedo of the particle; $P_0$ is a Solar constant whose valu
 
 \section{Perturbed Two-Body Problem}
 \label{sec:2BP}
-We have discussed the gravity potential and the perturbations model to be used for our system, and now we'll present the \gls{EOM} that govern the motion of the lofted particle. Note that the \gls{CDE} potential model is defined for a body-fixed frame inherently which means the accelerations that we get out of it are directly defined for the \gls{ARF} frame. The same applies for the \gls{STBE} and \gls{SRP} perturbing accelerations. This is why we define the equations of motion too in the \gls{ARF} frame and transform the propagated state to the \gls{AIF} frame post-simulation.
+We have discussed the gravity potential and the perturbations model to be used for our system, and now we will present the \gls{EOM} that govern the motion of the lofted particle. Note that the \gls{CDE} potential model is defined for a body-fixed frame inherently which means the accelerations that we get out of it are directly defined for the \gls{ARF} frame. The same applies for the \gls{STBE} and \gls{SRP} perturbing accelerations. This is why we define the equations of motion too in the \gls{ARF} frame and transform the propagated state to the \gls{AIF} frame post-simulation.
 %
 \newline\newline
 %
@@ -427,12 +427,12 @@ where $(x_i, \dot{x}_i)$ are the position and velocity vector components. We wil
     \label{eqn:lagrange_arf}
 \end{align}
 %%%
-where the transformation matrix $\phi_B^I$ preserves \footnote{For two vectors \bvt{u} and \bvt{v}, and an orthogonal matrix $Q$, $\bv{u} \cdotp \bv{v} = (Q\bv{u}) \cdotp (Q\bv{v})$} the dot product, as it is orthogonal, and hence is excluded from the equation. The derivative on the right hand side of \Cref{eqn:lagrange_general_form}, directly in vector form, is evaluated as follows:
+where the transformation matrix $\phi_B^I$ preserves \footnote{For two vectors \bvt{u} and \bvt{v}, and an orthogonal matrix $Q$, $\bv{u} \cdotp \bv{v} = (Q\bv{u}) \cdotp (Q\bv{v})$} the dot product, as it is orthogonal, and hence is excluded from the equation. The derivative on the right-hand side of \Cref{eqn:lagrange_general_form}, directly in vector form, is evaluated as follows:
 %%%
 \begin{align}
-    \frac{\delta L}{\delta \bv{q}} &= \frac{1}{2} \left[ 2 \cdotp (\dot{\bv{q}} + \bv{w} \times \bv{q}) \cdotp (\bv{\omega} \times \bv{1} + \bv{q} \times {\bv{0}}) \right] + \frac{\delta \mathcal{U}}{\delta \bv{q}} \\
-    &= \dot{\bv{q}} \cdotp (\bv{\omega} \times \bv{1}) + (\bv{\omega} \times \bv{q}) \cdotp (\bv{\omega} \times \bv{1}) + \frac{\delta \mathcal{U}}{\delta \bv{q}} \\
-    &= (\dot{\bv{q}} \times \bv{\omega}) \cdotp \bv{1} + \bv{1} \cdotp ((\bv{\omega} \times \bv{q}) \times \bv{\omega}) + \frac{\delta \mathcal{U}}{\delta \bv{q}} \\
+    \frac{\delta L}{\delta \bv{q}} &= \frac{1}{2} \left[ 2 \cdotp (\dot{\bv{q}} + \bv{w} \times \bv{q}) \cdotp (\bv{\omega} \times \bv{1} + \bv{q} \times {\bv{0}}) \right] + \frac{\delta \mathcal{U}}{\delta \bv{q}} \nonumber \\
+    &= \dot{\bv{q}} \cdotp (\bv{\omega} \times \bv{1}) + (\bv{\omega} \times \bv{q}) \cdotp (\bv{\omega} \times \bv{1}) + \frac{\delta \mathcal{U}}{\delta \bv{q}} \nonumber \\
+    &= (\dot{\bv{q}} \times \bv{\omega}) \cdotp \bv{1} + \bv{1} \cdotp ((\bv{\omega} \times \bv{q}) \times \bv{\omega}) + \frac{\delta \mathcal{U}}{\delta \bv{q}} \nonumber \\
     &= -(\bv{\omega} \times \dot{\bv{q}}) - (\bv{\omega} \times (\bv{\omega} \times \bv{q})) + \frac{\delta \mathcal{U}}{\delta \bv{q}}
     \label{eqn:lagrangian_RHS}
 \end{align}
@@ -445,17 +445,17 @@ where \bvt{1} and \bvt{0} are vectors of ones and zeros respectively and all oth
     \label{eqn:lagrangian_LHS}
 \end{align}
 %%%
-Thus, by substituting \Cref{eqn:lagrangian_LHS,eqn:lagrangian_RHS} into \Cref{eqn:lagrange_general_form}, we get the final equations of motion as follows:
+Thus, by substituting \Cref{eqn:lagrangian_LHS,eqn:lagrangian_RHS} into \Cref{eqn:lagrange_general_form}, we get the final \gls{EOM} as follows:
 %%%
 \begin{align}
-    \ddot{\bv{q}} + 2 \cdotp \bv{\omega} \times \dot{\bv{q}} + (\bv{\omega} \times (\bv{\omega} \times \bv{q})) &= \frac{\delta \mathcal{U}}{\delta \bv{q}} \\
+    \ddot{\bv{q}} + 2 \cdotp \bv{\omega} \times \dot{\bv{q}} + (\bv{\omega} \times (\bv{\omega} \times \bv{q})) &= \frac{\delta \mathcal{U}}{\delta \bv{q}} \nonumber \\
     &= \frac{\delta U(\bv{q})}{\delta \bv{q}} + \frac{\delta \mathcal{R}_{STBE}}{\delta \bv{q}} + \frac{\delta \mathcal{R}_{SRP}}{\delta \bv{q}}
     \label{eqn:lagrangian_potential_eval} \\
     \ddot{\bv{q}} + 2 \cdotp \bv{\omega} \times \dot{\bv{q}} + (\bv{\omega} \times (\bv{\omega} \times \bv{q})) &= \frac{\delta U(\bv{q})}{\delta \bv{q}} + \bv{a}_{STBE} + \bv{a}_{SRP}
     \label{eqn:p2bp}
 \end{align}
 %%%
-In \Cref{eqn:lagrangian_potential_eval}, the first term denotes the acceleration due to gravity, and the second and the third term denote the perturbing accelerations. \Cref{eqn:p2bp} is thus the final equation of motion used in this thesis.
+In \Cref{eqn:lagrangian_potential_eval}, the first term denotes the acceleration due to gravity, and the second and the third term denote the perturbing accelerations. \Cref{eqn:p2bp} is thus the final \gls{EOM} used in this thesis.
 
 \section{Particle Initial Conditions}
 \label{sec:init_conditions}
@@ -463,11 +463,11 @@ The \gls{EOM} established in the previous section are difficult to solve analyti
 
 \subsection{Launch Location}
 \label{subsec:launch_location}
-This section will present a method to efficiently calculate the launch location of a particle, in the form of a Cartesian position vector from the centre of the asteroid. The formulation is such that the resulting position vector will always point to a location on the surface of the asteroid.
+This section will present a method to efficiently calculate the launch location of a particle, in the form of a Cartesian position vector with respect to the centre of the asteroid. The formulation is such that the resulting position vector will always point to a location on the surface of the asteroid.
 %
 \newline\newline
 %
-Consider the equation for the ellipsoid given as follows:
+Consider the equation for the ellipsoid as follows:
 %%%
 \begin{align}
     \frac{x^2}{\alpha^2} + \frac{y^2}{\beta^2} + \frac{z^2}{\gamma^2} &= 1
@@ -487,7 +487,7 @@ where $(x,y,z)$ is the coordinate of any point on the surface. An alternate way 
     \end{bmatrix}
 \end{align}
 %%%
-where \bvt{r} is a general position vector expressed in the \gls{ARF} and ($\alpha, \beta, \gamma$) are the semi-major axes of the triaxial ellipsoid model of the asteroid. Continuing with \Cref{eqn:launch_loc_ellipsoid_eqn_vectorForm}:
+where \bvt{r} is a general position vector expressed in the \gls{ARF} and ($\alpha, \beta, \gamma$) are the semi-axes of the triaxial ellipsoid model of the asteroid. Continuing with \Cref{eqn:launch_loc_ellipsoid_eqn_vectorForm}:
 %%%
 \begin{align}
     \bv{r}.\bv{r} &= \frac{1}{E} \\
@@ -495,7 +495,7 @@ where \bvt{r} is a general position vector expressed in the \gls{ARF} and ($\alp
     \label{eqn:launch_loc_r_square}
 \end{align}
 %%%
-where $\buvec{u}$ is a unit vector expressed in \gls{ARF}, pointing in the direction of the launch location from the asteroid's centre, with components $(u_x, u_y, u_z)$. The unit vector can be stated in terms of the latitude $(\delta)$ and longitude $(\lambda)$ of the launch point as follows:
+where $\buvec{u}$ is a unit vector expressed in the \gls{ARF}, pointing in the direction of the launch location from the asteroid's centre, with components $(u_x, u_y, u_z)$. The unit vector can be stated in terms of the latitude $(\delta)$ and longitude $(\lambda)$ of the launch point as follows:
 %%%
 \begin{align}
     \buvec{u} &= \cos\delta \cos\lambda \buvec{x} + \cos\delta \sin\lambda \buvec{y} + \sin\delta \buvec{z}
@@ -508,7 +508,7 @@ where $(\buvec{x},\buvec{y},\buvec{z})$ are the basis vectors forming the \gls{A
     \label{eqn:launch_loc_r_square_expanded}
 \end{align}
 %%%
-The final position vector to the launch location, from the origin of \gls{ARF} or the asteroid's centre, is given as follows:
+The final position vector to the launch location is given as follows:
 %%%
 \begin{align}
     \bv{r}_s &= r\buvec{u}
@@ -519,7 +519,7 @@ where $r$ is obtained from \Cref{eqn:launch_loc_r_square_expanded}. Thus, just b
 
 \subsection{Launch Velocity}
 \label{subsec:launch_velocity}
-Once we know the position of the particle, we need to provide an initial velocity to launch it into an orbit around the asteroid. But this has to do much more than just providing a velocity magnitude. The velocity magnitude is accompanied by a launch direction which is defined by two angles, namely, Launch Azimuth ($\eta$) and Launch Declination ($\chi$).
+Once we know the position of the particle, we need to provide an initial velocity to launch it off the surface of the asteroid. This has to do much more than just providing a velocity magnitude. The velocity magnitude is accompanied by a launch direction which is defined by two angles, namely Launch Azimuth ($\eta$) and Launch Declination ($\chi$).
 %
 \newline\newline
 %
@@ -529,15 +529,14 @@ These angles can be understood as follows. Suppose you are standing on the surfa
 \centering
 \captionsetup{justification=centering}
 \subfloat[]{
-    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_ARF_velocity_vectors_cone.pdf}
+    \includegraphics[width=0.5\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_ARF_velocity_vectors_cone.pdf}
     \label{fig:longestEdge_velocity_vector_cone_1}
 }
-
 \subfloat[]{
-    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{velocity_vector_ARF_lateral_view.pdf}
+    \includegraphics[width=0.5\textwidth, height=0.5\textheight, keepaspectratio=true]{velocity_vector_ARF_lateral_view.pdf}
     \label{fig:longestEdge_velocity_vector_cone_2}
 }
-\caption{Various velocity vectors depicted at the longest edge of the ellipsoid shaped asteroid i.e. for a launch location longitude and latitude of \SI{0}{\degree}. \protect\Cref{fig:longestEdge_velocity_vector_cone_1} depicts the front view of multiple velocity vectors spaced at \SI{45}{\degree} azimuth from each other and at a constant declination of \SI{45}{\degree}. All vectors are expressed in the rotating frame or the \gls{ARF}. \protect\Cref{fig:longestEdge_velocity_vector_cone_2} depicts the lateral view of the same velocity vectors.}
+\caption{Various velocity vectors depicted at the longest edge of the ellipsoid shaped asteroid i.e. for a launch location longitude and latitude of \SI{0}{\degree}. \protect\Cref{fig:longestEdge_velocity_vector_cone_1} depicts the front view of multiple velocity vectors spaced at \SI{45}{\degree} azimuth from each other and at a constant declination of \SI{45}{\degree}. All vectors are expressed in the \gls{ARF}. \protect\Cref{fig:longestEdge_velocity_vector_cone_2} depicts the lateral view of the same velocity vectors.}
 \label{fig:longest_edge_velocity_vector_cone}
 \end{figure}
 \FloatBarrier
@@ -595,7 +594,7 @@ where $V$ is the magnitude of the velocity chosen manually at the start of the s
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{surfaceFrame_longestEdge.pdf}
+\includegraphics[width=\textwidth, height=0.25\textheight, keepaspectratio=true]{surfaceFrame_longestEdge.pdf}
 \caption{An example of the \gls{SF} at the launch location of latitude and longitude \SI{0}{\degree} i.e. the longest edge of the asteroid. The x-axis points to the local North; z-axis is in the direction of the unit normal vector at the launch location; and finally the y-axis completes right-hand rule orthogonal frame.}
 \label{fig:surface_frame}
 \end{figure}
@@ -609,7 +608,7 @@ Up until now we discussed the dynamics involved with the particle motion around 
 %
 \newline\newline
 %
-The conservative guarantee escape speed method is obtained by making use of the maximum gravity potential, between the actual potential of the irregular body and an equivalent point mass potential, at the location of the launch of the particle. If the launch speed is above the conservative guarantee escape speed, then the particle will escape immediately after launch. The conservative guaranteed escape speed method works best for uniform gravity field models, as we'll see later in \Cref{subsec:nonconservative}, but fails when one accounts for non-uniform gravity field models such as the \gls{CDE} model.
+The conservative guarantee escape speed method is obtained by making use of the maximum gravity potential, between the actual potential of the irregular body and an equivalent point mass potential, at the location of the launch of the particle. If the launch speed is above the conservative guarantee escape speed, then the particle will escape immediately after launch. The conservative guaranteed escape speed method works best for uniform gravity field models, as we will see later in \Cref{subsec:nonconservative}, but fails when one accounts for non-uniform gravity field models such as the \gls{CDE} model.
 % This method however, does not account for the cases which result in an escape situation after completing one or more orbital revolutions around the asteroid or basically the cases where the launch speed is below the conservative guarantee escape speed and still result in an escape scenario. The idea of developing a new analytical method stems from this problem and we call it the non-conservative guarantee escape speed since we aim to account for those cases as well where the escape does not happen immediately.
 %
 \newline\newline
@@ -662,7 +661,7 @@ Now for a non-conservative approach, we will not use $\bv{v}_I = \sqrt{2U_{max}}
 %
 \newline\newline
 %
-Consider the \gls{EOM} mentioned in \Cref{eqn:p2bp}, with the exception that we only consider the gravity potential and remove all external perturbations on the left hand side of the equation. These equations do not have an explicit dependence on time which means that the Jacobian for the system exists and is conserved \parencite{scheeresBook}. The Jacobian, expressed in the \gls{ARF}, is given as follows \parencite{scheeresBook}:
+Consider the \gls{EOM} mentioned in \Cref{eqn:p2bp}, with the exception that we only consider the gravity potential and remove all external perturbations on the left-hand side of the equation. These equations do not have an explicit dependence on time which means that the Jacobian for the system exists and is conserved \parencite{scheeresBook}. The Jacobian, expressed in the \gls{ARF}, is given as follows \parencite{scheeresBook}:
 %%%
 \begin{align}
     J &= \frac{1}{2} v_B^2 - \frac{1}{2} \omega^2(x^2 + y^2) - U(\bv{r})
