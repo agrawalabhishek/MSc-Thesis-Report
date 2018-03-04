@@ -563,7 +563,7 @@ where $\bv{r}_s$ is the position vector to the launch location from the centre o
 %
 \newline\newline
 %
-$\buv{x}$ is also viewed as the x-axis basis vector for a frame of reference fixed and centered at the launch location. This frame of reference is termed as the \gls{SF}. Note that the \gls{SF} is not used to define the orbital motion of the regolith and hence it is not one of the standard reference frames. This is why it was not mentioned in \Cref{sec:reference_frames} and is only defined here since it's use is only for obtaining the velocity vector. The z-axis of \gls{SF} is defined in the direction of the unit normal vector at the launch location and the y-axis is obtained by following the right-hand rule to form the orthogonal frame. The \gls{SF} is shown in \Cref{fig:surface_frame}.
+$\buv{x}$ is also viewed as the x-axis basis vector for a frame of reference fixed and centered at the launch location. This frame of reference is termed as the \gls{SF}. Note that the \gls{SF} is not used to define the orbital motion of the regolith and hence it is not one of the standard reference frames. This is why it was not mentioned in \Cref{sec:reference_frames} and is only defined here since its use is only for obtaining the velocity vector. The z-axis of the \gls{SF} is defined in the direction of the unit normal vector at the launch location and the y-axis is obtained by following the right-hand rule to form the orthogonal frame. The \gls{SF} is shown in \Cref{fig:surface_frame}.
 %
 \newline\newline
 %
@@ -578,14 +578,14 @@ Note that the basis vectors of the \gls{SF} are expressed in the \gls{ARF} and t
     \label{eqn:sf_zbasis_exp}
 \end{align}
 %%%
-Then the velocity vector components in \gls{ARF} are obtained as follows:
+The velocity vector components in the \gls{ARF} are obtained as follows:
 %%%
 \begin{align}
-    v_x &= V . \left[ x_1 \cos\eta \sin\chi + y_1 \sin\eta \sin\chi + z_1 \cos\chi \right]
+    v_x &= V \left[ x_1 \cos\eta \sin\chi + y_1 \sin\eta \sin\chi + z_1 \cos\chi \right]
     \label{eqn:xVelocity} \\
-    v_y &= V . \left[ x_2 \cos\eta \sin\chi + y_2 \sin\eta \sin\chi + z_2 \cos\chi \right]
+    v_y &= V \left[ x_2 \cos\eta \sin\chi + y_2 \sin\eta \sin\chi + z_2 \cos\chi \right]
     \label{eqn:yVelocity} \\
-    v_z &= V . \left[ x_3 \cos\eta \sin\chi + y_3 \sin\eta \sin\chi + z_3 \cos\chi \right]
+    v_z &= V \left[ x_3 \cos\eta \sin\chi + y_3 \sin\eta \sin\chi + z_3 \cos\chi \right]
     \label{eqn:zVelocity}
 \end{align}
 %%%
@@ -595,31 +595,35 @@ where $V$ is the magnitude of the velocity chosen manually at the start of the s
 \centering
 \captionsetup{justification=centering}
 \includegraphics[width=\textwidth, height=0.25\textheight, keepaspectratio=true]{surfaceFrame_longestEdge.pdf}
-\caption{An example of the \gls{SF} at the launch location of latitude and longitude \SI{0}{\degree} i.e. the longest edge of the asteroid. The x-axis points to the local North; z-axis is in the direction of the unit normal vector at the launch location; and finally the y-axis completes right-hand rule orthogonal frame.}
+\caption{An example of the \gls{SF} at the launch location of latitude and longitude \SI{0}{\degree} i.e. the longest edge of the asteroid. The x-axis points to the local North; z-axis is in the direction of the unit normal vector at the launch location; and finally the y-axis completes right-hand rule orthogonal frame. Two more generalized examples of the \gls{SF} are illustrated in \Cref{fig:surface_frame_leadingEdge_vv,fig:launch_velocity_angles_vv}.}
 \label{fig:surface_frame}
 \end{figure}
 \FloatBarrier
 %%%
-As said earlier, the x-basis vector for the \gls{SF} can not be defined by the method described previously for launch locations on the two poles of the asteroid. Hence we use two alternate definitions for the x-basis vector in those scenarios however all other computations remain the same as described before. If the launch location is the North pole, then the x-basis vector of the \gls{SF} is defined as $\buv{x}=[1, 0, 0]$ and for South pole it is defined as $\buv{x}=[-1, 0, 0]$.
+As said earlier, the x-basis vector for the \gls{SF} can not be defined by the method described previously for launch locations on the two poles of the asteroid. Hence we use two alternate definitions for the x-basis vector in those scenarios; however all other computations remain the same as described before. If the launch location is the North pole, then the x-basis vector of the \gls{SF} is defined as $\buv{x}=[1, 0, 0]$ and for South pole it is defined as $\buv{x}=[-1, 0, 0]$.
 
-\section{Non-conservative Guarantee Escape Speed}
+\section{Guaranteed Escape Speed}
 \label{sec:escape_speed_derivation}
-Up until now we discussed the dynamics involved with the particle motion around an asteroid and we also devised methods to launch regolith from the surface into an orbit. It was mentioned earlier that the thesis has employed a full numerical simulation approach to the problem at hand, but while doing that we did attempt at finding a new analytical method to determine a non-conservative guarantee escape speed.
+Up until now we discussed the dynamics involved with the particle motion around an asteroid and we also devised methods to launch regolith off the surface of the asteroid. It was mentioned earlier that the thesis has employed a full numerical simulation approach to the problem at hand, but while doing that we did attempt at finding a new analytical method to determine a \gls{NCGES}; as opposed to a \gls{CGES} method discussed by \cite{scheeresBook}.
 %
 \newline\newline
 %
-The conservative guarantee escape speed method is obtained by making use of the maximum gravity potential, between the actual potential of the irregular body and an equivalent point mass potential, at the location of the launch of the particle. If the launch speed is above the conservative guarantee escape speed, then the particle will escape immediately after launch. The conservative guaranteed escape speed method works best for uniform gravity field models, as we will see later in \Cref{subsec:nonconservative}, but fails when one accounts for non-uniform gravity field models such as the \gls{CDE} model.
-% This method however, does not account for the cases which result in an escape situation after completing one or more orbital revolutions around the asteroid or basically the cases where the launch speed is below the conservative guarantee escape speed and still result in an escape scenario. The idea of developing a new analytical method stems from this problem and we call it the non-conservative guarantee escape speed since we aim to account for those cases as well where the escape does not happen immediately.
+The \gls{CGES} method is obtained by making use of the maximum gravity potential, between the actual potential of the irregular body and an equivalent point mass potential, at the location of the launch of the particle. For a body with non-uniform gravity field, if the launch speed is above the \gls{CGES}, then the particle will definitely escape the asteroid and can not have any other final fate; however for launch velocities below the \gls{CGES}, the particle can encounter any of the final fates, including escape. Thus in the case of a non-uniform gravity field, the \gls{CGES} can not be used for a definitive predetermination of all launch velocities that will lead to an escape situation. The \gls{CGES} method works best for uniform gravity field models, as we will see later in \Cref{chap:nonconservative}. In that case, it acts as a definitive demarcation between the final fates escape ($V_{launch} > $ \gls{CGES}) and re-impact ($V_{launch} < $ \gls{CGES}). The theory behind the \gls{CGES} method is explained in \Cref{subsec:conservative_escape_speed_derivation}.
 %
 \newline\newline
 %
-We will first understand how the conventional guarantee escape speed is obtained since it will help us in understanding the method for the non-conventional guarantee escape speed later on. The inertial velocity of a particle which is resting on an asteroid's surface is given as $\bv{v}_I = \bv{\omega} \times \bv{r}$, where \bvt{r} is the location to the particle from the centre of the asteroid. The resulting vector is pointing outwards from the asteroid if the launch location is on the leading edge of the asteroid and inwards if the launch location is on the trailing edge of the asteroid \parencite{scheeresBook}. The idea is easily depicted in \Cref{fig:conservative_escape_speed_leading_trailing_edges}.
+The \gls{NCGES} method on the other hand uses the property of conservation of the Jacobi integral and assumes a parabolic escape trajectory for the particle; the combination of these two is then used to derive a method which is completely different from the \gls{CGES}. The theory behind \gls{NCGES} is explained in more detail in \Cref{subsec:non_conservative_escape_derivation}. In both the \gls{CGES} and the \gls{NCGES} methods, the non-uniform gravity field of the asteroid is taken into account, however, no other external perturbations are included in their formulation.
+
+\subsection{Conservative Guaranteed Escape Speed}
+\label{subsec:conservative_escape_speed_derivation}
+% This method however, does not account for the cases which result in an escape situation after completing one or more orbital revolutions around the asteroid or basically the cases where the launch speed is below the conservative guaranteed escape speed and still result in an escape scenario. The idea of developing a new analytical method stems from this problem and we call it the \gls{NCGES} since we aim to account for those cases as well where the escape does not happen immediately.
+We will first understand how the \gls{CGES} is obtained since it will help us in understanding the derivation for the \gls{NCGES} later on. The inertial velocity of a particle which is resting on an asteroid's surface is given as $\bv{v}_I = \bv{\omega} \times \bv{r}$, where \bvt{r} is the location to the particle from the centre of the asteroid. The resulting vector is pointing outwards from the asteroid if the launch location is on the leading edge of the asteroid and inwards if the launch location is on the trailing edge of the asteroid \parencite{scheeresBook}. This is depicted in \Cref{fig:conservative_escape_speed_leading_trailing_edges}.
 %%%
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.3\textheight, keepaspectratio=true]{leading_trailing_edge.pdf}
-\caption{Schematic for inertial velocity at the surface for different launch locations \parencite{scheeresBook}.}
+\includegraphics[width=\textwidth, height=0.25\textheight, keepaspectratio=true]{leading_trailing_edge.pdf}
+\caption{Particle inertial velocity at the surface for different launch locations \parencite{scheeresBook}.}
 \label{fig:conservative_escape_speed_leading_trailing_edges}
 \end{figure}
 \FloatBarrier
@@ -631,7 +635,7 @@ The idea now is to provide an additional launch speed, for instance in the norma
     \label{eqn:conservative_inertial_escape}
 \end{align}
 %%%
-where $v_e\buv{n}$ is the velocity, expressed in \gls{ARF}, with which a particle is launched in the normal direction such that the particle is on an escape trajectory. All other terms have been defined previously. The conservative approach is to equate $\bv{v}_I$ to $\sqrt{2U_{max}}$ where $U_{max} = max[U(\bv{r}), \mu/\bv{r}]$ \parencite{scheeresBook}. \Cref{eqn:conservative_inertial_escape} can then be re-written as follows:
+where $v_e\buv{n}$ is the velocity, expressed in the \gls{ARF}, with which a particle is launched in the normal direction such that the particle is on an escape trajectory. All other terms have been defined previously. The conservative approach is to equate $\bv{v}_I$ to $\sqrt{2U_{max}}$ where $U_{max} = max[U(\bv{r}), \mu/\bv{r}]$ \parencite{scheeresBook}. \Cref{eqn:conservative_inertial_escape} can then be re-written as follows:
 %%%
 \begin{align}
     \sqrt{2U_{max}} &= v_{e}\buv{n} + \bv{\omega} \times \bv{r} \\
@@ -646,18 +650,18 @@ where $v_e\buv{n}$ is the velocity, expressed in \gls{ARF}, with which a particl
     v_e &= -(\buv{n} \cdotp (\bv{\omega} \times \bv{r})) \pm \sqrt{(\buv{n} \cdotp (\bv{\omega} \times \bv{r}))^2 + 2U_{max} - (\bv{\omega} \times {\bv{r}})^2}
 \end{align}
 %%%
-Since the speed can not be negative, the formula is re-written as:
+Since speed can not be negative, the formula is re-written as:
 %%%
 \begin{align}
     v_e &= -(\buv{n} \cdotp (\bv{\omega} \times \bv{r})) + \sqrt{(\buv{n} \cdotp (\bv{\omega} \times \bv{r}))^2 + 2U_{max} - (\bv{\omega} \times {\bv{r}})^2}
     \label{eqn:conservative_escape_speed}
 \end{align}
 %%%
-\Cref{eqn:conservative_escape_speed} thus gives the conservative escape speed, expressed in the \gls{ARF}, for a particle launched in the normal direction. The equation is equally applicable for a particle launched in any general direction as well by substituting $\buv{n}$ with the unit vector for the direction in which the launch takes place. Thus if a particle is launched with a velocity above or equal to the one mentioned in \Cref{eqn:conservative_escape_speed}, then it would result in a guaranteed escape situation.
-%
-\newline\newline
-%
-Now for a non-conservative approach, we will not use $\bv{v}_I = \sqrt{2U_{max}}$ to get a guaranteed escape launch speed. We will derive an alternate relation for $\bv{v}_I$ first and then later on substitute it back into \Cref{eqn:conservative_escape_speed} in place of $2U_{max}$ to get the non-conservative guaranteed escape launch speed.
+\Cref{eqn:conservative_escape_speed} thus gives the \gls{CGES}, expressed in the \gls{ARF}, for a particle launched in the normal direction. The equation is equally applicable for a particle launched in any general direction as well by substituting $\buv{n}$ with the unit vector for the direction in which the launch takes place. Thus if a particle is launched with a velocity above or equal to the one mentioned in \Cref{eqn:conservative_escape_speed}, then it would result in a guaranteed escape situation.
+
+\subsection{Non-Conservative Guaranteed Escape Speed}
+\label{subsec:non_conservative_escape_derivation}
+For the \gls{NCGES}, we will not use $\bv{v}_I = \sqrt{2U_{max}}$ to get a guaranteed escape launch speed. We will derive an alternate relation for $\bv{v}_I$ first and then later on substitute it back into \Cref{eqn:conservative_escape_speed} in place of $2U_{max}$ to get the \gls{NCGES}.
 %
 \newline\newline
 %
@@ -668,13 +672,13 @@ Consider the \gls{EOM} mentioned in \Cref{eqn:p2bp}, with the exception that we 
     \label{eqn:jacobian}
 \end{align}
 %%%
-where $v_B$ is the velocity of the particle in the \gls{ARF}; $\omega$ is the magnitude of the angular velocity of the rotating asteroid and is along the z-axis of the \gls{ARF}; $(x,y)$ are the x-y coordinate of the orbiting particle; $U(\bv{r})$ is the small-body gravity potential, which in our case is the \gls{CDE} potential model. From transport theorem, we use the relation between an inertial velocity and the rotating frame velocity:
+where $v_B$ is the velocity of the particle in the \gls{ARF}; $\omega$ is the magnitude of the angular velocity of the rotating asteroid and is along the z-axis of the \gls{ARF}; $(x,y)$ are the x-y coordinates of the orbiting particle; $U(\bv{r})$ is the small-body gravity potential, which in our case is the \gls{CDE} potential model. From transport theorem, we use the relation between an inertial velocity and the rotating frame velocity:
 %%%
 \begin{align}
     \bv{v}_B &= \bv{v}_I - (\bv{\omega} \times \bv{r}) \\
-    v_B^2 &= v_I^2 + (\bv{\omega} \times \bv{r})^2 - 2 \bv{v}_I \cdotp (\bv{\omega} \times \bv{r}) \\
-    v_B^2 &= v_I^2 + (\bv{\omega} \times \bv{r})^2 - 2 \bv{\omega} \cdotp (\bv{r} \times \bv{v}_I) \\
-    v_B^2 &= v_I^2 + (\bv{\omega} \times \bv{r})^2 - 2 \bv{\omega} \cdotp \bv{H}
+    v_B^2 &= v_I^2 + (\bv{\omega} \times \bv{r})^2 - 2 \bv{v}_I \cdotp (\bv{\omega} \times \bv{r}) \nonumber \\
+    &= v_I^2 + (\bv{\omega} \times \bv{r})^2 - 2 \bv{\omega} \cdotp (\bv{r} \times \bv{v}_I) \nonumber \\
+    &= v_I^2 + (\bv{\omega} \times \bv{r})^2 - 2 \bv{\omega} \cdotp \bv{H}
     \label{eqn:arf_velocity_modified_with_H}
 \end{align}
 %%%
@@ -685,7 +689,7 @@ where \bvt{H} is the angular momentum of the orbiting particle. We substitute \C
     \label{eqn:jacobian_mod}
 \end{align}
 %%%
-Considering that after launch the particle is on a parabolic trajectory such that it barely escapes then in such a case the energy of the particle would be 0 which reduces the Jacobian to $J_{\infty} = -\bv{\omega} \cdotp \bv{H}_{\infty}$. Now at the instance of the launch, the Jacobian is expressed as follows:
+Considering that after launch the particle is on a parabolic trajectory such that it just escapes then in such a case the energy of the particle would be 0 which reduces the Jacobian to $J_{\infty} = -\bv{\omega} \cdotp \bv{H}_{\infty}$. Thus, $J_{\infty}$ is the Jacobi integral's value when the particle is just outside the sphere of influence of the asteroid. Now at the instance of the launch, the Jacobian is expressed as follows:
 %%%
 \begin{align}
     J_0 &= \frac{1}{2} v_{I_0}^2 - \bv{\omega} \cdotp \bv{H}_0 - U(\bv{r}_0)
@@ -706,7 +710,7 @@ For parabolic trajectories, the angular momentum magnitude is expressed in terms
     \label{eqn:jacobian_equate_cosi}
 \end{align}
 %%%
-We will consider only equatorial orbits for now and hence \Cref{eqn:jacobian_equate_cosi} can be stated as simply:
+We will consider only equatorial orbits for now to simplify \Cref{eqn:jacobian_equate_cosi} by making the cosine term equal to one. Hence, \Cref{eqn:jacobian_equate_cosi} can be stated as simply:
 %%%
 \begin{align}
     \frac{1}{2} v_{I_0}^2 - \bv{\omega} \cdotp \bv{H}_0 - U(\bv{r}_0) &= -\omega \sqrt{2\mu q_{\infty}} \\
@@ -714,7 +718,7 @@ We will consider only equatorial orbits for now and hence \Cref{eqn:jacobian_equ
     \label{eqn:jacobian_equate_equatorial}
 \end{align}
 %%%
-Note we can write $H_0 = \bv{r}_0 \times \bv{v}_{I_0}$, where $\bv{r_0}$ is expressed in \gls{ARF}, since at time $t = 0$ both \gls{ARF} and \gls{AIF} are aligned which means that $\bv{r}_{I_0} = \bv{r}_{B_0}$. The intent now is to solve for $v_{I_0}$ from \Cref{eqn:jacobian_equate_equatorial}, which is the inertial velocity at launch that eventually leads to an escape scenario.
+Note we can write $H_0 = \bv{r}_0 \times \bv{v}_{I_0}$, where $\bv{r_0}$ is expressed in the \gls{ARF}, since at time $t = 0$ both \gls{ARF} and \gls{AIF} are aligned which means that $\bv{r}_{I_0} = \bv{r}_{B_0}$. The intent now is to solve for $v_{I_0}$ from \Cref{eqn:jacobian_equate_equatorial}, which is the inertial velocity at launch that eventually leads to an escape scenario.
 %%%
 \begin{figure}[htb]
 \centering
@@ -725,7 +729,7 @@ Note we can write $H_0 = \bv{r}_0 \times \bv{v}_{I_0}$, where $\bv{r_0}$ is expr
 \end{figure}
 \FloatBarrier
 %%%
-We need to evaluate the second term on the left hand side of \Cref{eqn:jacobian_equate_equatorial} using the angle definitions given in \Cref{fig:velocity_vector_angles}. In that, $\gamma$ is the angle between the velocity vector and the plane perpendicular to the position vector; $\delta$ is the launch declination angle as explained in \Cref{subsec:launch_velocity}; $\alpha$ is the angle between the normal vector and the position vector direction and finally, $\beta$ is the angle between the velocity vector and the position vector direction. Using these definitions, the cross product in \Cref{eqn:jacobian_equate_equatorial} is evaluated as follows:
+We need to evaluate the second term on the left-hand side of \Cref{eqn:jacobian_equate_equatorial} using the angle definitions given in \Cref{fig:velocity_vector_angles}. In that, $\gamma$ is the angle between the velocity vector and the plane perpendicular to the position vector; $\delta$ is the launch declination angle as explained in \Cref{subsec:launch_velocity}; $\alpha$ is the angle between the normal vector and the position vector direction and finally, $\beta$ is the angle between the velocity vector and the position vector direction. Using these definitions, the cross product in \Cref{eqn:jacobian_equate_equatorial} is evaluated as follows:
 %%%
 \begin{align}
     \bv{\omega} \cdotp (\bv{r}_0 \times \bv{v}_{I_0}) &= \bv{\omega} \cdotp (r_0 v_{I_0} \sin(\beta) \buv{h}) \\
@@ -737,7 +741,7 @@ We need to evaluate the second term on the left hand side of \Cref{eqn:jacobian_
     \label{eqn:cross_product_eval}
 \end{align}
 %%%
-where $\buv{h}$ specifies the direction of the cross product, i.e. the angular momentum vector $\bv{H}_0$. The angle definitions given in \Cref{fig:velocity_vector_angles} remains valid even for a launch location at the trailing edge of the asteroid and hence the angular definitions remain generalized. In addition to having an equatorial orbit, we can further simplify \Cref{eqn:cross_product_eval} by keeping the launch site at the longest edge of the ellipsoid which means that we can make $\alpha=0$. Thus \Cref{eqn:jacobian_equate_equatorial} can be re-written as:
+where $\buv{h}$ specifies the direction of the cross product, i.e. the unit vector of the angular momentum vector $\bv{H}_0$. The angle definitions given in \Cref{fig:velocity_vector_angles} remain valid even for a launch location at the trailing edge of the asteroid and hence the angular definitions remain generalized. In addition to having an equatorial orbit, we can further simplify \Cref{eqn:cross_product_eval} by keeping the launch site at the longest edge of the ellipsoid which means that we can make $\alpha=0$. Thus \Cref{eqn:jacobian_equate_equatorial} can be re-written as:
 %%%
 \begin{align}
     \frac{1}{2} v_{I_0}^2 - (r_0 v_{I_0} \sin(\delta)) \bv{\omega}\cdotp\buv{h} - U(\bv{r}_0) &= -\omega \sqrt{2\mu q_{\infty}}
@@ -751,14 +755,24 @@ where $\buv{h}$ specifies the direction of the cross product, i.e. the angular m
     \label{eqn:non_conservative_inertial_guaranteed_escape_speed}
 \end{align}
 %%%
-Thus instead of using $v_{I_0} = \sqrt{2U_{max}}$ in \Cref{eqn:conservative_quadratic}, we use the formula in \Cref{eqn:non_conservative_inertial_guaranteed_escape_speed} which leads to modifying \Cref{eqn:conservative_escape_speed} as follows:
+Thus instead of using $v_{I_0} = \sqrt{2U_{max}}$ in \Cref{eqn:conservative_quadratic} and subsequently in \Cref{eqn:conservative_escape_speed}, as we did for the definition of the \gls{CGES}, we use the formula in \Cref{eqn:non_conservative_inertial_guaranteed_escape_speed} to define the \gls{NCGES}. This leads to modifying \Cref{eqn:conservative_escape_speed} as follows:
 %%%
 \begin{align}
     v_e &= -(\buv{d} \cdotp (\bv{\omega} \times \bv{r})) + \sqrt{(\buv{d} \cdotp (\bv{\omega} \times \bv{r}))^2 + v_{I_0}^2 - (\bv{\omega} \times {\bv{r}})^2}
     \label{eqn:nonconservative_escape_speed}
 \end{align}
 %%%
-where instead of using $\buv{n}$ we use the unit vector $\buv{d}$, representing a general direction of launch and not just the normal direction. Note that \Cref{eqn:jacobian_equate_equatorial_mod,eqn:non_conservative_inertial_guaranteed_escape_speed} are valid only for the launch location at the longest edge of the ellipsoid. We simplified the equations by making $\alpha=0$ so that testing this approach for a non-conservative guaranteed escape speed can be made easy, however the approach can be generalized by using a non-zero value for $\alpha$ in \Cref{eqn:cross_product_eval} as well.
+where $v_{I_0}$ is defined in \Cref{eqn:non_conservative_inertial_guaranteed_escape_speed} for the \gls{NCGES}; and instead of using $\buv{n}$ we use the unit vector $\buv{d}$, representing a general direction of launch and not just the normal direction.
+%
+\newline\newline
+%
+Thus, the difference between the \gls{CGES} and the \gls{NCGES} is in the definition of the inertial velocity at launch. For the \gls{CGES}, it is defined as $\sqrt{2U_{max}}$, and for \gls{NCGES} it is defined by the expression in \Cref{eqn:non_conservative_inertial_guaranteed_escape_speed}.
+%
+\newline\newline
+%
+Note that the definition of the inertial velocity at launch as expressed in \Cref{eqn:non_conservative_inertial_guaranteed_escape_speed} is only valid when a particle is launched from a location such that the radial position vector to the launch location and the surface normal vector are aligned, and when the particle is launched (and stays) in an equatorial orbit around the asteroid. For any other case, the expression for $v_{I_0}$ will have to be redefined since the cosine term in \Cref{eqn:jacobian_equate_cosi} will not remain equal to one for a non-equatorial orbit and the angle $\alpha$ in \Cref{eqn:cross_product_eval} will not remain zero when the surface normal and the launch location position vector are not aligned.
+
+% Note that \Cref{eqn:jacobian_equate_equatorial_mod,eqn:non_conservative_inertial_guaranteed_escape_speed} are valid only for the launch location at the longest edge of the ellipsoid. We simplified the equations by making $\alpha=0$ so that testing this approach for a \gls{NCGES} can be made easy, however the approach can be generalized by using a non-zero value for $\alpha$ in \Cref{eqn:cross_product_eval} as well.
 
 % \section{Conclusion}
 % \label{sec:dynamics_conclusion}
