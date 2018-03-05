@@ -613,6 +613,10 @@ The \gls{CGES} method is obtained by making use of the maximum gravity potential
 \newline\newline
 %
 The \gls{NCGES} method on the other hand uses the property of conservation of the Jacobi integral and assumes a parabolic escape trajectory for the particle; the combination of these two is then used to derive a method which is completely different from the \gls{CGES}. The theory behind \gls{NCGES} is explained in more detail in \Cref{subsec:non_conservative_escape_derivation}. In both the \gls{CGES} and the \gls{NCGES} methods, the non-uniform gravity field of the asteroid is taken into account, however, no other external perturbations are included in their formulation.
+%
+\newline\newline
+%
+The reason for working towards a \gls{NCGES} algorithm is to account for the inadequacy of the \gls{CGES}. As we will see later in \Cref{chap:nonconservative}, the \gls{CGES} method fails to account for certain escape cases. Most of these cases involve particles completing one or more orbital revolutions around the asteroid before finally embarking on an escape trajectory. These are the cases that we hope to account for through the \gls{NCGES} algorithm, in addition to the ones that are already accounted for through the \gls{CGES} method.
 
 \subsection{Conservative Guaranteed Escape Speed}
 \label{subsec:conservative_escape_speed_derivation}
@@ -766,11 +770,11 @@ where $v_{I_0}$ is defined in \Cref{eqn:non_conservative_inertial_guaranteed_esc
 %
 \newline\newline
 %
-Thus, the difference between the \gls{CGES} and the \gls{NCGES} is in the definition of the inertial velocity at launch. For the \gls{CGES}, it is defined as $\sqrt{2U_{max}}$, and for \gls{NCGES} it is defined by the expression in \Cref{eqn:non_conservative_inertial_guaranteed_escape_speed}.
+Thus, the difference between the \gls{CGES} and the \gls{NCGES} is in the definition of the inertial guaranteed escape velocity at launch. For the \gls{CGES}, it is defined as $\sqrt{2U_{max}}$, and for \gls{NCGES} it is defined by the expression in \Cref{eqn:non_conservative_inertial_guaranteed_escape_speed}. As mentioned in the introduction of \Cref{sec:escape_speed_derivation}, we work towards a \gls{NCGES} method to also account for the escape cases where a particle completes one or more orbital revolutions around the asteroid before finally escaping. Due to a non-uniform gravity field, the trajectory of the particle is osculating and for an escape situation that does not occur immediately, the trajectory could osculate from a bounded circular or elliptical orbit to a parabolic or hyperbolic escape trajectory. Thus, with that in mind it should be noted that the value of $q_\infty$ in \Cref{eqn:non_conservative_inertial_guaranteed_escape_speed} is not determined from the initial launch position and velocity; rather, it is the value of the periapsis distance of the particle on a hypothetical parabolic trajectory, just outside the sphere of influence of the asteroid.
 %
 \newline\newline
 %
-Note that the definition of the inertial velocity at launch as expressed in \Cref{eqn:non_conservative_inertial_guaranteed_escape_speed} is only valid when a particle is launched from a location such that the radial position vector to the launch location and the surface normal vector are aligned, and when the particle is launched (and stays) in an equatorial orbit around the asteroid. For any other case, the expression for $v_{I_0}$ will have to be redefined since the cosine term in \Cref{eqn:jacobian_equate_cosi} will not remain equal to one for a non-equatorial orbit and the angle $\alpha$ in \Cref{eqn:cross_product_eval} will not remain zero when the surface normal and the launch location position vector are not aligned.
+Note that the definition of the inertial guaranteed escape velocity at launch as expressed in \Cref{eqn:non_conservative_inertial_guaranteed_escape_speed} is only valid when a particle is launched from a location such that the radial position vector to the launch location and the surface normal vector are aligned, and when the particle is launched (and stays) in an equatorial orbit around the asteroid. For any other case, the expression for $v_{I_0}$ will have to be redefined since the cosine term in \Cref{eqn:jacobian_equate_cosi} will not remain equal to one for a non-equatorial orbit and the angle $\alpha$ in \Cref{eqn:cross_product_eval} will not remain zero when the surface normal and the launch location position vector are not aligned.
 
 % Note that \Cref{eqn:jacobian_equate_equatorial_mod,eqn:non_conservative_inertial_guaranteed_escape_speed} are valid only for the launch location at the longest edge of the ellipsoid. We simplified the equations by making $\alpha=0$ so that testing this approach for a \gls{NCGES} can be made easy, however the approach can be generalized by using a non-zero value for $\alpha$ in \Cref{eqn:cross_product_eval} as well.
 

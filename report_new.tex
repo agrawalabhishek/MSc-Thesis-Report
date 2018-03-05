@@ -84,8 +84,9 @@ Carl Sagan
 \glsaddall
 %
 % \renewcommand{\glstextformat}[1]{\color{orange} #1}
+\printglossary[type=\acronymtype, title=List of Acronyms, style=long]
 % \printglossary[type=\acronymtype, title=List of Acronyms, style=superragged]
-\printglossary[type=\acronymtype, title=List of Acronyms, style=superborder]
+% \printglossary[type=\acronymtype, title=List of Acronyms, style=superborder]
 % \printglossary[type=\acronymtype, title=List of Acronyms]
 %\afterpage{\null\thispagestyle{empty}\addtocounter{page}{-1}\newpage}
 %
@@ -137,6 +138,34 @@ Carl Sagan
     }
     \caption{Re-impact trajectory for regolith launched from the longest edge of the asteroid at \SI{5}{\metre\per\second}. Trajectories for two different launch azimuths is shown, i.e., \SI{90}{\degree} and \SI{10}{\degree}.}
     \label{fig:5ms_traj_90and10_azim_noSP}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \subfloat[]{
+        \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/non_conservative_escape_speed/5ms_270Azim_40Decl_2dTraj.pdf}
+        \label{fig:40Deg_declination}
+    }
+
+    \subfloat[]{
+        \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/non_conservative_escape_speed/5ms_270Azim_41Decl_2dTraj.pdf}
+        \label{fig:41Deg_declination}
+    }
+    \caption{Trajectory plots for regolith launched from the longest edge of the asteroid at \SI{5}{\metre\per\second}, at two different launch declinations \protect\subref{fig:40Deg_declination} \SI{40}{\degree} and \protect\subref{fig:41Deg_declination} \SI{41}{\degree} are shown.}
+    \label{fig:non_conservative_5ms_40and41_declination}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/non_conservative_escape_speed/qinfinity_dot7alpha_plus.pdf}
+    \caption{A non-applicable \gls{NCGES} curve for $q_\infty=0.7$. The curve in the rotating frame or the \gls{ARF} shows negative speed values which is not valid.}
+    \label{fig:non_conservative_qinfinity_0.7}
     \end{figure}
     \FloatBarrier
     %%%
