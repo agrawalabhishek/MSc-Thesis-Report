@@ -245,6 +245,78 @@ Carl Sagan
     \begin{figure}[htb]
     \centering
     \captionsetup{justification=centering}
+    \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/3.2Density_1cmSize/reimpactRangeComparison.png}
+    \caption{Range to re-impact location from the launch point for different velocities. Particle code LoGSP-1.}
+    \label{fig:LoGSP_1_range_comparison}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    % another option for includegraphics - keepaspectratio
+    \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/3.2Density_1cmSize/maxAltitude_reimpactCase.png}
+    \caption{Maximum radial distance (from the centre of the asteroid) attained by the regolith in orbit for different launch velocities and launch azimuths. The particles were launched from the longest edge of the ellipsoid (asteroid). Plots are for particle code LoGSP-1 and only for the re-impact scenario.}
+    \label{fig:LoGSP_1_maxAltitude_reimpactscenario}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/3.2Density_1cmSize/time_to_reimpact_all_solar_phases.pdf}
+    \caption{Time taken by regolith at different velocities and launch directions to re-impact with the surface of the asteroid. Particle code LoGSP-1.}
+    \label{fig:LoGSP_1_reimpact_time}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[p]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[scale=0.5]{Results/Images/longest_edge_perturbations/3.2Density_1cmSize/altitude_versus_time_all_cases_part_1.pdf}
+    \includegraphics[scale=0.5]{Results/Images/longest_edge_perturbations/3.2Density_1cmSize/altitude_versus_time_all_cases_part_2.pdf}
+    \caption{Orbital range progression with time for temporary capture scenarios. Particle code LoGSP-1.}
+    \label{fig:LoGSP_1_capture_orbital_range}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\linewidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_eccentricity_energy.pdf}
+    \caption{Evolution of total energy of the particle and its orbital eccentricity. Particle has the same initial conditions as that of capture case 5 in \Cref{tab:LoGSP_1_capture} except that only \gls{STBE} was included in this simulation. The range of data points plotted is the same as that in \Cref{fig:LoGSP_1_capture_case_5_2d_noSRP_accelerationVectorPlot_inertialFrame}. Particle code LoGSP-1.}
+    \label{fig:LoGSP_1_capture_case_5_eccentricity_energy_noSRP}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[b]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\linewidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_acceleration_magnitudes.pdf}
+    \caption{Magnitudes of acceleration due to gravity, \gls{STBE} and the net effect of the two for the corresponding vectors as shown in \Cref{fig:LoGSP_1_capture_case_5_2d_noSRP_accelerationVectorPlot_inertialFrame}. Particle code LoGSP-1.}
+    \label{fig:LoGSP_1_capture_case_5_2d_acceleration_magnitudes_noSRP}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/allPhases_crashMap_3P2_density_1cm_5cm_Radius.pdf}
+    \caption{Re-impact locations for regoliths of different sizes but the same density (i.e. \SI{3.2}{\gram\per\centi\metre\cubed}). The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:crashmap_3.2_density_1cm_5cm_Radius}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
     \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/allPhases_crashMap_3P2_7P5_density_5cm_Radius.pdf}
     \caption{Re-impact locations for regoliths of different density but same size (i.e. 5 cm). The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
     \label{fig:crashmap_3.2_7.5_density_5cmRadius}
@@ -296,8 +368,38 @@ Carl Sagan
     \centering
     \captionsetup{justification=centering}
     \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/escape_traj_5ms_225Azim_45solarPhase_zoomed.pdf}
-    \caption{Zoomed in version of the escape trajectory shown in \Cref{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase}. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \caption{Zoomed-in version of the escape trajectory shown in \Cref{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase}. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
     \label{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase_zoomed}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[!h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/2d_traj_6ms_20Azim_45SolarPhase.pdf}
+    \caption{Trajectories plotted for all regolith types, with launch conditions that lead to a capture case only for particle LoGSP-4. For particle LoGSP-1, the final fate is escape and for LoGSP-2 and LoGSP-3, the final fate is re-impact. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:allRegolith_traj_6ms_20Azim_45solarPhase}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[!h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{Results/Images/longest_edge_perturbations/multiple_regolith_types/2d_traj_6ms_20Azim_45SolarPhase_zoomed_edit.pdf}
+    \caption{Zoomed-in version of the plot shown in \Cref{fig:allRegolith_traj_6ms_20Azim_45solarPhase}. This view enhancement highlights the instance when the trajectories begin to visibly separate from each other. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:allRegolith_traj_6ms_20Azim_45solarPhase_zoomed}
+    \end{figure}
+    \FloatBarrier
+    %%%
+    %%%
+    \begin{figure}[htb]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{Results/Images/leading_edge_perturbations/crashMap_3P2_density_1cm_5cm_radius.pdf}
+    \caption{Re-impact locations for regoliths of different sizes but the same density (i.e. \SI{3.2}{\gram\per\centi\metre\cubed}). The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
+    \label{fig:crashmap_3.2_density_1cm_5cm_Radius_leadingEdge}
     \end{figure}
     \FloatBarrier
     %%%
@@ -458,17 +560,6 @@ Carl Sagan
     \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio=true]{Results/Images/asteroid_mining/trailingEdge_orbitMoreThanOneDay.pdf}
     \caption{Plot depicting the initial conditions for particles LoGSP-1 and LoGSP-4 wherein the orbits last longer than one Earth day. The regoliths were launched from the trailing edge.}
     \label{fig:trailingEdge_IC_for_24h_orbits}
-    \end{figure}
-    \FloatBarrier
-    %%%
-    %%%
-    \begin{figure}[htb]
-    \centering
-    \captionsetup{justification=centering}
-    % another option for includegraphics - keepaspectratio
-    \includegraphics[angle=90, width=\textwidth, height=\textheight]{Results/Images/longest_edge_perturbations/3.2Density_1cmSize/maxAltitude_reimpactCase.png}
-    \caption{Maximum radial distance (from the centre of the asteroid) attained by the regolith in orbit for different launch velocities and launch azimuths. The particles were launched from the longest edge of the ellipsoid (asteroid). Plots are for particle code LoGSP-1 and only for the re-impact scenario.}
-    \label{fig:LoGSP_1_maxAltitude_reimpactscenario}
     \end{figure}
     \FloatBarrier
     %%%

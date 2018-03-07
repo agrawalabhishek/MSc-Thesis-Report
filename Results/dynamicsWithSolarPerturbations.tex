@@ -6,7 +6,7 @@ The discussion on results so far have not accounted for any Solar perturbations 
 
 \section{Regolith Size and Density}
 \label{sec:regolith_size_density}
-Before we can present the results of any simulation, we need to justify the size and density of different regolith types used. We used two different density values and two different grain radii and thereby used 4 different area-to-mass ratios. The selection of regolith types was made by using asteroid Eros as an example. The different area-to-mass ratios are mentioned in \Cref{tab:area_to_mass_ratio}.
+Before we can present the results of any simulation, we need to justify the size and density of different regolith types used. We used two different density values and two different grain radii and thereby used four different area-to-mass ratios. The selection of regolith types was made by using asteroid Eros as an example. The different area-to-mass ratios are mentioned in \Cref{tab:area_to_mass_ratio}.
 
 \subsection{Density Selection}
 \label{subsec:regolith_density_selection}
@@ -18,7 +18,7 @@ Eros also contains Fe-Ni but it is significantly separated from the Silicates (O
 
 \subsection{Size Selection}
 \label{subsec:regolith_size_selection}
-\cite{Veverka2001} analyzed high resolution surface images of Eros captured by \gls{NEAR}-Shoemaker on a low-altitude flyover. It argued the build-up of a heterogeneous and complex regolith that comprised of material ranging from fine particles all the way up to metre-sized ejecta blocks. \cite{Veverka2001} argues that while there is an abundance of large ejecta blocks across the surface, the much finer regolith occupies mostly the low-lying topographies, i.e., inside large craters on the surface of Eros. The latter was termed as ponded deposits. \cite{Robinson2001} argues, from high resolution images (1.2 cm per pixel) of ponded deposits at Eros, that the grain size of regolith would be around 1.0 cm or below.
+\cite{Veverka2001} analyzed high-resolution surface images of Eros captured by \gls{NEAR}-Shoemaker on a low-altitude flyover. It argued the build-up of a heterogeneous and complex regolith that comprised of material ranging from fine particles all the way up to metre-sized ejecta blocks. \cite{Veverka2001} argues that while there is an abundance of large ejecta blocks across the surface, the much finer regolith occupies mostly the low-lying topographies, i.e., inside large craters on the surface of Eros. The latter was termed as ponded deposits. \cite{Robinson2001} argues, from high-resolution images (1.2 cm per pixel) of ponded deposits at Eros, that the grain size of regolith would be around 1.0 cm or below.
 %
 \newline\newline
 %
@@ -28,11 +28,11 @@ Thus based on this extreme spectra of regolith composition at Eros, we shall als
 \begin{table}[htb]
 \centering
 \captionsetup{justification=centering}
-\caption{Particle Area-to-Mass ratios}
+\caption{Particle area-to-mass ratios}
 \label{tab:area_to_mass_ratio}
 \begin{tabular}{|l|c|c|c|}
 \hline
-Code    & \multicolumn{1}{l|}{Particle radius {[}cm{]}} & \multicolumn{1}{l|}{Density {[}g/cm$^3${]}} & \multicolumn{1}{l|}{Area-to-Mass ratio {[}m$^2$/kg{]}} \\ \hline
+Code    & \multicolumn{1}{l|}{Particle radius {[}cm{]}} & \multicolumn{1}{l|}{Density {[}g/cm$^3${]}} & \multicolumn{1}{l|}{area-to-mass ratio {[}m$^2$/kg{]}} \\ \hline
 LoGSP-1     &   1.0     &   3.2     & 0.0234        \\ \hline
 LoGSP-2     &   1.0     &   7.5     & 0.01          \\ \hline
 LoGSP-3     &   5.0     &   3.2     & 0.0047        \\ \hline
@@ -46,11 +46,11 @@ LoGSP-4     &   5.0     &   7.5     & 0.002         \\ \hline
 
 \section{Simulation Setup}
 \label{sec:simulation_setup}
-The initial conditions for lofting each type of regolith are varied in the same manner and are mentioned as follows. The asteroid revolves around the Sun in an equatorial circular orbit at a distance of 1.0 \gls{AU}. Four different initial Solar phase angles were considered for the simulation – \SI{45.0}{\degree}, \SI{135.0}{\degree}, \SI{225.0}{\degree} \SI{315.0}{\degree}, to account for the four different quadrants where the Sun could be with respect to the asteroid.
+The initial conditions for lofting each type of regolith are varied in the same manner and are mentioned as follows. The asteroid revolves around the Sun in an equatorial circular orbit at a distance of 1.0 AU. Four different initial Solar phase angles were considered for the simulation (\SI{45.0}{\degree}, \SI{135.0}{\degree}, \SI{225.0}{\degree} \SI{315.0}{\degree}), to account for the four different quadrants where the Sun could be with respect to the asteroid.
 %
 \newline\newline
 %
-For each case in \Cref{tab:area_to_mass_ratio}, a total of 72 particles\footnote{Recall that in the previous chapter, the number of particles were launched at an azimuth resolution of \SI{1}{\degree} which resulted in 360 particles being launched} were launched from the surface of the asteroid, each in a different direction. The launch declination angle was kept constant at \SI{45.0}{\degree}  for all the particles. The launch azimuth was varied at a resolution of \SI{5.0}{\degree}  starting from \SI{0.0}{\degree}  all the way up to \SI{355.0}{\degree} . Each particle was launched, in their specified direction, with different velocities ranging from \SI{1.0}{\metre\per\second} to \SI{16.0}{\metre\per\second} (measured with respect to the \gls{ARF}) at a resolution of \SI{1.0}{\metre\per\second}. So basically, every combination of an initial Solar phase angle, initial launch azimuth, and initial launch velocity corresponds to a unique trajectory for a single particle of a given Area-to-Mass ratio; Thus amounting to a total of 4608 unique trajectories for each regolith type.
+For each case in \Cref{tab:area_to_mass_ratio}, a total of 72 particles\footnote{Recall that in the previous chapter, the number of particles were launched at an azimuth resolution of \SI{1}{\degree} which resulted in 360 particles being launched} were launched from the surface of the asteroid, each in a different direction. The launch declination angle was kept constant at \SI{45.0}{\degree}  for all particles. The launch azimuth was varied at a resolution of \SI{5.0}{\degree}  starting from \SI{0.0}{\degree}  all the way up to \SI{355.0}{\degree} . Each particle was launched, in their specified direction, with different velocities ranging from 1.0 to \SI{16.0}{\metre\per\second} (measured with respect to the \gls{ARF}) at a resolution of \SI{1.0}{\metre\per\second}. So basically, every combination of an initial Solar phase angle, initial launch azimuth, and initial launch velocity corresponds to a unique trajectory for a single particle of a given area-to-mass ratio; thus amounting to a total of 4608 unique trajectories for each regolith type.
 %
 \newline\newline
 %
@@ -62,11 +62,19 @@ We now present the orbital motion analysis for one of the regolith types, partic
 
 \subsection{Comparison With Unperturbed Scenario}
 \label{subsec:noSP_comparison_reimpact_and_escape}
-We'll begin with a very brief comparison of the final fate characteristics of regolith from when the Solar perturbations were included in our simulation, with the case when they were excluded. Note that, when we say unperturbed, it simply means the exclusion of the \gls{SRP} and \gls{STBE} and not the non-uniform gravity field. Since the only two outcomes in the unperturbed scenario were escape and re-impact, we compare them with the results from the simulation with perturbations.
+We will begin with a very brief comparison of the final fate characteristics of regolith from when the Solar perturbations were included in our simulation, with the case when they were excluded. Note that, when we say unperturbed, it simply means the exclusion of the \gls{SRP} and \gls{STBE} and not the non-uniform gravity field. Since the only two outcomes in the unperturbed scenario were escape and re-impact, we compare them with the results from the simulation with perturbations.
 %
 \newline\newline
 %
-We begin by first comparing the re-impact behavior. \Cref{fig:three_velocity_crashmap_comparison_noSP} shows the re-impact locations for regolith launch in an environment with no Solar perturbations, with three different launch velocities as shown in the plot. The plot is the same as \Cref{fig:crashmap_launchAzimuth_noSP} except that the launch azimuth resolution is \SI{5}{\degree} instead of \SI{1}{\degree}. Similarly, \Cref{fig:three_velocity_crashmap_comparison_sp} shows the re-impact locations for regolith simulated in Solar perturbations. The two cases are very similar to each other. The location and shape of the re-impact points, forming an arc on the West of the launch site for launch velocities of \SI{5}{\metre\per\second} and \SI{9}{\metre\per\second}, remains the same for both the perturbed and unperturbed scenario. In those cases, the trajectories are short lived and ballistic and the perturbations don't get enough time to accumulate and change the trajectory. For all other re-impact points, the numbers are smaller for the perturbed case and the corresponding re-impact locations are different from the unperturbed counterpart. In general, the re-impact map for the perturbed scenario shares a good resemblance with the unperturbed one. This aforementioned features of the re-impact locations was found to be similar for results from all four initial Solar phase angles considered in the simulations, but the plots for each is not shown in this report for brevity.
+We begin by first comparing the re-impact behavior. \Cref{fig:three_velocity_crashmap_comparison_noSP} shows the re-impact locations for regolith launch in an environment with no Solar perturbations, with three different launch velocities as shown in the plot. The plot is the same as \Cref{fig:crashmap_launchAzimuth_noSP} except that the launch azimuth resolution is \SI{5}{\degree} instead of \SI{1}{\degree}. Similarly, \Cref{fig:three_velocity_crashmap_comparison_sp} shows the re-impact locations for regolith simulated with Solar perturbations. The two cases are very similar to each other. The location and shape of the re-impact points, forming an arc on the West of the launch site for launch velocities of 5 and \SI{9}{\metre\per\second}, remains the same for both the perturbed and unperturbed scenario. In those cases, the trajectories are short lived and ballistic and the perturbations do not get enough time to accumulate and change the trajectory. For all other re-impact points, the numbers are smaller for the perturbed case and the corresponding re-impact locations are different from the unperturbed counterpart. In general, the re-impact map for the perturbed scenario shares a good resemblance with the unperturbed one. This aforementioned features of the re-impact locations was found to be similar for results from all four initial Solar phase angles considered in the simulations, but the plots for each are not shown in this report for brevity.
+%
+\newline\newline
+%
+Now we will look at the escape behavior. The correlation between escape trajectories and distribution of data points in the \gls{HEV} versus launch azimuth plot, discussed in \Cref{subsec:escape_behavior_noSP}, was found to be true even in the case of the perturbed simulation. We show an example case for launch velocity of \SI{9}{\metre\per\second} and for launch azimuths from \SI{0}{\degree} to \SI{20}{\degree} in steps of \SI{1}{\degree}, in \Cref{fig:escape_9ms_noSP_spanalysis}. What we see in the figure is that for all launch azimuths below \SI{10}{\degree}, the particles are on an escape trajectory immediately after launch. For escaping particles with launch azimuth above \SI{10}{\degree}, the particles required gravity assists from the asteroid and involved taking one or more revolutions around it before finally escaping.
+%
+\newline\newline
+%
+So far the behavior and the explanation for it is the same as that in \Cref{subsec:escape_behavior_noSP}, however, there is a critical case witnessed here at launch azimuth \SI{10}{\degree}. From the discussion earlier and from \Cref{fig:escape_hev_9ms_phase45}, one would say that this particle should already be on an escape trajectory as it is aligned with the smoothly reducing \gls{HEV} data points of lower azimuths. But that is not the case. Also note that the \gls{HEV} for it is \SI{0}{\metre\per\second} and from \Cref{fig:escape_energy_ecc_9ms_phase45} we see that at the time of escape the trajectory has an eccentricity of 1.0. Both these facts confirm that the osculating trajectory finally becomes parabolic at the instance of escape. This is perhaps why this particular regolith does not share the same traits with any other launch azimuth, because in every other case the escape trajectory is hyperbolic.
 %%%
 \begin{figure}[htb]
 \centering
@@ -85,11 +93,6 @@ We begin by first comparing the re-impact behavior. \Cref{fig:three_velocity_cra
 \end{figure}
 \FloatBarrier
 %%%
-Now we will look at the escape behavior. Recall how in \Cref{subsec:escape_behavior_noSP} we discussed the link between the escape trajectories and distribution of data points in the \gls{HEV} versus launch azimuth plot. It was found that a continuous and streamlined distribution of data points implied that the particles had escaped immediately without using any gravity assists while this wasn't true for the remaining data points that were distributed chaotically. This correlation was found to be true even in the case of the perturbed simulation. We show an example case for launch velocity of \SI{9}{\metre\per\second} and for launch azimuths from \SI{0}{\degree} to \SI{20}{\degree} in steps of \SI{1}{\degree}, in \Cref{fig:escape_9ms_noSP_spanalysis}. What we see in the figure is that for all launch azimuths below \SI{10}{\degree}, the particles are on an escape trajectory immediately after launch. For escaping particles with launch azimuth above \SI{10}{\degree}, the particles required gravity assists from the asteroid and involved taking one or more revolutions around it before finally escaping.
-%
-\newline\newline
-%
-So far the behavior and the explanation for it is the same as that in \Cref{subsec:escape_behavior_noSP}, however, there is a critical case witnessed here at launch azimuth \SI{10}{\degree}. From the discussion earlier and from \Cref{fig:escape_hev_9ms_phase45}, one would say that this particle should already be on an escape trajectory as it is aligned with the smoothly reducing \gls{HEV} data points of lower azimuths. But that is not the case. Also note that the \gls{HEV} for it is \SI{0}{\metre\per\second} and from \Cref{fig:escape_energy_ecc_9ms_phase45} we see that at the time of escape the trajectory has an eccentricity of 1.0. Both these facts confirm that the osculating trajectory finally becomes parabolic at the instance of escape. This is perhaps why this particular regolith doesn't share the same traits with any other launch azimuth, because in every other case the escape trajectory is hyperbolic.
 %%%
 \begin{figure}[htb]
 \centering
@@ -150,7 +153,11 @@ Index & \multicolumn{1}{l|}{Launch azimuth [deg]} & \multicolumn{1}{l|}{Launch v
 \end{table}
 \FloatBarrier
 %%%
-The capture cases which represent symmetry in terms of the launch azimuth angle are highlighted with the same color in \Cref{tab:LoGSP_1_capture}. This symmetric behavior results from the combination of two factors. First, the Sun's motion relative to the asteroid is not in an inclined plane, and secondly, the particles are launched from the equatorial tip of the ellipsoid shaped asteroid, which is a point of symmetry on the ellipsoid. The capture cases are discussed in detail, later in the report.
+The capture cases which represent symmetry in terms of the launch azimuth angle are highlighted with the same color in \Cref{tab:LoGSP_1_capture}. This symmetric behavior results from the combination of two factors. First, the Sun's motion relative to the asteroid is not in an inclined plane, and secondly, the particles are launched from the equatorial tip of the ellipsoid shaped asteroid, which is a point of symmetry on the ellipsoid. The capture cases are discussed in detail in \Cref{subsec:capture_orbit_analysis_as_is}.
+%
+\newline\newline
+%
+\Cref{fig:LoGSP_1_crashmap} depicts the surface distribution of regolith that re-impacts the surface when launched from the same location with different velocities and different initial Solar phase angles. The launch location is in the centre of the map, Latitude and Longitude \SI{0.0}{\degree}.
 %%%
 \begin{figure}[htb]
 \centering
@@ -161,17 +168,10 @@ The capture cases which represent symmetry in terms of the launch azimuth angle 
 \end{figure}
 \FloatBarrier
 %%%
-\Cref{fig:LoGSP_1_crashmap} depicts the surface distribution of regolith that re-impacts the surface when launched from the same location with different velocities and different initial Solar phase angles. The launch location is in the centre of the map, Latitude and Longitude \SI{0.0}{\degree}. The re-impact locations remains unchanged, irrespective of the initial Solar phase angles, for all particles launched with the relatively lower velocities (\SI{1}{\metre\per\second} to \SI{4}{\metre\per\second}). Again for the mid-range velocities, i.e. \SI{5}{\metre\per\second} to \SI{9}{\metre\per\second}, the re-impact locations for the particles that are launched in the direction opposite to the asteroid's rotation remains unchanged for different initial Solar phase angles. This can be observed in the arc shaped re-impact location patterns West of the launch location for those velocities. The distribution pattern, for all launch velocities and initial Solar phases, is also symmetric about the equator. Again, the reason for this is the same as mentioned earlier for the symmetry in capture cases in \Cref{tab:LoGSP_1_capture}. In general, keeping the launch direction and velocity constant, we see that the distribution of re-impact locations does not change drastically with varying initial Solar phase angles. This is much easily observed in a plot of Range from the launch direction to the re-impact point versus launch azimuth for different velocities as shown in \Cref{fig:LoGSP_1_range_comparison}.
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/crash_map_all_solar_phases.pdf}
-\caption{Surface distribution of re-impacted regolith for different launch velocities. The launch location is \\ latitude: \SI{0}{\degree}, longitude: \SI{0.0}{\degree}. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_crashmap}
-\end{figure}
-\FloatBarrier
-%%%
+The re-impact locations remains unchanged, irrespective of the initial Solar phase angles, for all particles launched with the relatively lower velocities (\SI{1}{\metre\per\second} to \SI{4}{\metre\per\second}). Again for the mid-range velocities, i.e. \SI{5}{\metre\per\second} to \SI{9}{\metre\per\second}, the re-impact locations for the particles that are launched in the direction opposite to the asteroid's rotation remains unchanged for different initial Solar phase angles. This can be observed in the arc shaped re-impact location patterns West of the launch location for those velocities. The distribution pattern, for all launch velocities and initial Solar phases, is also symmetric about the equator. Again, the reason for this is the same as mentioned earlier for the symmetry in capture cases in \Cref{tab:LoGSP_1_capture}. In general, keeping the launch direction and velocity constant, we see that the distribution of re-impact locations does not change drastically with varying initial Solar phase angles. This is much easily observed in a plot of Range from the launch direction to the re-impact point versus launch azimuth for different velocities as shown in \Cref{fig:LoGSP_1_range_comparison}.
+%
+\newline\newline
+%
 We haven't shown the range to re-impact point plots in \Cref{fig:LoGSP_1_range_comparison} for all launch velocities because the intention here is to show the qualitative behavior, which can be achieved by considering only a subset of the launch velocities that result in a re-impact scenario. The very first thing we observe is that as the launch velocity increases, the range of launch azimuth over which the regolith re-impacts the surface reduces because a higher velocity allows the regolith to enter a higher orbit (as it attains a relatively higher energy) and reduces the probability of a re-impact. Even as the velocity increases, we see that the azimuths that result in a re-impact are the ones in which the regolith is launched in a direction that is opposite to the asteroid's rotation direction. This makes sense since the regolith's energy would be reduced the most in this scenario compared to all other launch directions, thereby increasing the chances of a re-impact.
 %
 \newline\newline
@@ -181,19 +181,9 @@ Now the primary purpose of the plots in \Cref{fig:LoGSP_1_range_comparison} (com
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/reimpactRangeComparison.png}
-\caption{Range to re-impact location from the launch point for different velocities. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_range_comparison}
-\end{figure}
-\FloatBarrier
-%%%
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/time_to_reimpact_all_solar_phases.pdf}
-\caption{Time taken by regolith at different velocities and launch directions to re-impact with the surface of the asteroid. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_reimpact_time}
+\includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/crash_map_all_solar_phases.pdf}
+\caption{Surface distribution of re-impacted regolith for different launch velocities. The launch location is \\ latitude: \SI{0}{\degree}, longitude: \SI{0.0}{\degree}. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_crashmap}
 \end{figure}
 \FloatBarrier
 %%%
@@ -235,27 +225,15 @@ Of all the cases shown in \Cref{fig:LoGSP_1_capture_orbital_range} or \Cref{tab:
 \FloatBarrier
 %%%
 %%%
-\begin{figure}[p]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[scale=0.5]{longest_edge_perturbations/3.2Density_1cmSize/altitude_versus_time_all_cases_part_1.pdf}
-\includegraphics[scale=0.5]{longest_edge_perturbations/3.2Density_1cmSize/altitude_versus_time_all_cases_part_2.pdf}
-\caption{Orbital range progression with time for temporary capture scenarios. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_capture_orbital_range}
-\end{figure}
-\FloatBarrier
-%%%
-%%%
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
 % another option for includegraphics - keepaspectratio
 \subfloat[]{
-\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/3dTrajectory_10ms_45Azimuth_315solarPhase_inertialFrame_View1.pdf}
+\includegraphics[width=0.5\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/3dTrajectory_10ms_45Azimuth_315solarPhase_inertialFrame_View1.pdf}
 }
-
 \subfloat[]{
-\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/3dTrajectory_10ms_45Azimuth_315solarPhase_inertialFrame_View2.pdf}
+\includegraphics[width=0.5\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/3dTrajectory_10ms_45Azimuth_315solarPhase_inertialFrame_View2.pdf}
 }
 \caption{3D inertial frame trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture} in two different viewing angles. Particle code LoGSP-1.}
 \label{fig:LoGSP_1_capture_case_5_3d_traj_inertialFrame_differnetViews}
@@ -275,7 +253,7 @@ In \Cref{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}, the trajectory loops
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\linewidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/2d_trajectory_inertialFrame_edit.pdf}
+\includegraphics[angle=90, width=\linewidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/2d_trajectory_inertialFrame_edit.pdf}
 \caption{2D inertial frame trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture}. Particle code LoGSP-1.}
 \label{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}
 \end{figure}
@@ -287,13 +265,12 @@ In \Cref{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}, the trajectory loops
 \captionsetup{justification=centering}
 \subfloat[]
 {
-    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/srp_inertialFrame.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/srp_inertialFrame.pdf}
     \label{fig:LoGSP_1_capture_case_5_2d_trajectory_srpVectors}
 }
-
 \subfloat[]
 {
-    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/stbe_inertialFrame.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/stbe_inertialFrame.pdf}
     \label{fig:LoGSP_1_capture_case_5_2d_trajectory_stbeVectors}
 }
 \caption{2D trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture} with direction of \gls{SRP} and \gls{STBE} perturbation vectors. Note that the vectors are shown only for those parts of the trajectory where the \gls{SRP} magnitude is of the same order as that of the asteroid's gravitational acceleration. For those very same points along the trajectory, the magnitude of the \gls{STBE} is always 1.0 order of magnitude smaller than the gravitational acceleration. Particle code LoGSP-1.}
@@ -306,13 +283,12 @@ In \Cref{fig:LoGSP_1_capture_case_5_2d_traj_inertialFrame}, the trajectory loops
 \centering
 \captionsetup{justification=centering}
 \subfloat[]{
-    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/totalPerturbation_inertialFrame.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/totalPerturbation_inertialFrame.pdf}
     \label{fig:LoGSP_1_capture_case_5_2d_trajectory_totalPerturbationVectors}
 }
-
 \subfloat[]
 {
-    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/gravity_inertialFrame.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/gravity_inertialFrame.pdf}
     \label{fig:LoGSP_1_capture_case_5_2d_trajectory_gravityVector}
 }
 \caption{2D trajectory of capture regolith for case number 5 in \Cref{tab:LoGSP_1_capture} with direction of the sum total of \gls{SRP} and \gls{STBE} perturbation vectors, and the direction of the gravitational acceleration vector for the same data points. Note that the vectors are shown only for those parts of the trajectory where the \gls{SRP} magnitude is of the same order as that of the asteroid's gravitational acceleration. For those very same points along the trajectory, the magnitude of the \gls{STBE} is always 1.0 order of magnitude smaller than the gravitational acceleration. Particle code LoGSP-1.}
@@ -337,7 +313,7 @@ When only \gls{STBE} is removed, then we get a trajectory where the particle eve
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\linewidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSTBE_2d_trajectory_inertialFrame.pdf}
+\includegraphics[angle=90, width=\linewidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSTBE_2d_trajectory_inertialFrame.pdf}
 \caption{2D trajectory of particle for same initial conditions as that of capture case 5 in \Cref{tab:LoGSP_1_capture} except that only \gls{SRP} was included in this simulation. Particle code LoGSP-1.}
 \label{fig:LoGSP_1_capture_case_5_2d_inertialTrajectory_noSTBE}
 \end{figure}
@@ -348,12 +324,11 @@ When only \gls{STBE} is removed, then we get a trajectory where the particle eve
 \centering
 \captionsetup{justification=centering}
 \subfloat[]{
-    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSTBE_srp_gravity_vectors_inertialFrame.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSTBE_srp_gravity_vectors_inertialFrame.pdf}
     \label{fig:LoGSP_1_capture_case_5_2d_SRP_and_gravity_vector_noSTBE_inertialFrame}
 }
-
 \subfloat[]{
-    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSTBE_total_acceleration_inertialFrame.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSTBE_total_acceleration_inertialFrame.pdf}
     \label{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSTBE_inertialFrame}
 }
 \caption{Inertial frame XY plane trajectory for same launch conditions as that of capture case 5 in \Cref{tab:LoGSP_1_capture}: \protect\subref{fig:LoGSP_1_capture_case_5_2d_SRP_and_gravity_vector_noSTBE_inertialFrame} showing direction of \gls{SRP} acceleration and gravitational acceleration \& \protect\subref{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSTBE_inertialFrame} showing direction of the net acceleration acting on the particle. Vectors are shown only for those parts of trajectory where acceleration due to \gls{SRP} and gravity have the same order of magnitude. Note that \gls{STBE} perturbation was not part of the simulation here. Particle code LoGSP-1.}
@@ -367,21 +342,14 @@ When we keep \gls{STBE} but remove \gls{SRP} from our simulations, then the traj
 \newline\newline
 %
 From this analysis, we can say that effect of removing \gls{SRP} from simulations had a much drastic effect than removing just the \gls{STBE}. Both cases lead to an escape situation and the combined effect of both the perturbations leads to a capture orbit, for the same launch conditions and initial Solar phase angle. The behavior of the trajectory, in all cases, can be easily understood by looking at the direction of the net acceleration vector, especially when the particle is far away from the asteroid because it tells us exactly, how by adding perturbations, the motion of the particle is affected and not just in terms of its final fate but even in terms of changing its orbital direction.
+
+\subsubsection{Capture Trajectory: Another Example}
+\Cref{fig:LoGSP_1_capture_case_8_3d_traj_inertialFrame_differnetViews} shows the 3D trajectory for completely different launch conditions (see capture case 8 in \Cref{tab:LoGSP_1_capture}). The 3D trajectory as viewed from the asteroid centric body fixed frame is shown in \Cref{fig:LoGSP_1_capture_case_8_3d_trajectory}. The 2D trajectory projections for the same, in inertial and body fixed frames, are shown in \Cref{fig:LoGSP_1_capture_case_8_2d_traj_inertialFrame} and \Cref{fig:LoGSP_1_capture_case_8_2d_traj_bodyFrame} respectively. Just like in the previous case, we see from the animation (see \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_animation}) and the 3D trajectory for current launch conditions, that the particle direction of motion is reversed twice in its course. These two locations are marked by numbers 1 and 2 in \Cref{fig:LoGSP_1_capture_case_8_2d_traj_inertialFrame}. At location number 1 we see that the motion changes from anti-clockwise to clockwise direction in the XY plane. The case for location number 2 is exactly the opposite. If we look at \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_totalPerturbationVectors}, the change in direction of motion is consistent with the direction in which the net perturbing force is acting. Ultimately, when we look at the net acceleration acting on the particle in \Cref{fig:LoGSP_1_capture_case_8_2d_totalAccelerationVector}, we can understand how exactly the particle would orbit around the asteroid. The net force, gravitational and perturbations combined, act in a direction such that the particle is forced to change its orbital motion direction at the two locations previously explained. The acceleration vectors in \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_perturbationVectors,fig:LoGSP_1_capture_case_8_2d_trajectory_totalPerturbations_and_gravity_vectors,fig:LoGSP_1_capture_case_8_2d_totalAccelerationVector} are plotted for points along the trajectory where the magnitude of acceleration due to \gls{SRP} is of the same order of magnitude as the gravitational acceleration. Again, the magnitude of \gls{STBE} is 1.0 order of magnitude smaller than the gravitational acceleration for the same data points along the trajectory.
 %%%
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_eccentricity_energy.pdf}
-\caption{Evolution of total energy of the particle and its orbital eccentricity. Particle has the same initial conditions as that of capture case 5 in \Cref{tab:LoGSP_1_capture} except that only \gls{STBE} was included in this simulation. The range of data points plotted is the same as that in \Cref{fig:LoGSP_1_capture_case_5_2d_noSRP_accelerationVectorPlot_inertialFrame}. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_capture_case_5_eccentricity_energy_noSRP}
-\end{figure}
-\FloatBarrier
-%%%
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[width=\linewidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_2d_trajectory_inertialFrame.pdf}
+\includegraphics[angle=90, width=0.9\linewidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_2d_trajectory_inertialFrame.pdf}
 \caption{2D trajectory of particle for same initial conditions as that of capture case 5 in \Cref{tab:LoGSP_1_capture} except that only \gls{STBE} was included in this simulation. Particle code LoGSP-1.}
 \label{fig:LoGSP_1_capture_case_5_2d_inertialTrajectory_noSRP}
 \end{figure}
@@ -392,12 +360,11 @@ From this analysis, we can say that effect of removing \gls{SRP} from simulation
 \centering
 \captionsetup{justification=centering}
 \subfloat[]{
-    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_stbe_gravity_vectors_inertialFrame.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.3\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_stbe_gravity_vectors_inertialFrame.pdf}
     \label{fig:LoGSP_1_capture_case_5_2d_STBE_and_gravity_vector_noSRP_inertialFrame}
 }
-
 \subfloat[]{
-    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_total_acceleration_inertialFrame.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.3\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_total_acceleration_inertialFrame.pdf}
     \label{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSRP_inertialFrame}
 }
 \caption{Inertial frame XY plane trajectory for same launch conditions as that of capture case 5 in \Cref{tab:LoGSP_1_capture}: \protect\subref{fig:LoGSP_1_capture_case_5_2d_STBE_and_gravity_vector_noSRP_inertialFrame} showing direction of \gls{STBE} acceleration and gravitational acceleration \& \protect\subref{fig:LoGSP_1_capture_case_5_2d_totalAcceleration_vector_noSRP_inertialFrame} showing direction of the net acceleration acting on the particle. Vectors are shown only for those parts of trajectory where acceleration due to \gls{STBE} is equal to gravitational acceleration or smaller than it by 1.0 order of magnitude. Note that \gls{SRP} perturbation was not part of the simulation here. Particle code LoGSP-1.}
@@ -409,26 +376,21 @@ From this analysis, we can say that effect of removing \gls{SRP} from simulation
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\linewidth, height=0.50\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/10ms_45Azimuth_315SolarPhase/noSRP_acceleration_magnitudes.pdf}
-\caption{Magnitudes of acceleration due to gravity, \gls{STBE} and the net effect of the two for the corresponding vectors as shown in \Cref{fig:LoGSP_1_capture_case_5_2d_noSRP_accelerationVectorPlot_inertialFrame}. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_capture_case_5_2d_acceleration_magnitudes_noSRP}
+\includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/2dTrajectory_8ms_165Azimuth_45solarPhase_inertialFrame_edit.pdf}
+\caption{2D inertial frame trajectory of capture regolith for case number 8 in \Cref{tab:LoGSP_1_capture}. Particle code LoGSP-1.}
+\label{fig:LoGSP_1_capture_case_8_2d_traj_inertialFrame}
 \end{figure}
 \FloatBarrier
 %%%
-
-\subsubsection{Capture Trajectory: Another Example}
-\Cref{fig:LoGSP_1_capture_case_8_3d_traj_inertialFrame_differnetViews} shows the 3D trajectory for completely different launch conditions (see capture case 8 in \Cref{tab:LoGSP_1_capture}). The 3D trajectory as viewed from the asteroid centric body fixed frame is shown in \Cref{fig:LoGSP_1_capture_case_8_3d_trajectory}. The 2D trajectory projections for the same, in inertial and body fixed frames, are shown in \Cref{fig:LoGSP_1_capture_case_8_2d_traj_inertialFrame} and \Cref{fig:LoGSP_1_capture_case_8_2d_traj_bodyFrame} respectively. Just like in the previous case, we see from the animation (see \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_animation}) and the 3D trajectory for current launch conditions, that the particle direction of motion is reversed twice in its course. These two locations are marked by numbers 1 and 2 in \Cref{fig:LoGSP_1_capture_case_8_2d_traj_inertialFrame}. At location number 1 we see that the motion changes from anti-clockwise to clockwise direction in the XY plane. The case for location number 2 is exactly the opposite. If we look at \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_totalPerturbationVectors}, the change in direction of motion is consistent with the direction in which the net perturbing force is acting. Ultimately, when we look at the net acceleration acting on the particle in \Cref{fig:LoGSP_1_capture_case_8_2d_totalAccelerationVector}, we can understand how exactly the particle would orbit around the asteroid. The net force, gravitational and perturbations combined, act in a direction such that the particle is forced to change its orbital motion direction at the two locations previously explained. The acceleration vectors in \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_perturbationVectors,fig:LoGSP_1_capture_case_8_2d_trajectory_totalPerturbations_and_gravity_vectors,fig:LoGSP_1_capture_case_8_2d_totalAccelerationVector} are plotted for points along the trajectory where the magnitude of acceleration due to \gls{SRP} is of the same order of magnitude as the gravitational acceleration. Again, the magnitude of \gls{STBE} is 1.0 order of magnitude smaller than the gravitational acceleration for the same data points along the trajectory.
 %%%
-\begin{figure}[htb]
+\begin{figure}[!h]
 \centering
 \captionsetup{justification=centering}
-% another option for includegraphics - keepaspectratio
 \subfloat[]{
-\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/3dTrajectory_8ms_165Azimuth_45solarPhase_inertialFrame_View1.pdf}
+\includegraphics[width=0.5\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/3dTrajectory_8ms_165Azimuth_45solarPhase_inertialFrame_View1.pdf}
 }
-
 \subfloat[]{
-\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/3dTrajectory_8ms_165Azimuth_45solarPhase_inertialFrame_View2.pdf}
+\includegraphics[width=0.5\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/3dTrajectory_8ms_165Azimuth_45solarPhase_inertialFrame_View2.pdf}
 }
 \caption{3D inertial frame trajectory of capture regolith for case number 8 in \Cref{tab:LoGSP_1_capture} from two different viewing angles. Particle code LoGSP-1.}
 \label{fig:LoGSP_1_capture_case_8_3d_traj_inertialFrame_differnetViews}
@@ -440,24 +402,12 @@ From this analysis, we can say that effect of removing \gls{SRP} from simulation
 \centering
 \captionsetup{justification=centering}
 % another option for includegraphics - keepaspectratio
-\includegraphics[width=\textwidth, height=\textheight]{longest_edge_perturbations/3.2Density_1cmSize/2dTrajectory_8ms_165Azimuth_45solarPhase_inertialFrame_edit.pdf}
-\caption{2D inertial frame trajectory of capture regolith for case number 8 in \Cref{tab:LoGSP_1_capture}. Particle code LoGSP-1.}
-\label{fig:LoGSP_1_capture_case_8_2d_traj_inertialFrame}
-\end{figure}
-\FloatBarrier
-%%%
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-% another option for includegraphics - keepaspectratio
 \subfloat[]{
-    \includegraphics[width=\textwidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/8ms_165Azimuth_45SolarPhase/srp_vectors.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/8ms_165Azimuth_45SolarPhase/srp_vectors.pdf}
     \label{fig:LoGSP_1_capture_case_8_2d_trajectory_srp_vectors}
 }
-
 \subfloat[]{
-    \includegraphics[width=\textwidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/8ms_165Azimuth_45SolarPhase/stbe_vectors.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/8ms_165Azimuth_45SolarPhase/stbe_vectors.pdf}
     \label{fig:LoGSP_1_capture_case_8_2d_trajectory_stbe_vectors}
 }
 \caption{2D trajectory of capture regolith for case number 8 in \Cref{tab:LoGSP_1_capture} with direction of \gls{SRP} and \gls{STBE} perturbation vectors. Note that the vectors are shown only for those parts of the trajectory where the \gls{SRP} magnitude is of the same order as that of the asteroid's gravitational acceleration. For those very same points along the trajectory, the magnitude of the \gls{STBE} is always 1.0 order of magnitude smaller than the gravitational acceleration. Particle code LoGSP-1.}
@@ -470,13 +420,12 @@ From this analysis, we can say that effect of removing \gls{SRP} from simulation
 \centering
 \captionsetup{justification=centering}
 \subfloat[]{
-    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/8ms_165Azimuth_45SolarPhase/netPerturbations_vectors.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/8ms_165Azimuth_45SolarPhase/netPerturbations_vectors.pdf}
     \label{fig:LoGSP_1_capture_case_8_2d_trajectory_totalPerturbationVectors}
 }
-
 \subfloat[]
 {
-    \includegraphics[width=\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/8ms_165Azimuth_45SolarPhase/gravity_vectors.pdf}
+    \includegraphics[width=0.5\linewidth, height=0.45\textheight, keepaspectratio=true]{longest_edge_perturbations/3.2Density_1cmSize/8ms_165Azimuth_45SolarPhase/gravity_vectors.pdf}
     \label{fig:LoGSP_1_capture_case_8_2d_trajectory_gravityVector}
 }
 \caption{2D trajectory of capture regolith for case number 8 in \Cref{tab:LoGSP_1_capture} with direction of the sum total of \gls{SRP} and \gls{STBE} perturbation vectors, and the direction of the gravitational acceleration vector for the same data points. Note that the vectors are shown only for those parts of the trajectory where the \gls{SRP} magnitude is of the same order as that of the asteroid's gravitational acceleration. For those very same points along the trajectory, the magnitude of the \gls{STBE} is always 1.0 order of magnitude smaller than the gravitational acceleration. Particle code LoGSP-1.}
@@ -506,7 +455,7 @@ From this analysis, we can say that effect of removing \gls{SRP} from simulation
 \FloatBarrier
 %%%
 
-\subsubsection{How Are Capture Orbits Formed}
+\subsubsection{Formation of capture orbits}
 We saw in the analysis of capture case number 5 for particle LoGSP-1 that both \gls{SRP} and \gls{STBE} were necessary for getting that specific capture trajectory and removal of either of the perturbations resulted in a different final fate for the same particle. The next analysis that we present now, will tell us about how a capture scenario occurs, relative to a situation when all perturbations are removed, for the same initial launch conditions in both cases. We do the analysis for capture case number 8 from \Cref{tab:LoGSP_1_capture}. \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_comparative_inertialFrame} shows two different trajectories for the particle launched with the same initial conditions. The one shown in dotted line is for the case when Solar perturbations were omitted from the simulation, which eventually results in the particle escaping the asteroid after 1.4 [days]. The one in the solid line shows the capture trajectory (actually a section of the entire capture trajectory as seen in \Cref{fig:LoGSP_1_capture_case_8_2d_traj_inertialFrame}) when Solar perturbations were included in the simulation. Note that we show the perturbed trajectory (capture case) for the same amount of time (1.4 [days] instead of 270.0 [days]) as taken by the unperturbed trajectory (escape case) to be able to do a one-to-one comparison. The arrows plotted along this trajectory indicate the direction of the net perturbing acceleration due to \gls{SRP} and \gls{STBE}. \Cref{fig:LoGSP_1_capture_case_8_2d_trajectory_comparative_animation} directs to an animation for both the unperturbed and perturbed trajectory.
 %%%
 \begin{figure}[htb]
@@ -687,21 +636,19 @@ Two re-impact maps are shown in \Cref{fig:crashmap_3.2_density_1cm_5cm_Radius} a
 \end{figure}
 \FloatBarrier
 %%%
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/multiple_regolith_types/allPhases_crashMap_3P2_density_1cm_5cm_Radius.pdf}
-\caption{Re-impact locations for regoliths of different sizes but the same density (i.e. \SI{3.2}{\gram\per\centi\metre\cubed}). The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
-\label{fig:crashmap_3.2_density_1cm_5cm_Radius}
-\end{figure}
-\FloatBarrier
-%%%
 \Cref{fig:longestEdge_allParticles_escape_hist} shows the number of cases that lead to an escape situation for all the regolith types and for different initial Solar phase angles. Just like that for the re-impact case, what we observe here is that the general trend of the number of cases does not vary much with different initial Solar phase angles. Although, the fluctuations in exact numbers are clearly visible. For extremely high velocities, \SI{15}{\metre\per\second} and beyond, the particles always escape and are not affected by the presence of the Solar perturbations.
 %
 \newline\newline
 %
 \Cref{fig:longestEdge_allParticles_escape_hev_solarPhase45} shows the variation in the \gls{HEV} with launch azimuth, for three different launch velocities and for an initial Solar phase angle of \SI{45}{\degree}. For the remaining Solar phases, the plots are similar and can be found in the appendix in \Cref{fig:longestEdge_allParticles_escape_hev_solarPhase135,fig:longestEdge_allParticles_escape_hev_solarPhase225,fig:longestEdge_allParticles_escape_hev_solarPhase315}. In the plot for velocity \SI{13}{\metre\per\second} we see that the escape behavior is identical for all particle types as the data points for each overlap one another. As previously discussed, the relationship between the distribution of data points in a smooth and continuous form and the escape behavior and trajectory, is that the particles are on an escape trajectory immediately after launch and hence do not require an assist from the rapid rotation of the asteroid. The latter is required, for example, in the case of \SI{5}{\metre\per\second} as observed from the uneven distribution of the points. Thus for smaller velocities, the \gls{HEV} data points for different regolith types are not overlapping, suggesting that the perturbations have a significant effect on their trajectories. But as the velocities increase, the perturbations have lesser of an effect on the trajectories. Another way of saying this is that when the launch velocity is itself large, the particles are on a relatively quicker escape trajectory, which means that the perturbing acceleration does not surmount to a value that can cause significant changes. This is also observed in the trajectory plots for all the particles.
+%
+\newline\newline
+%
+\Cref{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase} shows the trajectories for a launch velocity of \SI{5}{\metre\per\second}, launch azimuth of \SI{225}{\degree} and an initial Solar phase angle of \SI{45}{\degree}. \Cref{fig:escape_traj_allParticles_9ms_225Azim_45solarPhase} shows the trajectory for a launch velocity of \SI{9}{\metre\per\second} with all other initial conditions being the same. We see that for a higher velocity, all regolith types have the same escape behavior or trajectory and are hardly affected by the Solar perturbations. For the smaller velocity, we see that all particles are distinctly separated as they embark on the escape trajectory in the end. The difference is significantly large. A zoomed in version of the trajectory plot for the case of \SI{5}{\metre\per\second} is shown in \Cref{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase_zoomed}. For the example case depicted in \Cref{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase}, and keeping in mind that the initial Solar phase angle is \SI{45}{\degree}, the differences in the trajectories start emerging slowly much earlier in the simulation (before even the first revolution is completed), with the highest area-to-mass ratio particle getting pushed outwards (due to a higher \gls{SRP} effect) relative to the one with the lowest area-to-mass ratio. As explained previously for the capture scenario, in this case too, we witness that different regolith types are subject to different phasing with respect to the asteroid. Thus as the particles approach the vicinity of the asteroid, the existing trajectory differences (or phase differences) get amplified by the rapid rotation of the asteroid, leading to 4 distinct escape routes.
+%
+\newline\newline
+%
+\Cref{fig:longestEdge_allParticles_capture_hist} shows the number of capture cases for all regolith types. The number of capture cases are extremely small relative to the number of escape and re-impact cases shown previously. We will look at the trajectory of an example capture case from \Cref{fig:longestEdge_allParticles_capture_hist}, i.e. particle LoGSP-4, at launch velocity \SI{6}{\metre\per\second}, launch azimuth of \SI{20}{\degree}, and initial Solar phase angle of \SI{45}{\degree}. For the same launch conditions, the trajectories for the remaining regolith types were also plotted, neither of which resulted in capture, and are shown in \Cref{fig:allRegolith_traj_6ms_20Azim_45solarPhase}. A zoomed in version of the trajectory, highlighting the visible separation in the regolith trajectories is shown in \Cref{fig:allRegolith_traj_6ms_20Azim_45solarPhase_zoomed}. The reasons for separation of the trajectories for the different regolith types, in this situation, is the same as explained recently for the escape scenario. Due to Solar perturbations, the trajectory for each particle is shifted such that their phase with respect to the rotating asteroid. The only difference here, is that all particles do not share the same fate as each other.
 %%%
 \begin{figure}[htb]
 \centering
@@ -722,9 +669,8 @@ Two re-impact maps are shown in \Cref{fig:crashmap_3.2_density_1cm_5cm_Radius} a
 \end{figure}
 \FloatBarrier
 %%%
-\Cref{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase} shows the trajectories for a launch velocity of \SI{5}{\metre\per\second}, launch azimuth of \SI{225}{\degree} and an initial Solar phase angle of \SI{45}{\degree}. \Cref{fig:escape_traj_allParticles_9ms_225Azim_45solarPhase} shows the trajectory for a launch velocity of \SI{9}{\metre\per\second} with all other initial conditions being the same. We see that for a higher velocity, all regolith types have the same escape behavior or trajectory and are hardly affected by the Solar perturbations. For the smaller velocity, we see that all particles are distinctly separated as they embark on the escape trajectory in the end. The difference is significantly large. A zoomed in version of the trajectory plot for the case of \SI{5}{\metre\per\second} is shown in \Cref{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase_zoomed}. For the example case depicted in \Cref{fig:escape_traj_allParticles_5ms_225Azim_45solarPhase}, and keeping in mind that the initial Solar phase angle is \SI{45}{\degree}, the differences in the trajectories start emerging slowly much earlier in the simulation (before even the first revolution is completed), with the highest area-to-mass ratio particle getting pushed outwards (due to a higher \gls{SRP} effect) relative to the one with the lowest area-to-mass ratio. As explained previously for the capture scenario, in this case too, we witness that different regolith types are subject to different phasing with respect to the asteroid. Thus as the particles approach the vicinity of the asteroid, the existing trajectory differences (or phase differences) get amplified by the rapid rotation of the asteroid, leading to 4 distinct escape routes.
 %%%
-\begin{figure}[htb]
+\begin{figure}[!h]
 \centering
 \captionsetup{justification=centering}
 \subfloat[]{
@@ -740,42 +686,16 @@ Two re-impact maps are shown in \Cref{fig:crashmap_3.2_density_1cm_5cm_Radius} a
 \end{figure}
 \FloatBarrier
 %%%
-\Cref{fig:longestEdge_allParticles_capture_hist} shows the number of capture cases for all regolith types. The number of capture cases are extremely small relative to the number of escape and re-impact cases shown previously. We will look at the trajectory of an example capture case from \Cref{fig:longestEdge_allParticles_capture_hist}, i.e. particle LoGSP-4, at launch velocity \SI{6}{\metre\per\second}, launch azimuth of \SI{20}{\degree}, and initial Solar phase angle of \SI{45}{\degree}. For the same launch conditions, the trajectories for the remaining regolith types were also plotted, neither of which resulted in capture, and are shown in \Cref{fig:allRegolith_traj_6ms_20Azim_45solarPhase}. A zoomed in version of the trajectory, highlighting the visible separation in the regolith trajectories is shown in \Cref{fig:allRegolith_traj_6ms_20Azim_45solarPhase_zoomed}. The reasons for separation of the trajectories for the different regolith types, in this situation, is the same as explained recently for the escape scenario. Due to Solar perturbations, the trajectory for each particle is shifted such that their phase with respect to the rotating asteroid. The only difference here, is that all particles don't share the same fate with each other.
 %%%
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{longest_edge_perturbations/multiple_regolith_types/allPhases_captureCases.pdf}
+\includegraphics[width=\textwidth, height=\textheight, keepaspectratio=true]{longest_edge_perturbations/multiple_regolith_types/allPhases_captureCases.pdf}
 \caption{Number of all capture cases for all regolith types launched from the longest edge of the asteroid. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
 \label{fig:longestEdge_allParticles_capture_hist}
 \end{figure}
 \FloatBarrier
 %%%
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio=true]{longest_edge_perturbations/multiple_regolith_types/2d_traj_6ms_20Azim_45SolarPhase_zoomed_edit.pdf}
-\caption{Zoomed-in version of the plot shown in \Cref{fig:allRegolith_traj_6ms_20Azim_45solarPhase}. This view enhancement highlights the instance when the trajectories begin to visibly separate from each other. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
-\label{fig:allRegolith_traj_6ms_20Azim_45solarPhase_zoomed}
-\end{figure}
-\FloatBarrier
-%%%
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{longest_edge_perturbations/multiple_regolith_types/2d_traj_6ms_20Azim_45SolarPhase.pdf}
-\caption{Trajectories plotted for all regolith types, with launch conditions that lead to a capture case only for particle LoGSP-4. For particle LoGSP-1, the final fate is escape and for LoGSP-2 and LoGSP-3, the final fate is re-impact. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
-\label{fig:allRegolith_traj_6ms_20Azim_45solarPhase}
-\end{figure}
-\FloatBarrier
-%%%
-
-
-\subsection{Regolith Loft From Leading Edge Of Asteroid}
-\label{sec:general_char_leadingEdge}
-\Cref{fig:leadingEdge_allParticles_reimpact_hist} shows the total number of re-impact cases for all regolith types launched from a fixed location on the leading edge of the asteroid. The number of re-impact cases are far more than those observed for the longest edge scenario. Even for a relatively high velocity as \SI{11}{\metre\per\second}, all particles result in a re-impact. Their are two reasons for this behavior. The first is that the gravitational attraction for the current launch location is stronger than that on the longest edge of the asteroid. The latter has the weakest gravitational attraction on the entire ellipsoid shaped asteroid. The second is that the particles have a much lower inertial velocity at rest (due to the asteroid's rotation) at the current launch site as it is radially closer (from the centre of the asteroid) to the axis of rotation, compared to that for a launch site at the longest edge of the asteroid. Thus, we see an increase in the number of re-impact cases and especially for the higher velocities.
 %%%
 \begin{figure}[htb]
 \centering
@@ -786,6 +706,13 @@ Two re-impact maps are shown in \Cref{fig:crashmap_3.2_density_1cm_5cm_Radius} a
 \end{figure}
 \FloatBarrier
 %%%
+
+\subsection{Regolith Loft From Leading Edge Of Asteroid}
+\label{sec:general_char_leadingEdge}
+\Cref{fig:leadingEdge_allParticles_reimpact_hist} shows the total number of re-impact cases for all regolith types launched from a fixed location on the leading edge of the asteroid. The number of re-impact cases are far more than those observed for the longest edge scenario. Even for a relatively high velocity as \SI{11}{\metre\per\second}, all particles result in a re-impact. Their are two reasons for this behavior. The first is that the gravitational attraction for the current launch location is stronger than that on the longest edge of the asteroid. The latter has the weakest gravitational attraction on the entire ellipsoid shaped asteroid. The second is that the particles have a much lower inertial velocity at rest (due to the asteroid's rotation) at the current launch site as it is radially closer (from the centre of the asteroid) to the axis of rotation, compared to that for a launch site at the longest edge of the asteroid. Thus, we see an increase in the number of re-impact cases and especially for the higher velocities.
+%
+\newline\newline
+%
 The presence of Solar radiation pressure has no significant effect on the particle trajectories. Compared to the longest edge, there are fewer cases where different regolith types have distinct re-impact locations. We observe this in the re-impact maps shown in \Cref{fig:crashmap_3.2_7.5_density_1cmRadius_leadingEdge}, where regoliths have the same particle radii of \SI{1}{\centi\metre} and densities \SI{3.2}{\gram\per\centi\metre\cubed} and \SI{7.5}{\gram\per\centi\metre\cubed}; and \Cref{fig:crashmap_3.2_density_1cm_5cm_Radius_leadingEdge}, where regoliths have the same density of \SI{3.2}{\gram\per\centi\metre\cubed} and particle radii of \SI{1}{\centi\metre} and \SI{5}{\centi\metre}. The number of distinct re-impact locations between different regolith types is certainly less than that for particles launched from the longest edge. However, compared to the latter, the re-impact locations are more widespread. From the re-impact maps, we also observe that the (apart from a very few individual cases) the re-impact locations remain the same for different initial Solar phase angles.
 %
 \newline\newline
@@ -805,24 +732,14 @@ The presence of Solar radiation pressure has no significant effect on the partic
 \begin{figure}[htb]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio=true]{leading_edge_perturbations/crashMap_3P2_density_1cm_5cm_radius.pdf}
-\caption{Re-impact locations for regoliths of different sizes but the same density (i.e. \SI{3.2}{\gram\per\centi\metre\cubed}). The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
-\label{fig:crashmap_3.2_density_1cm_5cm_Radius_leadingEdge}
-\end{figure}
-\FloatBarrier
-%%%
-%%%
-\begin{figure}[htb]
-\centering
-\captionsetup{justification=centering}
-\includegraphics[width=\textwidth, height=0.3\textheight, keepaspectratio=true]{leading_edge_perturbations/reimpact_traj_11ms_355Azim_45solarPhase.pdf}
+\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{leading_edge_perturbations/reimpact_traj_11ms_355Azim_45solarPhase.pdf}
 \caption{Re-impact trajectory for all regolith types used in this simulation, each launched with the same initial conditions. The densities and the particle size for the corresponding area-to-mass ratios can be found in \Cref{tab:area_to_mass_ratio}.}
 \label{fig:crash_traj_11ms_355Azim_45solarPhase_leadingEdge}
 \end{figure}
 \FloatBarrier
 %%%
 %%%
-\begin{figure}[htb]
+\begin{figure}[!h]
 \centering
 \captionsetup{justification=centering}
 \includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio=true]{leading_edge_perturbations/reimpact_traj_14ms_115Azim_45solarPhase.pdf}
@@ -935,7 +852,7 @@ Finally, we arrive at the capture cases for particles launched from the leading 
 %
 \newline\newline
 %
-A peculiar behavior is noticed for launch velocity 9 m/s where all particles don't have re-impact as their final fate, few of which have either escape or temporary capture as their final fate. We take a look at an example for particle LoGSP-1, where it is launched at an azimuth of \SI{270}{\degree}, initial Solar phase angle of \SI{45}{\degree} and launch velocities of 8, 9 and 10 m/s. The trajectory plot is given in \Cref{fig:trailingEdge_9ms_specialCase_escape_compared_logsp1}. For the same particle launched at 8 and 10 m/s, the final fate is re-impact (for the given azimuth and Solar phase angle). However, at 9 m/s we see that the particle escapes. From \Cref{fig:trailingEdge_9ms_specialCase_escape_allRegoliths}, which shows the trajectories for all regolith types launched with the same initial conditions as before but at 9 m/s, we know that Solar perturbations are not responsible for the aforementioned behavior because if they were then we would have seen noticeable differences between the trajectories for each regolith type. Thus, in \Cref{fig:trailingEdge_9ms_specialCase_escape_compared_logsp1}, at 9 m/s, the particle achieves a phase relative to the asteroid such that it acquires an assist from the asteroid's rotation and escapes, thereby avoiding a re-impact scenario. This type of behavior, however, wouldn't in general be restricted only to one specific velocity even though that's what we witness here and the reason for that is the resolution of launch azimuth being varied coarsely at \SI{5}{\degree}. Its possible that for a finer resolution, a different trend be observed in the histogram plots.
+A peculiar behavior is noticed for launch velocity 9 m/s where all particles do not have re-impact as their final fate, few of which have either escape or temporary capture as their final fate. We take a look at an example for particle LoGSP-1, where it is launched at an azimuth of \SI{270}{\degree}, initial Solar phase angle of \SI{45}{\degree} and launch velocities of 8, 9 and 10 m/s. The trajectory plot is given in \Cref{fig:trailingEdge_9ms_specialCase_escape_compared_logsp1}. For the same particle launched at 8 and 10 m/s, the final fate is re-impact (for the given azimuth and Solar phase angle). However, at 9 m/s we see that the particle escapes. From \Cref{fig:trailingEdge_9ms_specialCase_escape_allRegoliths}, which shows the trajectories for all regolith types launched with the same initial conditions as before but at 9 m/s, we know that Solar perturbations are not responsible for the aforementioned behavior because if they were then we would have seen noticeable differences between the trajectories for each regolith type. Thus, in \Cref{fig:trailingEdge_9ms_specialCase_escape_compared_logsp1}, at 9 m/s, the particle achieves a phase relative to the asteroid such that it acquires an assist from the asteroid's rotation and escapes, thereby avoiding a re-impact scenario. This type of behavior, however, wouldn't in general be restricted only to one specific velocity even though that's what we witness here and the reason for that is the resolution of launch azimuth being varied coarsely at \SI{5}{\degree}. Its possible that for a finer resolution, a different trend be observed in the histogram plots.
 %%%
 \begin{figure}[htb]
 \centering
@@ -999,7 +916,7 @@ A similar situation is obtained for the case when the density for regoliths is k
 \end{figure}
 \FloatBarrier
 %%%
-\Cref{fig:trailingEdge_allParticles_escape_hist} shows the total number of escape cases. The numbers are fewer than those for the leading or the longest edge scenario since the bulk of the particles resorted to re-impact. Just like for the leading edge launch site, we will examine if the previously generalized relationship between the distribution of \gls{HEV} data points and the escape behavior, is valid for a launch site in the trailing edge as well. \Cref{fig:trailingEdge_hev_solarPhase225} shows the variation in \gls{HEV} with the launch azimuth for three distinct velocities and for an initial Solar phase angle of \SI{225}{\degree}. The escape behavior as depicted for 13 m/s and 15 m/s is similar to that of the case for leading edge (therein for launch velocities 12 m/s and 14 m/s). As an example, for the launch velocity of 13 m/s in \Cref{fig:trailingEdge_hev_solarPhase225}, all \gls{HEV} data points that don't correspond to a 0 \gls{HEV} value and are uniformly distributed can be correlated to escaping from the asteroid without completing even a single revolution. However, just like with the case of the leading edge, these trajectories do not correspond to being hyperbolic from the instance of launch. For this example, the energy and eccentricity plot is shown in \Cref{fig:trailingEdge_logsp1_escape_energy_ecc_13ms_solar225} and the corresponding trajectories are shown in \Cref{fig:trailingEdge_logsp1_escape_traj_13ms_solar225}. The specifics in these graphs are not important but one should look at the general trend for launch azimuths going from \SI{200}{\degree} to \SI{325}{\degree}. The explanation for the escape behavior at 15 m/s is the same as that covered for the leading edge case for 14 m/s and hence is not repeated here. For launch velocity 9 m/s in \Cref{fig:trailingEdge_hev_solarPhase225}, the \gls{HEV} data points for particle LoGSP-1 are plotted from azimuth \SI{270}{\degree} to \SI{285}{\degree}. The energy and eccentricity plots for it is given in \Cref{fig:trailingEdge_logsp1_escape_energy_ecc_9ms_solar225} and the trajectory evolution plots are given in \Cref{fig:trailingEdge_logsp1_escape_traj_9ms_solar225}. Unlike all the discussion we have had so far on this topic, we notice here that despite the distribution of \gls{HEV} points, the particles take atleast one revolution around the asteroid before escaping.
+\Cref{fig:trailingEdge_allParticles_escape_hist} shows the total number of escape cases. The numbers are fewer than those for the leading or the longest edge scenario since the bulk of the particles resorted to re-impact. Just like for the leading edge launch site, we will examine if the previously generalized relationship between the distribution of \gls{HEV} data points and the escape behavior, is valid for a launch site in the trailing edge as well. \Cref{fig:trailingEdge_hev_solarPhase225} shows the variation in \gls{HEV} with the launch azimuth for three distinct velocities and for an initial Solar phase angle of \SI{225}{\degree}. The escape behavior as depicted for 13 m/s and 15 m/s is similar to that of the case for leading edge (therein for launch velocities 12 m/s and 14 m/s). As an example, for the launch velocity of 13 m/s in \Cref{fig:trailingEdge_hev_solarPhase225}, all \gls{HEV} data points that do not correspond to a 0 \gls{HEV} value and are uniformly distributed can be correlated to escaping from the asteroid without completing even a single revolution. However, just like with the case of the leading edge, these trajectories do not correspond to being hyperbolic from the instance of launch. For this example, the energy and eccentricity plot is shown in \Cref{fig:trailingEdge_logsp1_escape_energy_ecc_13ms_solar225} and the corresponding trajectories are shown in \Cref{fig:trailingEdge_logsp1_escape_traj_13ms_solar225}. The specifics in these graphs are not important but one should look at the general trend for launch azimuths going from \SI{200}{\degree} to \SI{325}{\degree}. The explanation for the escape behavior at 15 m/s is the same as that covered for the leading edge case for 14 m/s and hence is not repeated here. For launch velocity 9 m/s in \Cref{fig:trailingEdge_hev_solarPhase225}, the \gls{HEV} data points for particle LoGSP-1 are plotted from azimuth \SI{270}{\degree} to \SI{285}{\degree}. The energy and eccentricity plots for it is given in \Cref{fig:trailingEdge_logsp1_escape_energy_ecc_9ms_solar225} and the trajectory evolution plots are given in \Cref{fig:trailingEdge_logsp1_escape_traj_9ms_solar225}. Unlike all the discussion we have had so far on this topic, we notice here that despite the distribution of \gls{HEV} points, the particles take atleast one revolution around the asteroid before escaping.
 % This particular velocity may very well be an exceptional case, but it does stop us from generalizing escape behavior based on \gls{HEV} plots.
 %%%
 \begin{figure}[htb]
@@ -1041,7 +958,7 @@ A similar situation is obtained for the case when the density for regoliths is k
 \end{figure}
 \FloatBarrier
 %%%
-\Cref{fig:trailingEdge_allParticles_capture_hist} shows the total number of temporary capture cases for particles launched from the trailing edge of the asteroid. The numbers are far less than those for the leading and the longest edge launch cases. For the resolution of initial conditions employed in the simulation, atleast one capture case is obtained for all regolith types. Compared to the total particles launched, these numbers are extremely small. We'll look at an example of a capture trajectory for particle LoGSP-1 launched at 13 m/s and an initial Solar phase angle of \SI{45}{\degree}. The launch azimuth at which capture occurs is \SI{330}{\degree}. For the same initial conditions, we plot the trajectory for other regolith types as well for comparison. These are shown in \Cref{fig:trailing_edge_capture_example_logsp1}. While regolith LoGSP-2 re-impacts (orange curve), the remaining two particles are in temporary capture. \Cref{fig:trailing_edge_capture_example_logsp1_compared} shows the comparison between all capture trajectories for the given initial conditions.
+\Cref{fig:trailingEdge_allParticles_capture_hist} shows the total number of temporary capture cases for particles launched from the trailing edge of the asteroid. The numbers are far less than those for the leading and the longest edge launch cases. For the resolution of initial conditions employed in the simulation, atleast one capture case is obtained for all regolith types. Compared to the total particles launched, these numbers are extremely small. We will look at an example of a capture trajectory for particle LoGSP-1 launched at 13 m/s and an initial Solar phase angle of \SI{45}{\degree}. The launch azimuth at which capture occurs is \SI{330}{\degree}. For the same initial conditions, we plot the trajectory for other regolith types as well for comparison. These are shown in \Cref{fig:trailing_edge_capture_example_logsp1}. While regolith LoGSP-2 re-impacts (orange curve), the remaining two particles are in temporary capture. \Cref{fig:trailing_edge_capture_example_logsp1_compared} shows the comparison between all capture trajectories for the given initial conditions.
 %%%
 \begin{figure}[htb]
 \centering
