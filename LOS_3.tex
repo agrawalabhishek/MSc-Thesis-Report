@@ -4,23 +4,23 @@
 \addcontentsline{toc}{chapter}{List of Symbols}
 
 \subsection*{Roman}
-\begin{longtable}[l]{p{100pt} p{70pt} p{150pt}}
+\begin{longtable}[l]{p{100pt} p{70pt} p{250pt}}
     \textbf{Symbol} & \textbf{Units} & \textbf{Description}                                 \\
     \hline
     $a, b, c$        & m                & Semi-axes of reference ellipsoid
                                           (ellipsoidal harmonics gravity potential model)   \\
     $\mathcal{B}$    & -                & Collection of all discrete mass distributions     \\
-    $C$              & -                & Spherical harmonics expansion coefficient         \\
+    $C_{l,m}$              & -                & Spherical harmonics expansion coefficient         \\
     $E$              & -                & Lam\'e function of first kind                     \\
     $\bm{E}$         & -                & Edge Dyad in the polyhedron potential model       \\
     $F$              & -                & Lam\'e function of second kind                    \\
     $\bm{F}$         & -                & Facet dyad in the polyhedron potential model      \\
-    $\mathcal{G}$    & $m^3 g^{-1} s^{-2}$ & Universal Gravitational constant               \\
+    $\mathcal{G}$    & \si{\metre\cubed\per\kilo\gram\per\second\squared} & Universal gravitational constant               \\
     $L_e$            & -                & Per-edge factor in polyhedron model               \\
     $\buvec{n}$      & -                & Unit normal vector                                \\
     $\buvec{n}_e^f$  & -                & Unit normal vector to edge \textit{e}
                                           of facet \textit{f} of a polyhedron               \\
-    $P$              & -                & Associated Legendre functions                     \\
+    $P_{l,m}$              & -                & Associated Legendre function                \\
     \textbf{P}       & -                & Field point in polyhedron potential model         \\
     $r$              & m                & Distance                                          \\
     $\vv{\bm{r}}$    & m                & Position vector                                   \\
@@ -33,21 +33,21 @@
                                            in polyhedron model                              \\
     $R_D, R_F$       & -                & Carlson elliptic integral functions               \\
     $s$              & m                & Conic equation parameter                          \\
-    $S$              & -                & Spherical harmonics expansion coefficient         \\
+    $S_{l,m}$              & -                & Spherical harmonics expansion coefficient         \\
     $t$              & s                & Time                                              \\
     $u$              & m                & Parameter in equation for family of confocal
                                           quadrics to an ellipsoid (CDE potential model)    \\
     $u_1, u_2, u_3$  & m                & Real valued and unequal roots to the equation for
                                           family of confocal quadrics to an ellipsoid (CDE potential model)                                  \\
-    $U$              & $m^2/s^2$        & Gravitational potential                           \\
-    $U_1, U_2, U_3, U_4$ & $m^2/s^2$    & CDE gravitational potential split in 4 parts      \\
-    $U_\ast$         & $m/s^2$          & Gravitational acceleration component
+    $U$              & \si{\metre\squared\per\second\squared}        & Gravitational potential                           \\
+    $U_1, U_2, U_3, U_4$ & \si{\metre\squared\per\second\squared}    & CDE gravitational potential split in 4 parts      \\
+    $U_\ast$         & \si{\metre\per\second\squared}          & Gravitational acceleration component
                                           where $(\ast=x,y,z)$                              \\
     $v$              & m                & Substitution parameter to get standard Carlson
                                           elliptic integral                                 \\
-    $v$              & $m/s$            & Velocity                                          \\
-    $\vv{\bm{v}}$    & $m/s$            & Velocity vector                                   \\
-    $V$              & $m^3$            & Volume                                            \\
+    $v$              & \si{\metre\per\second}            & Velocity                                          \\
+    $\vv{\bm{v}}$    & \si{\metre\per\second}            & Velocity vector                                   \\
+    $V$              & \si{\metre\cubed}            & Volume                                            \\
     $x$              & m                & Cartesian coordinate \emph{x}                     \\
     $y$              & m                & Cartesian coordinate \emph{y}                     \\
     $z$              & m                & Cartesian coordinate \emph{z}                     \\
@@ -56,23 +56,23 @@
 \vspace{1cm}
 
 \subsection*{Greek}
-\begin{longtable}[l]{p{100pt} p{70pt} p{150pt}}
+\begin{longtable}[l]{p{100pt} p{70pt} p{250pt}}
     \textbf{Symbol} & \textbf{Units} & \textbf{Description}                                 \\
     \hline
     $\alpha$            & -               & Ellipsoidal harmonics expansion coefficient     \\
-    $\alpha, \beta, \gamma$ & m           & Semi-major axes of an ellipsoid
+    $\alpha, \beta, \gamma$ & m           & Semi-axes of an ellipsoid
                                             (CDE potential model)                           \\
-    $\delta$            & deg             & Latitude (spherical harmonics
+    $\delta$            & rad             & Latitude (spherical harmonics
                                             gravitational potential model)                  \\
     $\Delta$            & -               & Function in CDE potential model                 \\
-    $\lambda$           & deg             & Longitude (spherical harmonics
+    $\lambda$           & rad             & Longitude (spherical harmonics
                                             gravitational potential model)                  \\
     $\lambda_1, \lambda_2, \lambda_3$ & m & Ellipsoidal coordinates                         \\
     $\lambda_1^{ref}$   & m               & Largest semi-major axis of reference ellipsoid
                                             (ellipsoidal harmonics gravity potential model) \\
     $\lambda(\bvector{r})$ or $\lambda$ & m & Real valued parameter; defines a confocal
                                               ellipsoid in the CDE potential model          \\
-    $\mu$               & $m^3/s^2$       & Gravitational parameter                         \\
+    $\mu$               & \si{\metre\cubed\per\second\squared}       & Gravitational parameter                         \\
     $\omega$            & rad/s           & Asteroid rotation rate or angular
                                             velocity                                        \\
     $\omega_f$          & -               & Per-facet factor in the polyhedron model        \\
@@ -84,16 +84,16 @@
     $\phi$              & -               & Function in CDE potential model                 \\
     $\rho$              & m               & Distance to a discrete mass distribution        \\
     $\bvector{\rho}$    & m               & Distance vector to a discrete mass distribution \\
-    $\sigma$            & $kg/m^3$        & Density in polyhedron model                     \\
-    $\theta$            & deg             & Rotating angle between the Asteroid-centric
+    $\sigma$            & \si{\kilo\gram\per\metre\cubed}        & Density in polyhedron model                     \\
+    $\theta$            & rad             & Rotating angle between the Asteroid-centric
                                             inertial and Rotating frame                     \\
-    $\vartheta$         & deg             & Longitude of Sun with respect to the asteroid   \\
+    $\vartheta$         & rad             & Longitude of Sun with respect to the asteroid   \\
 \end{longtable}
 %%%
 \vspace{1cm}
 
 \subsection*{Subscripts \& Superscripts}
-\begin{longtable}[l]{p{100pt} p{230pt}}
+\begin{longtable}[l]{p{100pt} p{250pt}}
     \textbf{Symbol} & \textbf{Description}                                              \\
     \hline
     B                                 & Asteroid-centric Rotating frame (ARF)           \\
