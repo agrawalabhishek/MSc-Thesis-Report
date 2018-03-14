@@ -342,11 +342,11 @@
                 \includegraphics{cover/back}
             };
             \node at (current page.south east)[anchor=south east,inner sep=0pt]{
-                \includegraphics{cover/front_new}
+                %\includegraphics{cover/front_new}
             };
         \else
             \node at (current page.south west)[anchor=south west,inner sep=0pt]{
-                \includegraphics{cover/front_new}
+                %\includegraphics{cover/front_new}
             };
         \fi
         %% Calculate the coordinate of the top left corner of the front cover.
@@ -390,7 +390,7 @@
         \coordinate (back bottom right) at ($(back top left)+(\@cover@backboxwidth,-\@cover@backboxheight+150pt)$);
 
         %% Draw the front box in black.
-        \fill[fill=tudelft-black](front top left) rectangle (front bottom right);
+        % \fill[fill=tudelft-black](front top left) rectangle (front bottom right);
         %% Calculate the width and height of the front text box.
         \setlength\@cover@fronttextwidth{\@cover@frontboxwidth}
         \addtolength\@cover@fronttextwidth{-1\@cover@margin-2.35cm}
@@ -398,17 +398,17 @@
         \addtolength\@cover@fronttextheight{-2\@cover@margin}
         %% Create the front text box.
         \node at (front top left)[anchor=north west,inner sep=\@cover@margin]{
-            \begin{minipage}[t][\@cover@fronttextheight]{\@cover@fronttextwidth}
+        %    \begin{minipage}[t][\@cover@fronttextheight]{\@cover@fronttextwidth}
                 %% Print the title and optional subtitle at the top in white.
-                \tudsffamily\color{tudelft-white}\Huge\textbf{\@title}
-                \ifx\@subtitle\undefined\else
-                    \\
-                    \LARGE\@subtitle
-                \fi
-                %% Print the author at the bottom in cyan.
-                \vfill
-                \color{tudelft-white}\LARGE\@author
-            \end{minipage}
+        %        \tudsffamily\color{tudelft-white}\Huge\textbf{\@title}
+        %        \ifx\@subtitle\undefined\else
+        %            \\
+        %            \LARGE\@subtitle
+        %        \fi
+        %        %% Print the author at the bottom in cyan.
+        %        \vfill
+        %        \color{tudelft-white}\LARGE\@author
+        %    \end{minipage}
         };
 
         %% Draw the back box in cyan.

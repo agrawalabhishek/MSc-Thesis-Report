@@ -48,6 +48,14 @@
     citecolor=cyan
 }
 
+% \tolerance=1
+% \emergencystretch=\maxdimen
+% \hyphenpenalty=10000
+% \hbadness=10000
+
+\hyphenchar\font=-1
+\sloppy
+
 \begin{document}
 %% Use Roman numerals for the page numbers of the title pages and table of
 %% contents.
@@ -58,7 +66,7 @@
 \author{Abhishek Agrawal}
 \affiliation{Delft University of Technology}
 % \coverimage{backgroundimg_asteroid_2.jpg}
-\coverimage{cover/cover_image_test_3.pdf}
+\coverimage{cover/Thesis_cover2.pdf}
 \makecover
 
 %% Include an optional title page.
@@ -68,13 +76,14 @@
 % \placetextbox{0.500}{0.07}{Cover image credit: Adopted from European Southern Observatory. Artist's Impression of the binary asteroid Antiope.}%
 \cleardoublepage
 
-%Fancy quote
+% Fancy quote
 \dedication{
-\begin{center}
-\textit{"If you wish to make an apple pie from scratch, you must first invent the universe."}%
+    \begin{center}
+    \textit{"If you wish to make an apple pie from scratch, you must first invent the universe."}%
 
-Carl Sagan
-\end{center}}
+    Carl Sagan
+    \end{center}
+}
 
 % \input{preface}
 \input{acknowledgments}
